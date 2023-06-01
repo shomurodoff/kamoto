@@ -85,7 +85,9 @@ export const CustomButton = ({
           } custom-button-property ${height ? `h-md-${height}px` : ''}`}
           disabled={isSubmitting || !isValid || (!isAcceptTerms && isAcceptTermsPresent)}
         >
-          {!loading && <span className='indicator-label font-size-13 p-0'>{buttonText}</span>}
+          {!loading && (
+            <span className='text-[14px] font-medium leading-5 text-black'>{buttonText}</span>
+          )}
           {loading && (
             <span className='indicator-label font-size-13 p-0'>
               {formatMessage({id: 'Please wait...'})}

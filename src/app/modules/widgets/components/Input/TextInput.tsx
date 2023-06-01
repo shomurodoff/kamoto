@@ -75,9 +75,9 @@ const TextInput = ({
           >
             {isStarRequired ? (
               !isTooltipNotRequired ? (
-                <>
+                <span className={'flex items-center'}>
                   {label}* <ToolTipUI tooltipText={toolTipText} />
-                </>
+                </span>
               ) : (
                 <>{label}*</>
               )

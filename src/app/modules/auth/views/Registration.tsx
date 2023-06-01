@@ -266,8 +266,8 @@ export function Registration() {
                 <CustomToast status={error} />
               ))}
 
-              <div className='flex '>
-                <div className={'w-1/2'}>
+              <div className='md:flex gap-[16px]'>
+                <div className={'w-full md:w-1/2'}>
                   <TextInput
                     fieldType={'text'}
                     label={formatMessage({id: 'First Name'})}
@@ -281,7 +281,7 @@ export function Registration() {
                     isStarRequired={true}
                   />
                 </div>
-                <div className={'w-1/2'}>
+                <div className={'w-full md:w-1/2'}>
                   <TextInput
                     fieldType={'text'}
                     label={formatMessage({id: 'Last Name'})}

@@ -157,36 +157,37 @@ export const CompanyDetails = () => {
         {(formik) => {
           setCountryId(formik.values.country)
           return (
-            <Form className='company-container d-md-flex flex-md-row d-flex flex-column justify-content-md-between col-12'>
+            <Form className='d-md-flex flex-md-row d-flex flex-column justify-content-md-between col-12'>
               <div className='mb-10 col-md-6 col-12 d-md-flex flex-md-column justify-content-md-start d-flex flex-column justify-content-center '>
-                <h1 className='text-dark fw-bolder mb-3 '>
-                  {formatMessage({id: 'Company Details'})}
+                <h1 className='text-[22px] leading-8 text-[#FFFFFFCC] font-semibold mb-[8px]'>
+                  {formatMessage({id: 'AI Personality Details'})}
                 </h1>
                 <div className='text-gray-500 fs-4'>
-                  {formatMessage({id: 'Please enter your company details'})}
+                  {formatMessage({id: 'Please enter your AI Personality name'})}
                 </div>
                 <div className='mt-7'>
-                  <label
-                    className='form-label fs-6  text-gray-500 text-capitalize mb-3'
-                    htmlFor='kt_login_toc_agree '
-                  >
-                    {formatMessage({id: 'Company Logo'})}{' '}
-                    <ToolTipUI
-                      tooltipText={formatMessage({
-                        id: 'GLOBAL.TOOLTIP.COMPANY_DETAILS.COMPANY_LOGO',
-                      })}
-                    />
-                  </label>
+                  <TextInput
+                    fieldType={'text'}
+                    label={formatMessage({id: 'AI Personality name*'})}
+                    fieldName={'personalName'}
+                    placeholder={formatMessage({id: 'Shahrukh Khan'})}
+                    formik={formik}
+                    margin='me-4'
+                    toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.COMPANY_DETAILS.COMPANY_NAME'})}
+                  />
                   {/* file upload starts */}
-                  <div
-                    className={`card position-relative d-flex justify-content-center m-0`}
-                    onClick={handleOpen}
-                  >
-                    <DisplayImage imgName={imgName} width='100%' fit='contain' alt='profile' />
-                    <div className='pencil-container'>
-                      <img src={toAbsoluteUrl('/media/icons/duotune/general/pencil.svg')} alt='' />
-                    </div>
+                  <div className={`w-[125px]`} onClick={handleOpen}>
+                    <DisplayImage
+                      imgName={imgName}
+                      className={'w-[125px] h-[125px] rounded shadow'}
+                      fit='contain'
+                      alt='profile'
+                    />
+                    {/*<div className='pencil-container'>*/}
+                    {/*  <img src={toAbsoluteUrl('/media/icons/duotune/general/pencil.svg')} alt='' />*/}
+                    {/*</div>*/}
                   </div>
+
                   <FileUpload
                     fileSize={2097152}
                     maxFileNumber={1}
@@ -199,7 +200,7 @@ export const CompanyDetails = () => {
                       formik.setFieldValue('logoId', id)
                     }}
                   />
-                  <div className='text-gray-500  font-size-12 mt-3 w-md-250px w-100 text-md-start text-center'>
+                  <div className='text-gray-500  font-size-12 mt-3 w-md-250px w-100 text-md-start text-center hidden'>
                     <span>{formatMessage({id: 'Max size 2mb, supported'})} </span>
                     {formatMessage({id: 'format jpg, png'})}
                   </div>
