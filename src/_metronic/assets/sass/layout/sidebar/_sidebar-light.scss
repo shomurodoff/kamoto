@@ -1,0 +1,152 @@
+//industry-focus
+// Light Sidebar(used by Light Sidebar layout only)
+//
+
+[data-kt-app-layout='light-sidebar'] {
+  .info-card {
+    .card {
+      color: black;
+    }
+  }
+  .edit-container {
+    background-color: #f5f8fa;
+    height: 42px !important;
+  }
+  .amount-container {
+    background-color: #ffffff;
+  }
+  .company-container {
+    .form-switch {
+      .form-check-input {
+        background-size: 24px !important;
+      }
+    }
+  }
+  .logo-container-big {
+    background-image: url('../../../../../../public/media/auth/founderCrateLogo.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .logo-container-small {
+    background-image: url('../../../../../../public/media/auth/founderCrateOnlyLogo.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .app-sidebar-menu {
+    .app-sidebar-wrapper {
+      .menu {
+        .menu-item {
+          .menu-link {
+            .menu-title {
+              color: black;
+              &:hover {
+                color: gray;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .app-sidebar {
+    background-color: #fff;
+    border-right: 0 !important;
+
+    .hover-scroll-overlay-y {
+      @include scrollbar-color(
+        var(--kt-app-sidebar-light-scrollbar-color),
+        var(--kt-app-sidebar-light-scrollbar-color-hover)
+      );
+    }
+
+    .app-sidebar-logo {
+      border-bottom: 1px solid var(--kt-app-sidebar-light-separator-color);
+
+      .accordion-item {
+        .accordion-header {
+          .accordion-button {
+            background-color: #fff;
+          }
+        }
+      }
+    }
+
+    .menu {
+      font-weight: $font-weight-semibold;
+
+      .menu-item {
+        .menu-heading {
+          color: var(--kt-app-sidebar-light-menu-heading-color) !important;
+        }
+
+        @include menu-link-default-state(
+          $title-color: var(--kt-gray-700),
+          $icon-color: var(--kt-gray-500),
+          $bullet-color: var(--kt-gray-500),
+          $arrow-color: var(--kt-gray-500),
+          $bg-color: null
+        );
+
+        @include menu-link-hover-state(
+          $title-color: var(--kt-gray-900),
+          $icon-color: var(--kt-gray-700),
+          $bullet-color: var(--kt-gray-700),
+          $arrow-color: var(--kt-gray-700),
+          $bg-color: null
+        );
+
+        @include menu-link-show-state(
+          $title-color: var(--kt-gray-900),
+          $icon-color: var(--kt-gray-700),
+          $bullet-color: var(--kt-gray-700),
+          $arrow-color: var(--kt-gray-700),
+          $bg-color: null
+        );
+
+        @include menu-link-here-state(
+          $title-color: var(--kt-gray-900),
+          $icon-color: var(--kt-gray-700),
+          $bullet-color: var(--kt-gray-700),
+          $arrow-color: var(--kt-gray-700),
+          $bg-color: null
+        );
+
+        @include menu-link-active-state(
+          $title-color: var(--kt-primary),
+          $icon-color: var(--kt-primary),
+          $bullet-color: var(--kt-primary),
+          $arrow-color: var(--kt-primary),
+          $bg-color: var(--kt-app-sidebar-light-menu-link-bg-color-active)
+        );
+      }
+    }
+  }
+  .investor-crm {
+    .spinner-border {
+      --bs-spinner-width: 5rem;
+      --bs-spinner-height: 5rem;
+      --bs-spinner-vertical-align: -0.125em;
+      --bs-spinner-border-width: 12.185rem;
+      --bs-spinner-animation-speed: 0.65s;
+      --bs-spinner-animation-name: spinner-border;
+      border: 7px solid gray;
+      border-right-color: transparent;
+    }
+  }
+  .rb-tabs-items {
+    .active {
+      color: var(--kt-primary);
+      cursor: auto !important;
+    }
+  }
+}
+
+[data-kt-app-layout='light-sidebar'][data-kt-app-header-fixed='true'] {
+  .app-sidebar {
+    .app-sidebar-logo {
+      border-bottom: 1px dashed var(--kt-app-sidebar-light-separator-color);
+    }
+  }
+}

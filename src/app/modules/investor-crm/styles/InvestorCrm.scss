@@ -1,0 +1,371 @@
+$black: #2c2c54;
+$size: 32px;
+@import '../../../../_metronic/assets//sass/layout/mixins.scss';
+
+.expand-icon {
+  font-size: 20px !important;
+
+  @media only screen and (max-width: 400px) and (min-width: 300px) {
+    position: relative;
+    top: 153px;
+  }
+
+  @media only screen and (max-width: 760px) and (min-width: 400px) {
+    position: relative;
+    top: 158px;
+  }
+}
+
+.movable-item {
+  background-color: #fff3f3;
+}
+
+.bi-three-dots-vertical::after {
+  display: none !important;
+}
+
+.activity-container {
+  overflow-y: scroll;
+
+  .card {
+    width: 60%;
+    display: flex;
+
+    @include phone {
+      width: 100%;
+    }
+  }
+}
+.activity-container-n {
+  .card {
+    border: 0.5px solid #dbdcde;
+    width: 100%;
+  }
+  .timeline-line {
+    border-left-style: solid;
+    border-left-color: #dbdcde;
+  }
+}
+
+.timeline-line {
+  display: block;
+  content: ' ';
+  justify-content: center;
+  position: absolute;
+  z-index: 0;
+  left: 15px;
+  height: 100%;
+  top: 0;
+  bottom: 0px;
+  transform: translate(50%);
+  border-left-width: 4px;
+  border-left-style: solid;
+  border-left-color: white;
+
+  @include phone {
+    top: 55%;
+    left: 8px;
+    height: 111%;
+  }
+}
+.timeline-update-only-one {
+  height: 0;
+}
+.timeline-update-first {
+  height: 50%;
+  top: 50%;
+}
+.timeline-update-last {
+  height: 50%;
+  bottom: 50%;
+}
+
+.kebab-pin-container {
+  width: 32px;
+  height: 32px;
+  background-color: #f5f8fa;
+  border-radius: 5px;
+  color: #8898a6;
+}
+
+.contacts-container {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: row;
+
+  .card {
+    padding: 16px;
+  }
+
+  .button-container {
+    width: 233px;
+    height: 36px;
+    margin-top: 16px;
+  }
+}
+
+.search-container {
+  input[type='search']:focus {
+    outline: none;
+  }
+}
+
+.search-icon {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+}
+
+.industry-focus-container {
+  .card-container {
+    border: 1px solid #4776e6 !important;
+    width: auto;
+  }
+}
+
+.twiiter-tweet {
+  border: none;
+}
+
+.tabs-right-container {
+  position: absolute;
+  right: 20px;
+
+  @include phone {
+    position: relative;
+    right: 0;
+  }
+}
+
+.twitter-container {
+  margin-left: 50%;
+
+  @include phone {
+    margin-left: 0px;
+  }
+}
+
+.kebab-menu-dropdown-container {
+  position: absolute;
+  top: 35%;
+  right: 2%;
+
+  @include phone {
+    top: 25%;
+  }
+
+  .dropdown-items {
+    &:hover {
+      background-color: #e1e7ed;
+    }
+  }
+}
+
+@mixin transition {
+  transition: all 200ms ease;
+}
+
+.c-profile {
+  width: $size;
+  height: $size;
+  border: 0.5px solid rgb(212, 206, 206);
+  border-radius: 50%;
+  box-shadow: 0px 3px 8px rgba($black, 0.2);
+  display: inline-block;
+  background: white;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center center;
+  @include transition;
+
+  &:nth-of-type(n + 2) {
+    margin-left: $size * -0.4;
+  }
+}
+
+.favourite {
+  position: relative;
+  top: 5px;
+  right: 5px;
+  font-size: 16px;
+}
+
+.menu-expand {
+  @media only screen and (max-width: 400px) and (min-width: 300px) {
+    position: relative;
+    bottom: 154px;
+    left: 17px;
+  }
+
+  @media only screen and (max-width: 760px) and (min-width: 400px) {
+    position: relative;
+    bottom: 154px;
+    left: 17px;
+  }
+}
+
+.dropdown-container {
+  .btn.btn-primary:hover,
+  .btn.btn-primary:focus {
+    background-color: white !important;
+    color: #8898a6;
+  }
+
+  .btn-primary {
+    background-color: white;
+    color: #8898a6;
+    font-size: 11px;
+  }
+
+  .dropdown-item {
+    border-bottom: 1px #eff2f5 solid !important;
+    padding: 8px;
+  }
+
+  .bi-three-dots-vertical {
+    background-color: white !important;
+  }
+
+  .dropdown-toggle:hover,
+  .dropdown-toggle:active {
+    .bi-three-dots-vertical {
+      background-color: white !important;
+    }
+  }
+}
+
+.color-input {
+  .css-1yn2e29-InputColor {
+    width: 100%;
+    height: 40px;
+  }
+}
+
+.description {
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  word-wrap: break-word;
+}
+
+.description_crm {
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-wrap: break-word;
+}
+
+.fix-item {
+  position: relative;
+  top: 37px;
+  cursor: pointer;
+}
+
+.img_Card {
+  background-color: #f8fbff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2px;
+  border-radius: 4px;
+}
+
+.input-border {
+  border: 1px solid #e4e6ef;
+}
+
+.btn-height {
+  height: 35px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.dropdown-width {
+  width: 43px;
+}
+
+.kanbanboard-width {
+  width: 200px;
+}
+
+.drag-drop-box {
+  background-color: rgba(71, 118, 230, 0.1);
+  width: 93%;
+  padding-top: 5px;
+  padding-left: 10px;
+  border-radius: 5px;
+}
+
+.people-profile-card {
+  background-color: #f8fbff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  width: 120px;
+  height: 120px;
+  padding: 2px;
+  // margin:33px 0 0 26px;
+
+  .pencil-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
+.css-1dimb5e-singleValue {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+.css-1u9des2-indicatorSeparator {
+  display: none !important;
+}
+
+.searchable-select {
+  width: 99%;
+  @include phone {
+    width: 100%;
+  }
+}
+
+.css-13cymwt-control {
+  border: 1px solid rgb(233, 232, 236) !important;
+}
+.reduce_padding {
+  .is-valid-local,
+  .is-valid-local:focus {
+    padding-right: 1rem;
+  }
+  .is-invalid-local,
+  .is-invalid-local:focus {
+    padding-right: 1rem;
+  }
+  input[type='time']::-webkit-calendar-picker-indicator {
+    font-size: medium;
+  }
+}
+
+.card-height {
+  min-width: 280px;
+  height: 160px;
+}
+
+@media (max-width: 600px) {
+  .card-sm-grow {
+    flex-grow: 1;
+  }
+}
+
+.column-scroll {
+  overflow-y: scroll !important;
+  height: calc(100vh - 335px) !important;
+}
+#kt_app_content {
+  padding-bottom: 0px !important;
+}
+.show_square {
+  background-color: #f8fbff !important;
+}

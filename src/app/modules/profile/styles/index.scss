@@ -1,0 +1,158 @@
+@import '../../../../_metronic/assets//sass/layout/mixins.scss';
+
+.settings-container {
+  width: 100%;
+  height: 634px;
+  background-color: #ffffff;
+  border-radius: 4px;
+
+  .card {
+    border-radius: 4px;
+    background-color: #f8fbff;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    width: 120px;
+    height: 120px;
+    margin: 15px 0 20px 16px;
+
+    .pencil-container {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+}
+
+.company-container {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 4px;
+
+  .cardC {
+    border-radius: 4px;
+    background-color: #f8fbff;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    width: 120px;
+    height: 120px;
+    margin: 15px 0 20px 16px;
+    padding: 0;
+
+    .pencil-container {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+}
+
+.locale-container {
+  width: 100%;
+  min-height: 400px;
+  background-color: #ffffff;
+  border-radius: 4px;
+}
+
+.social-media-icon {
+  margin-left: 10px;
+}
+
+.custom-table {
+  width: 100%;
+
+  td {
+    width: 10%;
+  }
+
+  .custom-thead {
+    color: #8898a6;
+  }
+
+  .custom-button {
+    height: 45px;
+  }
+}
+
+.kebab-menu-dropdown {
+  position: absolute;
+  bottom: calc(80%);
+  left: 0;
+  z-index: 999;
+  .dropdown-items {
+    &:hover {
+      background-color: #e1e7ed;
+    }
+  }
+}
+
+@mixin transition {
+  transition: all 200ms ease;
+}
+
+.kebab-pin-container {
+  background-color: #f5f8fa;
+  border-radius: 5px;
+  color: #8898a6;
+}
+
+.parent-accordion {
+  .accordion-button {
+    height: 60px !important;
+    // background-color: white;
+    &:not(.hideIt) {
+      &::after {
+        content: '';
+        background-image: url('../../../../../public/media/icons/setting/side_arrow.svg');
+        transform: rotate(90deg);
+      }
+    }
+
+    &::after {
+      content: '';
+      background-image: url('../../../../../public/media/icons/setting/side_arrow.svg');
+      width: 34px;
+      height: 34px;
+      background-size: auto;
+      transform: rotate(0deg);
+    }
+  }
+}
+
+.radio-btn {
+  width: 21px;
+  height: 21px;
+}
+
+.button-icon {
+  width: 28px;
+  height: 24px;
+  margin-left: 5px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.save-btn {
+  background-color: #4776e6;
+}
+
+.transfer-ownership-table {
+  td {
+    width: 50%;
+  }
+}
+
+.transfer-ownership-td {
+  color: #8898a6;
+}
+
+.radio-button {
+  background-color: #f3f6f9;
+  border: none;
+}
+
+.table-body-td {
+  vertical-align: middle;
+}
+
+.title-notification{
+  line-height: 20px;
+  color: #383940;
+}

@@ -1,0 +1,196 @@
+//
+// Main init file of global bootstrap and theme functions, mixins, variables and config
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+//
+
+// Custom functions & mixins
+@import './core/base/functions';
+@import './core/base/mixins';
+@import './core/components/mixins';
+@import './core/vendors/plugins/mixins';
+
+// Custom variables
+@import 'components/variables.custom';
+@import './core/components/variables';
+
+// Bootstrap initializaton
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/maps';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/utilities';
+
+// 3rd-Party plugins variables
+@import './core/vendors/plugins/variables';
+
+// Custom layout variables
+@import './core/layout/base/variables';
+@import 'layout/variables.custom';
+$size: 40px;
+body {
+  background-color: $body-bg-color;
+  font-family: 'Poppins', sans-serif;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+input#session-date {
+  display: inline-block;
+  position: relative;
+}
+
+input[type='date']::-webkit-inner-spin-button,
+input[type='date']::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+
+.text-clr38 {
+  color: #383940;
+}
+
+.text-clr58 {
+  color: #585960;
+}
+.text-clr88 {
+  color: #8898a6 !important;
+}
+.text-clr5E {
+  color: #5e6278 !important;
+}
+.text-clrA1 {
+  color: #a1a5b7;
+}
+.text-clrA8{
+  color: #A8B3BF !important;
+}
+.bg-clrDB {
+  background-color: #dbdcde;
+}
+.bg-clrF5 {
+  background-color: #f5f8fa;
+}
+.form-check-input:checked[type='checkbox'] {
+  background-size: 14px;
+}
+
+.border-color {
+  border-color: #e1e7ed !important;
+}
+.font-weight-500 {
+  font-weight: 500 !important;
+}
+.font-weight-400 {
+  font-weight: 400 !important;
+}
+
+.font-weight-600 {
+  font-weight: 600 !important;
+}
+.font-weight-700 {
+  font-weight: 700 !important;
+}
+.font-size-16 {
+  font-size: 16px !important;
+}
+.font-size-13 {
+  font-size: 13px !important;
+}
+
+.font-size-12 {
+  font-size: 12px !important;
+}
+
+.font-size-14 {
+  font-size: 14px !important;
+}
+.font-size-15 {
+  font-size: 15px !important;
+}
+.font-size-20 {
+  font-size: 20px !important;
+}
+.height-36 {
+  height: 36px !important;
+}
+.c-profile {
+  width: $size;
+  height: $size;
+  border: 0.5px solid rgb(212, 206, 206);
+  border-radius: 50%;
+  box-shadow: 0px 3px 8px rgba($black, 0.2);
+  display: inline-block;
+  background: white;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center center;
+  @include transition;
+  &:nth-of-type(n + 2) {
+    margin-left: $size * -0.4;
+  }
+}
+
+.w-90 {
+  width: 85%;
+}
+
+.bg-clrf5f8 {
+  background-color: #f5f8fa;
+}
+
+.w-md-85 {
+  width: 85%;
+}
+.setting-tabs .active {
+  color: #C2D24B !important;
+}
+.setting-tabs .active {
+  color: #C2D24B !important;
+}
+.industry-focus-container {
+  .card-container {
+    border: 1px solid #4776e6 !important;
+    width: auto;
+  }
+}
+
+.custom-button-property {
+  font-weight: 400;
+  font-size: 13px !important;
+  border-radius: 4px !important;
+  &:hover {
+    opacity: 0.8 !important;
+  }
+}
+.rb-tabs,
+.rb-tabs .rb-tabs-header1 {
+  width: 100%;
+}
+
+.padding-16px {
+  padding: 16px;
+}
+.height-42px {
+  height: 42px;
+}
+.width-36 {
+  width: 36px;
+}
+
+.menu-link:hover .menu-title {
+  color: #4776e6 !important;
+}

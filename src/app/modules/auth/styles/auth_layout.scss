@@ -1,0 +1,91 @@
+//// Phone
+//$screen-sm-max: 1024px;
+//
+//// Tablets
+//$screen-tab-max: 1024px;
+//
+//// Phone
+//@mixin phone {
+//  @media (max-width: #{$screen-sm-max}) {
+//    @content;
+//  }
+//}
+//// Tablets
+//@mixin tabalet {
+//  @media (max-width: #{$screen-tab-max}) {
+//    @content;
+//  }
+//}
+//
+//.founder-crate-bg {
+//  background-image: url('../../../../../public//media/auth/auth-background.png');
+//  background-position: center;
+//  background-size: cover;
+//  display: flex;
+//  align-items: center;
+//  min-height: 100vh;
+//}
+//
+//.founder-crate-background {
+//  padding: 132px 0 81px;
+//  font-family: 'Poppins', sans-serif;
+//
+//  @include phone {
+//    padding: 33px 0;
+//  }
+//}
+//
+//.col-3-5 {
+//  width: 35.7%;
+//
+//  @include phone {
+//    width: 100%;
+//  }
+//}
+//
+//.btn {
+//  .btn-primary {
+//    background-color: #0077b5 !important;
+//  }
+//}
+//
+//.btn {
+//  .btn-linkedin {
+//    background-color: #0077b5;
+//  }
+//}
+//
+//.form-label {
+//  color: #585960 !important;
+//}
+//
+//.text-clr477 {
+//  color: #4776e6;
+//}
+//
+//.tooltip {
+//  --bs-tooltip-max-width: 350px;
+//}
+//
+//.is-invalid-local,
+//.is-invalid-local:focus {
+//  border-color: #f1416c;
+//  padding-right: calc(1.5em + 1.55rem);
+//  background-color: rgba(241, 65, 108, 0.2) !important;
+//}
+//
+//.is-valid-local,
+//.is-valid-local:focus {
+//  border-color: #50cd89;
+//  padding-right: calc(1.5em + 1.55rem);
+//}
+//
+//.founder-create-logo > img {
+//  @include phone {
+//    width: 50%;
+//  }
+//}
+//
+//.added_height {
+//  height: 100vh;
+//}

@@ -1,0 +1,18 @@
+// Phone
+$screen-sm-max: 1024px;
+
+// Tablets
+$screen-tab-max: 1024px;
+
+// Phone
+@mixin phone {
+  @media (max-width: #{$screen-sm-max}) {
+    @content;
+  }
+}
+// Tablets
+@mixin tabalet {
+  @media (max-width: #{$screen-tab-max}) {
+    @content;
+  }
+}

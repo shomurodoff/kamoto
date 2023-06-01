@@ -1,0 +1,58 @@
+.password {
+  position: absolute;
+  right: 3%;
+  top: 20%;
+}
+
+.alert {
+  border: 2px dashed #ffc700;
+}
+
+.spinner-wrapper {
+  position: absolute;
+  width: 1220px;
+  height: 100% !important;
+  backdrop-filter: blur(1px);
+  z-index: 9999;
+
+  .spinner-border {
+    position: relative;
+    top: 30%;
+    left: 47%;
+
+    @media only screen and (max-width: 496px) and (min-width: 300px) {
+      left: 15%;
+    }
+    @media only screen and (max-width: 767px) and (min-width: 500px) {
+      left: 22%;
+    }
+    @media only screen and (max-width: 860px) and (min-width: 600px) {
+      left: 30%;
+    }
+  }
+  .d-center {
+    top: 30%;
+    left: 22%;
+    @media only screen and (max-width: 500px) {
+      left: 16%;
+    }
+  }
+}
+
+.siderbar {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.active-border {
+  height: 36px;
+  border-left: 3px solid #4776e6;
+  color: #4776e6;
+}
+
+.form-search-select {
+  background-image: url(../../../../../../public/media/icons/investor/search.svg);
+  background-size: auto;
+  cursor: pointer;
+}

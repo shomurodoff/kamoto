@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.auth-bg {
+  background: linear-gradient(185.4deg, #11121c 25.69%, #101821 95.8%);
+  background-repeat: no-repeat;
+  background-position: center;
+}
