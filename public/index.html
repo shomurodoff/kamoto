@@ -29,7 +29,7 @@
         var themeMode = localStorage.getItem("kt_theme_mode_value");
         if (!themeMode) {
           if (defaultThemeMode === "system") {
-            themeMode = "light";
+            themeMode = "dark";
             //window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
           } else {
             themeMode = defaultThemeMode;
