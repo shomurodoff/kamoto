@@ -239,8 +239,8 @@ export function Registration() {
             >
               {/* begin::Heading */}
               <div className='text-center mb-11'>
-                <h1 className='text-dark fw-bolder mb-3'>
-                  {formatMessage({id: 'Sign Up to Foundercrate'})}
+                <h1 className='text-[22px] text-[#FFFFFFCC] leading-[32px] font-semibold pb-[8px]'>
+                  {formatMessage({id: 'Sign In to KamotoAI'})}
                 </h1>
                 <div className='text-gray-500 text-center fw-bold fs-4'>
                   {formatMessage({id: 'Already have an account?'})}{' '}
@@ -267,30 +267,34 @@ export function Registration() {
               ))}
 
               <div className='flex '>
-                <TextInput
-                  fieldType={'text'}
-                  label={formatMessage({id: 'First Name'})}
-                  fieldName={'firstname'}
-                  formik={formik}
-                  placeholder=''
-                  toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.REGISTRATION.FIRST_NAME'})}
-                  isWidthNotRequired={true}
-                  margin={'me-0'}
-                  isDisabled={isInvited}
-                  isStarRequired={true}
-                />
-                <TextInput
-                  fieldType={'text'}
-                  label={formatMessage({id: 'Last Name'})}
-                  fieldName={'lastname'}
-                  formik={formik}
-                  placeholder=''
-                  toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.REGISTRATION.LAST_NAME'})}
-                  isWidthNotRequired={true}
-                  margin={'me-0'}
-                  isDisabled={isInvited}
-                  isStarRequired={true}
-                />
+                <div className={'w-1/2'}>
+                  <TextInput
+                    fieldType={'text'}
+                    label={formatMessage({id: 'First Name'})}
+                    fieldName={'firstname'}
+                    formik={formik}
+                    placeholder=''
+                    toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.REGISTRATION.FIRST_NAME'})}
+                    isWidthNotRequired={true}
+                    margin={'me-0'}
+                    isDisabled={isInvited}
+                    isStarRequired={true}
+                  />
+                </div>
+                <div className={'w-1/2'}>
+                  <TextInput
+                    fieldType={'text'}
+                    label={formatMessage({id: 'Last Name'})}
+                    fieldName={'lastname'}
+                    formik={formik}
+                    placeholder=''
+                    toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.REGISTRATION.LAST_NAME'})}
+                    isWidthNotRequired={true}
+                    margin={'me-0'}
+                    isDisabled={isInvited}
+                    isStarRequired={true}
+                  />
+                </div>
               </div>
 
               {/* begin::Form group */}
