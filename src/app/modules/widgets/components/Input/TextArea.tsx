@@ -13,8 +13,10 @@ const TextArea = ({
   placeholder,
   isTooltipNotRequired,
   isStarRequired,
+  className,
 }: {
   fieldName: string
+  className?: string
   label: string
   margin?: string
   width?: number
@@ -40,9 +42,9 @@ const TextArea = ({
               <>{label}*</>
             )
           ) : !isTooltipNotRequired ? (
-            <>
+            <span className={'flex gap-1'}>
               {label} <ToolTipUI tooltipText={toolTipText} />
-            </>
+            </span>
           ) : (
             <>{label}</>
           )}
@@ -52,7 +54,8 @@ const TextArea = ({
         <Field
           // id='t_login_toc_agree'
           className={clsx(
-            'form-control font-size-12',
+            'form-control !bg-[#2E2F45] border-[#FFFFFF1A] font-size-12',
+            className,
             {'is-invalid-local': formik.touched[fieldName] && formik.errors[fieldName]},
             {
               'is-valid-local': formik.touched[fieldName] && !formik.errors[fieldName],
@@ -60,7 +63,6 @@ const TextArea = ({
           )}
           aria-describedby='basic-addon2'
           as={'textarea'}
-          rows={5}
           name={fieldName}
           placeholder={placeholder}
           autoComplete='off'

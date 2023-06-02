@@ -11,7 +11,7 @@ export const Country = ({
   setCountryId,
   tooltipText,
   width,
-  isStarRequired
+  isStarRequired,
 }: {
   initialValues: any
   formik: any
@@ -19,7 +19,7 @@ export const Country = ({
   setCountryId: (countryId: string) => void
   tooltipText: string
   width?: number
-  isStarRequired?:boolean
+  isStarRequired?: boolean
 }) => {
   const [countryOptions, setcountryOptions] = useState<any[]>([])
   const {formatMessage} = useIntl()

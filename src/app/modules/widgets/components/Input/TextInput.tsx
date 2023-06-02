@@ -82,9 +82,9 @@ const TextInput = ({
                 <>{label}*</>
               )
             ) : !isTooltipNotRequired ? (
-              <>
+              <span className={'flex items-center'}>
                 {label} <ToolTipUI tooltipText={toolTipText} />
-              </>
+              </span>
             ) : (
               <>{label}</>
             )}
@@ -107,7 +107,7 @@ const TextInput = ({
             <Field
               // id='t_login_toc_agree'
               className={`${
-                isCheckbox ? 'form-check-input ' : clsx('form-control h-40px font-size-12')
+                isCheckbox ? 'form-check-input ' : clsx('form-control h-[40px] font-size-12')
               }`}
               type={fieldType}
               name={fieldName}
@@ -120,7 +120,7 @@ const TextInput = ({
                 isCheckbox
                   ? 'form-check-input '
                   : clsx(
-                      'form-control h-40px font-size-12',
+                      'form-control h-[40px] font-size-12',
                       {
                         'is-invalid-local':
                           !isSocialMedia && formik.touched[fieldName] && formik.errors[fieldName],

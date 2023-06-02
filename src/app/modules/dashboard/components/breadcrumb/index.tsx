@@ -5,7 +5,7 @@ import {useIntl} from 'react-intl'
 const Index = () => {
   const {formatMessage} = useIntl()
   return (
-    <div className={'mb-8'}>
+    <div>
       <h4 className='mb-1 leading-7 text-[20px] font-semibold text-[#FFFFFFCC]'>
         {' '}
         {formatMessage({id: 'My AI Personality'})}

@@ -157,12 +157,12 @@ export const CompanyDetails = () => {
         {(formik) => {
           setCountryId(formik.values.country)
           return (
-            <Form className='d-md-flex flex-md-row d-flex flex-column justify-content-md-between col-12'>
-              <div className='mb-10 col-md-6 col-12 d-md-flex flex-md-column justify-content-md-start d-flex flex-column justify-content-center '>
+            <Form className='grid grid-cols-12 md:gap-[44px]'>
+              <div className='col-span-12 md:col-span-6'>
                 <h1 className='text-[22px] leading-8 text-[#FFFFFFCC] font-semibold mb-[8px]'>
                   {formatMessage({id: 'AI Personality Details'})}
                 </h1>
-                <div className='text-gray-500 fs-4'>
+                <div className='text-[16px] leading-5 text-[#FFFFFFCC] font-semibold '>
                   {formatMessage({id: 'Please enter your AI Personality name'})}
                 </div>
                 <div className='mt-7'>
@@ -176,7 +176,8 @@ export const CompanyDetails = () => {
                     toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.COMPANY_DETAILS.COMPANY_NAME'})}
                   />
                   {/* file upload starts */}
-                  <div className={`w-[125px]`} onClick={handleOpen}>
+
+                  <div className={`flex justify-center md:justify-start`} onClick={handleOpen}>
                     <DisplayImage
                       imgName={imgName}
                       className={'w-[125px] h-[125px] rounded shadow'}
@@ -187,7 +188,6 @@ export const CompanyDetails = () => {
                     {/*  <img src={toAbsoluteUrl('/media/icons/duotune/general/pencil.svg')} alt='' />*/}
                     {/*</div>*/}
                   </div>
-
                   <FileUpload
                     fileSize={2097152}
                     maxFileNumber={1}
@@ -205,8 +205,8 @@ export const CompanyDetails = () => {
                     {formatMessage({id: 'format jpg, png'})}
                   </div>
                 </div>
-                <div className='border border-2 rounded-3 me-10 my-10 p-5'>
-                  <div className='d-flex align-items-center mb-2'>
+                <div className='bg-[#1A1B25] rounded p-2.5 my-6'>
+                  <div className='flex items-center justify-between md:justify-start mb-2'>
                     <h2 className='font-size-16 m-0'>{selected}</h2>
                     <p className='btn btn-sm btn-light-success fw-semibold m-0 ms-4 font-size-13 py-1 px-3'>
                       {formatMessage({id: 'Selected Plan'})}
@@ -236,26 +236,34 @@ export const CompanyDetails = () => {
                         {price}/{currentState}
                       </p>
                     </div>
-
-                    <BasicButton
-                      height='44px'
-                      border='1px solid #F5F8FA'
-                      color='#4776E6'
-                      textColor='#FFFFFF'
-                      padding='8px 20px'
-                      buttonText='Change Plan'
-                      minWidth={84}
+                    {/*<BasicButton*/}
+                    {/*  height='44px'*/}
+                    {/*  border='1px solid #F5F8FA'*/}
+                    {/*  color='#4776E6'*/}
+                    {/*  textColor='#FFFFFF'*/}
+                    {/*  padding='8px 20px'*/}
+                    {/*  buttonText='Change Plan'*/}
+                    {/*  width={'100%'}*/}
+                    {/*  minWidth={84}*/}
+                    {/*  onClick={() => setModalShow(true)}*/}
+                    {/*/>*/}
+                    <button
+                      className={
+                        'w-full md:w-auto min-w-[120px] bg-[#C2D24B] py-3 rounded mt-8 md:mt-0 text-black text-[14px] leading-5'
+                      }
                       onClick={() => setModalShow(true)}
-                    />
+                    >
+                      Change Plan
+                    </button>
                   </div>
                 </div>
               </div>
-              <div className='col-md-6 col-12 d-md-flex flex-md-column justify-content-md-between d-flex flex-column justify-content-start'>
+              <div className='col-span-12 md:col-span-6'>
                 <div>
                   <InfoCard
-                    title={formatMessage({id: 'What is company detail?'})}
+                    title={formatMessage({id: 'What is an AI Personality?'})}
                     desc={formatMessage({
-                      id: 'Company basic information is essential for setting up the dashboard. Professional introduction of the business which aims to inform...',
+                      id: 'AI Personality refers to the personalized AI replicas that users can create and train. These AI personalities can reflect the individual users or other specific personalities such as celebrities or influencers.',
                     })}
                     slug={'#'}
                   />

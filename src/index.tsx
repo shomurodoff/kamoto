@@ -26,6 +26,11 @@ import {AuthProvider, setupAxios} from './app/modules/auth'
  *
  * @see https://github.com/axios/axios#interceptors
  */
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/scrollbar'
+
 setupAxios(axios)
 Chart.register(...registerables)
 

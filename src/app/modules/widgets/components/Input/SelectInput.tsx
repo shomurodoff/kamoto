@@ -49,10 +49,10 @@ export const SelectInput = ({
       {label && (
         <label className='form-label font-size-13 text-dark text-capitalize ms-3 ms-md-0'>
           {!isTooltipNotRequired ? (
-            <>
+            <div className={'flex items-center gap-1'}>
               {label}
               {!isStarRequired && '*'} <ToolTipUI tooltipText={toolTipText} />
-            </>
+            </div>
           ) : (
             <>{label}</>
           )}
