@@ -100,6 +100,7 @@ export function ForgotPassword() {
             isValid={formik.isValid}
             buttonText={formatMessage({id: 'Send Reset Link'})}
             loading={loading}
+            customClass={'w-full mb-5'}
           />{' '}
           <div className={'text-center '}>
             <Link to='/auth/login' className='text-[14px] leading-5  text-[#C2D24B] font-semibold'>

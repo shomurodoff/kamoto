@@ -135,6 +135,7 @@ export function ResetPassword() {
                 isValid={formik.isValid}
                 buttonText={formatMessage({id: 'Update Password Now'})}
                 loading={loading}
+                customClass={'w-full'}
               />
             </Form>
           )}

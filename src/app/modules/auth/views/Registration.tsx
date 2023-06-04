@@ -345,6 +345,7 @@ export function Registration() {
                 isAcceptTerms={formik.values.acceptTerms}
                 buttonText={formatMessage({id: 'Submit'})}
                 loading={loading}
+                customClass={'w-full'}
                 isAcceptTermsPresent={true}
               />
               {/* end::Action */}

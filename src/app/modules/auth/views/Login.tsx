@@ -140,6 +140,7 @@ export function Login() {
                   isSubmitting={formik.isSubmitting}
                   isValid={formik.isValid}
                   buttonText={formatMessage({id: 'Continue'})}
+                  customClass={'w-full'}
                   loading={loading}
                   height={54}
                 />
