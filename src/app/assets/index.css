@@ -123,14 +123,42 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  border:none;
+  border: none;
   -webkit-text-fill-color: #fff;
   transition: background-color 5000s ease-in-out 0s;
 }
 [data-kt-app-layout='dark-sidebar'] .form-control,
 [data-kt-app-layout='dark-sidebar'] .form-select {
-  background-color: #2E2F45 !important;
+  background-color: #2e2f45 !important;
   width: 100% !important;
+}
+.uppy-Root,
+.uppy-DashboardContent-back,
+.uppy-DashboardContent-save {
+  color: #fff !important;
+}
+.uppy-DashboardContent-bar,
+.uppy-StatusBar:not([aria-hidden='true']).is-waiting {
+  border-color: #2e2f45 !important;
+}
+
+.uppy-StatusBar:not([aria-hidden='true']).is-waiting {
+  background: #171825 !important;
+}
+.uppy-DashboardContent-bar,
+.uppy-Dashboard-innerWrap,
+.uppy-StatusBar.is-waiting .uppy-StatusBar-actions {
+  background: #171825 !important;
+}
+.uppy-StatusBar.is-waiting .uppy-StatusBar-actionBtn--upload {
+  background: #c2d24b !important;
+  color: #000000 !important;
+}
+.uppy-Dashboard--modal .uppy-Dashboard-AddFiles {
+  border-color: #000000 !important;
+}
+.uppy-Dashboard-AddFiles-title {
+  color: #ffffff !important;
 }
 /*.no-scrollbar::-webkit-scrollbar {*/
 /*  display: none;*/

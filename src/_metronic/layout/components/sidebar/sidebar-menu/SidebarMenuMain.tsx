@@ -94,6 +94,13 @@ const SidebarMenuMain = () => {
         title={intl.formatMessage({id: 'Support'})}
         fontIcon='bi-app-indicator'
       />
+      <SidebarMenuItem
+        to='/sitemap'
+        // icon='/media/icons/sidebar/Support.svg'
+        // activeIcon='/media/icons/sidebar/SupportActive.svg'
+        title={intl.formatMessage({id: 'Sitemap'})}
+        fontIcon='bi-app-indicator'
+      />
       {/* <SidebarMenuItem
         to='/training-hub'
         icon='/media/icons/sidebar/TrainingHubIcon.svg'

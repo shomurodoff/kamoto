@@ -17,6 +17,7 @@ import DataRoomsRoutes from '../modules/data-rooms/DataRoomsRoutes'
 import {DashboardPage} from '../modules/dashboard/DashboardPage'
 import {AiPersonalityPage} from '../modules/ai-personality/AiPersonalityPage'
 import SupportPage from '../modules/support'
+import Sitemap from '../modules/sitemap'
 
 const InvestorDBRoutes = lazy(() => import('../modules//investor-database/InvestorDBRoutes'))
 
@@ -79,6 +80,7 @@ const PrivateRoutes = () => {
                 </SuspensedView>
               }
             />
+            <Route path='/sitemap/*' element={<Sitemap />} />
             <Route path='*' element={<ErrorsPage />} />
           </Route>
           <Route index element={<Navigate to='/onboarding/' />} />
