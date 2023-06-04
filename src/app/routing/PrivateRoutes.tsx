@@ -16,6 +16,7 @@ import {ErrorsPage} from '../modules/errors/ErrorsPage'
 import DataRoomsRoutes from '../modules/data-rooms/DataRoomsRoutes'
 import {DashboardPage} from '../modules/dashboard/DashboardPage'
 import {AiPersonalityPage} from '../modules/ai-personality/AiPersonalityPage'
+import SupportPage from '../modules/support'
 
 const InvestorDBRoutes = lazy(() => import('../modules//investor-database/InvestorDBRoutes'))
 
@@ -67,6 +68,14 @@ const PrivateRoutes = () => {
               element={
                 <SuspensedView>
                   <InvestorDBRoutes />
+                </SuspensedView>
+              }
+            />
+            <Route
+              path='support'
+              element={
+                <SuspensedView>
+                  <SupportPage />
                 </SuspensedView>
               }
             />
