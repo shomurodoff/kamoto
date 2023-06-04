@@ -335,8 +335,8 @@ export const BillingModal = ({
               buttonText={formatMessage({id: 'Cancel'})}
               onClick={() => setModalShow(false)}
               border='none'
-              color='#F5F8FA'
-              textColor='#5E6278'
+              color='#C2D24B1A'
+              textColor='#C2D24B'
               height='44'
               padding='12px 22px'
               minWidth={91}
@@ -344,8 +344,8 @@ export const BillingModal = ({
             <BasicButton
               buttonText={formatMessage({id: 'Update plan'})}
               border='none'
-              color='#4776E6'
-              textColor='#FFFFFF'
+              color='#C2D24B'
+              textColor='#000000'
               height='44'
               padding='12px 24px'
               minWidth={137}
