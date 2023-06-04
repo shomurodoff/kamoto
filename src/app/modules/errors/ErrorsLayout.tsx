@@ -1,20 +1,30 @@
-import { Outlet } from 'react-router-dom'
-import { useThemeMode } from '../../../_metronic/partials'
+import {Link, Outlet} from 'react-router-dom'
+import {useThemeMode} from '../../../_metronic/partials'
+import AuthBg from '../../assets/images/auth/auth-background.png'
+import LogoImg from '../../assets/images/auth/logo.svg'
 
 const ErrorsLayout = () => {
   const {mode} = useThemeMode()
   return (
-
-    <div className='d-flex flex-column flex-center text-center p-10'>
-      <div className={`card card-flush  w-lg-650px py-5 ${mode === "dark"?"errorContainerDark":"errorContainer"}`}>
-        <div className="card-body py-15 py-lg-20">
+    <div className={'h-screen relative auth-bg'}>
+      <div
+        className={
+          'min-w-[340px] sm:min-w-[540px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
+        }
+      >
+        <div className={'flex justify-center mb-8'}>
+          <img src={LogoImg} className={'w-[125px] md:w-[290px]'} />
+        </div>
+        <div
+          className={
+            ' bg-[#171825]  shadow-[0px_2px_15px_0px_#00000040] px-[16px] md:px-[68px] py-[32px] md:py-12 rounded-md'
+          }
+        >
           <Outlet />
         </div>
       </div>
     </div>
-
-
   )
 }
 
-export { ErrorsLayout }
+export {ErrorsLayout}

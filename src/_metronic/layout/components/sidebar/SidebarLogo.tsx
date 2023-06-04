@@ -17,7 +17,7 @@ const SidebarLogo = () => {
   const [companyData, setCompanyData] = useState<any[]>()
   const {config} = useLayout()
   const dropdownRef = useRef<HTMLDivElement>(null)
-
+  const [openDropdown, setOpenDropdown] = useState(false)
   const appSidebarDefaultMinimizeDesktopEnabled =
     config?.app?.sidebar?.default?.minimize?.desktop?.enabled
   const appSidebarDefaultCollapseDesktopEnabled =
@@ -77,10 +77,13 @@ const SidebarLogo = () => {
             <button
               className='accordion-button collapsed w-100 app-sidebar-logo-default'
               type='button'
-              data-bs-toggle='collapse'
-              data-bs-target='#panelsStayOpen-collapseThree'
+              data-te-collapse-init
+              data-te-ripple-init
+              data-te-ripple-color='light'
+              data-te-target='#collapseExample'
               aria-expanded='false'
-              aria-controls='panelsStayOpen-collapseThree'
+              aria-controls='collapseExample'
+              onClick={() => setOpenDropdown((prevState) => !prevState)}
             >
               <button className='btn d-flex p-0 align-items-center'>
                 <DisplayImage
@@ -90,7 +93,6 @@ const SidebarLogo = () => {
                   width='30px'
                   fit='contain'
                 />
-
                 <h4 className='align-self-center ps-2 text-dark font-size-13 fw-bold ps-3 m-0'>
                   {selectCompany?.name}
                 </h4>
@@ -113,9 +115,14 @@ const SidebarLogo = () => {
           </div>
 
           <div
-            id='panelsStayOpen-collapseThree'
-            className='accordion-collapse ms-6 bg-white collapse w-200px shadow px-2 border-bottom mh-1000px'
-            aria-labelledby='panelsStayOpen-headingThree'
+            // id='panelsStayOpen-collapseThree'
+            className={clsx(
+              'accordion-collapse ms-6 bg-white  w-200px shadow px-2 border-bottom mh-1000px',
+              openDropdown ? '' : 'collapse'
+            )}
+            // aria-labelledby='panelsStayOpen-headingThree'
+            id='collapseExample'
+            data-te-collapse-item
           >
             <div className='accordion-body app-sidebar-logo-default overflow-scroll mh-550px'>
               {companyData &&

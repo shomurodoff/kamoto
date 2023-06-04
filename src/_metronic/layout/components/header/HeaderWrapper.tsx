@@ -16,7 +16,7 @@ export function HeaderWrapper() {
       <div
         id='kt_app_header_container'
         className={clsx(
-          'app-container flex-lg-grow-1',
+          'app-container flex-lg-grow-1 w-full',
           classes.headerContainer.join(' '),
           config.app?.header?.default?.containerClass
         )}
@@ -24,7 +24,7 @@ export function HeaderWrapper() {
         {config.app.sidebar?.display && (
           <>
             <div
-              className='d-flex align-items-center d-lg-none ms-n2 me-2'
+              className='d-flex flex-row-reverse align-items-center d-lg-none ms-n2 me-2'
               title='Show sidebar menu'
             >
               <div
@@ -37,7 +37,7 @@ export function HeaderWrapper() {
                 <Link to='/dashboard' className='d-lg-none'>
                   <img
                     alt='Logo'
-                    src={toAbsoluteUrl('/media/auth/founderCrateOnlyLogo.svg')}
+                    src={toAbsoluteUrl('/media/auth/logo-mini.png')}
                     className='h-25px'
                   />
                 </Link>

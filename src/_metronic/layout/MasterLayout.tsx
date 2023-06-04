@@ -32,12 +32,7 @@ const MasterLayout = () => {
               <Sidebar />
               <div className='app-main flex-column flex-row-fluid' id='kt_app_main'>
                 <div className='d-flex flex-column flex-column-fluid'>
-                  {
-                    !location.pathname.includes('settings') && (
-                      <ToolbarWrapper />
-                    )
-                  }
-                 
+                  {!location.pathname.includes('settings') && <ToolbarWrapper />}
                   <Content>
                     <Outlet />
                   </Content>

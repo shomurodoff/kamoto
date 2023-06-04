@@ -131,7 +131,6 @@ const HeaderNotificationsMenu = ({blinker, setBlinker}: {blinker: boolean; setBl
               {length} {formatMessage({id: 'reports'})}
             </span>
           </h3>
-
           <ul className='nav nav-line-tabs nav-line-tabs-2x nav-stretch fw-bold px-9 mt-n4'>
             <li className='nav-item'>
               <a
@@ -164,7 +163,6 @@ const HeaderNotificationsMenu = ({blinker, setBlinker}: {blinker: boolean; setBl
             </li>
           </ul>
         </div>
-
         <div className='tab-content'>
           <div className='tab-pane fade show active' id='kt_topbar_notifications_2' role='tabpanel'>
             {updates?.length > 0 ? (
