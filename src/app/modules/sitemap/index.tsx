@@ -15,6 +15,33 @@ const Index = () => {
         </thead>
         <tbody>
           <tr>
+            <td className={'border px-2 py-2'}>Login</td>
+            <td className={'border px-2 py-2'}>
+              <Link to={'/auth/login'} className={'text-blue-500'}>
+                {' '}
+                Login
+              </Link>
+            </td>
+          </tr>
+          <tr>
+            <td className={'border px-2 py-2'}>Login</td>
+            <td className={'border px-2 py-2'}>
+              <Link to={'/auth/registration'} className={'text-blue-500'}>
+                {' '}
+                Registration
+              </Link>
+            </td>
+          </tr>
+          <tr>
+            <td className={'border px-2 py-2'}>Login</td>
+            <td className={'border px-2 py-2'}>
+              <Link to={'/auth/forgot-password'} className={'text-blue-500'}>
+                {' '}
+                Forgot Password
+              </Link>
+            </td>
+          </tr>
+          <tr>
             <td className={'border px-2 py-2'}>Onboarding</td>
             <td className={'border px-2 py-2'}>
               <Link to={'/onboarding'} className={'text-blue-500'}>
