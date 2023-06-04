@@ -100,57 +100,49 @@ export const TeamMembers = () => {
         >
           {(formik) => {
             return (
-              <Form className='company-container d-flex justify-content-between col-12'>
-                <div className='mb-11 col-12 mt-4'>
-                  <div className='d-md-flex flex-md-row justify-content-md-between d-flex flex-column col-12'>
-                    <div className='col-md-6 col-12'>
-                      <h1 className='text-dark fw-bolder mb-3'>
-                        {formatMessage({id: 'Team Members'})}
-                      </h1>
-                      <div className='text-gray-500  fs-4'>
-                        {formatMessage({id: 'Add team members to collaborate better'})}
-                      </div>
-                    </div>
-                    <div className='col-md-6 col-12 mt-6 mt-md-0'>
-                      <InfoCard
-                        title={formatMessage({id: 'Why team members are invited?'})}
-                        desc={formatMessage({
-                          id: 'Give team members controlled access to your Foundercrate account. Roles protect your sensitive information and restrict...',
-                        })}
-                        slug={'#'}
-                      />
-                    </div>
-                    <div className='d-md-none d-flex'>
-                      <CustomButton
-                        buttonText={formatMessage({id: 'Skip'})}
-                        loading={loading}
-                        width={1}
-                        margin={'me-3'}
-                        buttonColor={'btn-secondary'}
-                        isSkipButton={true}
-                        onSkip={onSkip}
-                      />
-                    </div>
-                  </div>
-                  <div className='mt-md-19 mt-4'>
-                    <FieldArray
-                      name='teamMembers'
-                      render={(arrayHelpers) => {
-                        return (
-                          <>
-                            {formik.values.teamMembers.map((_, index) => (
-                              <div key={index} className='mb-8'>
-                                {index !== 0 ? (
-                                  <div className='fw-semibold fs-4'>
-                                    {`${formatMessage({id: 'Member'})} ${index + 1}`}
-                                  </div>
-                                ) : (
-                                  <div className='fw-semibold fs-4'>
-                                    {formatMessage({id: 'Add first Member'})}
-                                  </div>
-                                )}
-                                <div className='mb-3'></div>
-                                <div className='d-md-flex  col-12 col-md-12'>
+              <Form className='text-[#FFFFFFCC] grid grid-cols-12 md:gap-x-[32px] gap-y-[40px]'>
+                <div className={'col-span-12 md:col-span-6 font-medium'}>
+                  <h1
+                    className={'text-[14px] md:text-[22px] leading-[20px] md:leading-[32px] mb-2'}
+                  >
+                    Team Members (Optional)
+                  </h1>
+                  <p
+                    className={
+                      'text-[13px] md:text-[16px] leading-5 text-[#A8B3BF] font-medium md:font-semibold'
+                    }
+                  >
+                    Add team members to collaborate better
+                  </p>
+                </div>
+                <div className={'col-span-12 md:col-span-6'}>
+                  <InfoCard
+                    title={formatMessage({id: 'What is this?'})}
+                    desc={formatMessage({
+                      id: 'You can add your team members here who can help you manage & train this AI personality collaboratively with you.',
+                    })}
+                    slug={'#'}
+                  />
+                </div>
+                <div className={'col-span-12'}>
+                  <FieldArray
+                    name='teamMembers'
+                    render={(arrayHelpers) => {
+                      return (
+                        <>
+                          {formik.values.teamMembers.map((_, index) => (
+                            <div key={index}>
+                              {index !== 0 ? (
+                                <div className='fw-semibold fs-4'>
+                                  {`${formatMessage({id: 'Member'})} ${index + 1}`}
+                                </div>
+                              ) : (
+                                <div className='fw-semibold fs-4'>
+                                  {formatMessage({id: 'Add first Member'})}
+                                </div>
+                              )}
+                              <div className='grid grid-cols-12 md:gap-x-[18px]'>
+                                <div className={'col-span-12 md:col-span-3'}>
                                   <TextInput
                                     fieldType={'text'}
                                     label={formatMessage({id: 'First Name'})}
@@ -164,8 +156,9 @@ export const TeamMembers = () => {
                                     toolTipText={formatMessage({
                                       id: 'GLOBAL.TOOLTIP.TEAM_MEMBERS.FIRST_NAME',
                                     })}
-                                    width={3}
                                   />
+                                </div>
+                                <div className={'col-span-12 md:col-span-3'}>
                                   <TextInput
                                     fieldType={'text'}
                                     label={formatMessage({id: 'Last Name'})}
@@ -179,8 +172,9 @@ export const TeamMembers = () => {
                                     toolTipText={formatMessage({
                                       id: 'GLOBAL.TOOLTIP.TEAM_MEMBERS.LAST_NAME',
                                     })}
-                                    width={3}
                                   />
+                                </div>
+                                <div className={'col-span-12 md:col-span-3'}>
                                   <TextInput
                                     fieldType={'email'}
                                     label={formatMessage({id: 'Email Address'})}
@@ -189,89 +183,87 @@ export const TeamMembers = () => {
                                       id: 'Enter Email Address',
                                     })}
                                     formik={formik}
-                                    margin={'me-6'}
                                     isFieldArray={true}
                                     toolTipText={formatMessage({
                                       id: 'GLOBAL.TOOLTIP.TEAM_MEMBERS.EMAIL',
                                     })}
-                                    width={3}
                                   />
+                                </div>
+                                <div className={'col-span-12 md:col-span-3'}>
                                   <SelectInput
                                     label={formatMessage({
-                                      id: 'Designation',
+                                      id: 'Role',
                                     })}
-                                    fieldName={`teamMembers[${index}].designation`}
+                                    fieldName={`teamMembers[${index}].role`}
                                     placeholder={formatMessage({
-                                      id: 'Select Designation',
+                                      id: 'Select Role',
                                     })}
                                     formik={formik}
                                     toolTipText={formatMessage({
-                                      id: 'GLOBAL.TOOLTIP.TEAM_MEMBERS.DESIGNATION',
+                                      id: 'GLOBAL.TOOLTIP.TEAM_MEMBERS.ROLE',
                                     })}
-                                    margin={'me-0'}
                                     options={designationOptions}
                                     isFieldArray={true}
-                                    width={3 - 5}
                                   />
                                 </div>
-                                {index === formik.values.teamMembers.length - 1 && (
-                                  <div className='d-flex justify-content-end'>
-                                    {index !== 0 && (
-                                      <button
-                                        className='btn btn-secondary me-5'
-                                        onClick={() => {
-                                          arrayHelpers.remove(index)
-                                        }}
-                                      >
-                                        {formatMessage({id: 'Remove member'})}
-                                      </button>
-                                    )}
-
-                                    <button
-                                      type='button'
-                                      className='btn border border-primary text-primary'
-                                      onClick={() =>
-                                        arrayHelpers.push({
-                                          firstName: '',
-                                          lastName: '',
-                                          email: '',
-                                          designation: '',
-                                        })
-                                      }
-                                    >
-                                      {formatMessage({id: 'Add new Members'})}
-                                    </button>
-                                  </div>
-                                )}
                               </div>
-                            ))}
-                          </>
-                        )
-                      }}
-                    />
-                  </div>
-                  <div className='d-flex justify-content-end button-margin'>
-                    <div className='d-md-flex d-none'>
-                      <CustomButton
-                        buttonText={formatMessage({id: 'Skip'})}
-                        loading={skipLoading}
-                        width={1}
-                        margin={'me-3'}
-                        buttonColor={'btn-secondary'}
-                        isSkipButton={true}
-                        onSkip={onSkip}
-                        height={44}
-                      />
-                    </div>
-                    <CustomButton
-                      isSubmitting={formik.isSubmitting}
-                      isValid={formik.isValid}
-                      buttonText={formatMessage({id: 'Send invite and continue'})}
-                      loading={inviteLoading}
-                      width={3}
-                      height={44}
-                    />
-                  </div>
+                              {index === formik.values.teamMembers.length - 1 && (
+                                <div className='d-flex justify-content-end'>
+                                  {index !== 0 && (
+                                    <button
+                                      className='btn btn-secondary !bg-[#C2D24B1A] text-primary me-5'
+                                      onClick={() => {
+                                        arrayHelpers.remove(index)
+                                      }}
+                                    >
+                                      {formatMessage({id: 'Remove member'})}
+                                    </button>
+                                  )}
+
+                                  <button
+                                    type='button'
+                                    className='btn border border-primary text-primary'
+                                    onClick={() =>
+                                      arrayHelpers.push({
+                                        firstName: '',
+                                        lastName: '',
+                                        email: '',
+                                        designation: '',
+                                      })
+                                    }
+                                  >
+                                    {formatMessage({id: 'Add new Members'})}
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                        </>
+                      )
+                    }}
+                  />
+                </div>
+                <div
+                  className={
+                    'col-span-12 flex flex-col-reverse md:flex-row justify-end md:mt-[135px] gap-y-[16px] md:gap-x-[16px]'
+                  }
+                >
+                  <CustomButton
+                    buttonText={formatMessage({id: 'Skip'})}
+                    loading={skipLoading}
+                    customClass={'!w-full md:w-auto !bg-[#C2D24B1A] !text-[#C2D24B]'}
+                    isSkipButton={true}
+                    onSkip={onSkip}
+                    height={44}
+                  />
+                  <CustomButton
+                    isSubmitting={formik.isSubmitting}
+                    // isValid={formik.isValid}
+                    buttonText={formatMessage({id: 'Send invite and continue'})}
+                    loading={inviteLoading}
+                    customClass={'!w-full md:w-auto'}
+                    height={44}
+                  />
                 </div>
               </Form>
             )

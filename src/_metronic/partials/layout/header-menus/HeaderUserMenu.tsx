@@ -13,8 +13,8 @@ const HeaderUserMenu: FC = () => {
   const {currentUser, logout} = useAuth()
   const {formatMessage} = useIntl()
   const handleLogout = async () => {
-    navigate('/auth/login');
-    logout();
+    navigate('/auth/login')
+    logout()
   }
   const itemClass = 'ms-1 ms-lg-3'
   return (
@@ -48,7 +48,6 @@ const HeaderUserMenu: FC = () => {
       <div className={clsx('app-navbar-item', itemClass)}>
         <ThemeModeSwitcher toggleBtnClass={clsx('btn-active-light-primary btn-custom')} />
       </div>
-
       <Languages />
 
       <div className='menu-item px-5 my-1'>

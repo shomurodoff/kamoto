@@ -39,43 +39,44 @@ const PrivateRoutes = () => {
     <Routes>
       {/* Redirect to Dashboard after success login/registartion */}
       {newCompany ?? companyId ? (
-        <Route element={<MasterLayout />}>
-          <Route index element={<Navigate to='/dashboard' />} />
-          <Route path='dashboard' element={<DashboardPage />} />
-          <Route path='my-ai/*' element={<AiPersonalityPage />} />
-          <Route path='investor-crm/*' element={<InvestorCrmRoutes />} />
-          <Route
-            path='settings'
-            element={
-              <SuspensedView>
-                <ToolbarWrapper />
-              </SuspensedView>
-            }
-          />
-
-          <Route
-            path='data-rooms/*'
-            element={
-              <SuspensedView>
-                <DataRoomsRoutes />
-              </SuspensedView>
-            }
-          />
-          <Route
-            path='investor-database/*'
-            element={
-              <SuspensedView>
-                <InvestorDBRoutes />
-              </SuspensedView>
-            }
-          />
-
-          <Route path='*' element={<ErrorsPage />} />
-        </Route>
-      ) : (
         <>
+          <Route element={<MasterLayout />}>
+            <Route index element={<Navigate to='/dashboard' />} />
+            <Route path='dashboard' element={<DashboardPage />} />
+            <Route path='my-ai/*' element={<AiPersonalityPage />} />
+            <Route path='investor-crm/*' element={<InvestorCrmRoutes />} />
+            <Route
+              path='settings'
+              element={
+                <SuspensedView>
+                  <ToolbarWrapper />
+                </SuspensedView>
+              }
+            />
+
+            <Route
+              path='data-rooms/*'
+              element={
+                <SuspensedView>
+                  <DataRoomsRoutes />
+                </SuspensedView>
+              }
+            />
+            <Route
+              path='investor-database/*'
+              element={
+                <SuspensedView>
+                  <InvestorDBRoutes />
+                </SuspensedView>
+              }
+            />
+            <Route path='*' element={<ErrorsPage />} />
+          </Route>
           <Route index element={<Navigate to='/onboarding/' />} />
           <Route path='/onboarding/*' element={<OnboardingRoutes />} />
+        </>
+      ) : (
+        <>
           <Route element={<MasterLayout />}></Route>
           <Route path='*' element={<ErrorsPage />} />
         </>

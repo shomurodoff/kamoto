@@ -44,7 +44,7 @@ export const SelectInput = ({
   )
 
   return (
-    <div className={``}>
+    <div className={`mb-[16px] md:mb-[16px] `}>
       {label && (
         <label className='text-[13px] leading-5 text-[#FFFFFFA6] mb-1'>
           {!isTooltipNotRequired ? (

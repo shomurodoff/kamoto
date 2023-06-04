@@ -2,8 +2,8 @@ import clsx from 'clsx'
 import {KTSVG} from '../../../helpers'
 import {ThemeModeComponent} from '../../../assets/ts/layout'
 import {ThemeModeType, useThemeMode} from './ThemeModeProvider'
-import { useIntl } from 'react-intl'
-import { useLayout } from '../../../layout/core'
+import {useIntl} from 'react-intl'
+import {useLayout} from '../../../layout/core'
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
 type Props = {
@@ -27,7 +27,7 @@ const ThemeModeSwitcher = ({
     updateMenuMode(_mode)
     updateMode(_mode)
   }
-  const {formatMessage} = useIntl();
+  const {formatMessage} = useIntl()
   const {setLayoutType} = useLayout()
 
   return (
@@ -40,28 +40,28 @@ const ThemeModeSwitcher = ({
       >
         <a href='#' className='menu-link ps-5 pe-8'>
           <span className='menu-title position-relative'>
-            {formatMessage({id:"Theme"})}
-            <span className='fs-7 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0'>
-            {calculatedMode === 'dark' && (
-              <>
-              <span className="fs-7 text-gray-500 pe-4">{formatMessage({id:"Dark"})}</span>
-              <KTSVG
-                path='/media/icons/duotune/general/gen061.svg'
-                className={clsx('theme-light-hide', toggleBtnIconClass)}
-              />
-              </>
-            )}
+            {formatMessage({id: 'Theme'})}
+            <span className='fs-7 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-1/2 end-0'>
+              {calculatedMode === 'dark' && (
+                <div className={'flex items-center gap-1'}>
+                  <span className='fs-7 text-gray-500 pe-4'>{formatMessage({id: 'Dark'})}</span>
+                  <KTSVG
+                    path='/media/icons/duotune/general/gen061.svg'
+                    className={clsx('theme-light-hide', toggleBtnIconClass)}
+                  />
+                </div>
+              )}
 
-            {calculatedMode === 'light' && (
-              <>
-              <span className="fs-7 text-gray-500 pe-4">{formatMessage({id:"Light"})}</span>
-              <KTSVG
-                path='/media/icons/duotune/general/gen060.svg'
-                className={clsx('theme-dark-hide', toggleBtnIconClass)}
-              />
-              </>
-            )}
-          </span>
+              {calculatedMode === 'light' && (
+                <div className={'flex items-center gap-1'}>
+                  <span className='fs-7 text-gray-500 pe-4'>{formatMessage({id: 'Light'})}</span>
+                  <KTSVG
+                    path='/media/icons/duotune/general/gen060.svg'
+                    className={clsx('theme-dark-hide', toggleBtnIconClass)}
+                  />
+                </div>
+              )}
+            </span>
           </span>
         </a>
 
@@ -74,12 +74,15 @@ const ThemeModeSwitcher = ({
             <a
               href='#'
               className={clsx('menu-link px-3 py-2', {active: menuMode === 'light'})}
-              onClick={() => {setLayoutType('light-sidebar');switchMode('light')}}
+              onClick={() => {
+                setLayoutType('light-sidebar')
+                switchMode('light')
+              }}
             >
               <span className='menu-icon' data-kt-element='icon'>
                 <KTSVG path='/media/icons/duotune/general/gen060.svg' className='svg-icon-3' />
               </span>
-              <span className='menu-title'>{formatMessage({id:"Light"})}</span>
+              <span className='menu-title'>{formatMessage({id: 'Light'})}</span>
             </a>
           </div>
           {/* end::Menu item */}
@@ -89,12 +92,15 @@ const ThemeModeSwitcher = ({
             <a
               href='#'
               className={clsx('menu-link px-3 py-2', {active: menuMode === 'dark'})}
-              onClick={() => {setLayoutType('dark-sidebar');switchMode('dark')}}
+              onClick={() => {
+                setLayoutType('dark-sidebar')
+                switchMode('dark')
+              }}
             >
               <span className='menu-icon' data-kt-element='icon'>
                 <KTSVG path='/media/icons/duotune/general/gen061.svg' className='svg-icon-3' />
               </span>
-              <span className='menu-title'>{formatMessage({id:"Dark"})}</span>
+              <span className='menu-title'>{formatMessage({id: 'Dark'})}</span>
             </a>
           </div>
           {/* end::Menu item */}
@@ -164,7 +170,7 @@ const ThemeModeSwitcher = ({
       {/* begin::Menu toggle */}
 
       {/* begin::Menu */}
-      
+
       {/* end::Menu */}
     </>
   )

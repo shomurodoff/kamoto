@@ -45,7 +45,6 @@ export function HeaderWrapper() {
             </div>
           </>
         )}
-
         {!config.app.sidebar?.display && (
           <div className='d-flex align-items-center flex-grow-1 flex-lg-grow-0 me-lg-15'>
             <Link to='/dashboard'>
@@ -72,7 +71,6 @@ export function HeaderWrapper() {
             </Link>
           </div>
         )}
-
         <div
           id='kt_app_header_wrapper'
           className='d-flex align-items-stretch justify-content-between flex-lg-grow-1'

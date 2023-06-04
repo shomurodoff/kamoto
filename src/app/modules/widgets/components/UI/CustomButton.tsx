@@ -18,6 +18,7 @@ export const CustomButton = ({
   imgName,
   isSkipButton,
   widthLoading,
+  customClass,
   height,
   marginButtom,
   onSubmit,
@@ -39,6 +40,7 @@ export const CustomButton = ({
   imgName?: string
   isSkipButton?: boolean
   widthLoading?: number
+  customClass?: string
   height?: number
   marginButtom?: string
   onSubmit?: () => void
@@ -49,14 +51,14 @@ export const CustomButton = ({
 
   return (
     <div
-      className={`d-grid ${marginButtom ? marginButtom : 'mb-10'} ${margin ? margin : ''}
+      className={` ${marginButtom ? marginButtom : ''} ${margin ? margin : ''}
       }`}
     >
       {isModal ? (
         <button
           type='button'
           onClick={() => setShowModal(true)}
-          className={`btn ${
+          className={`btn ${customClass} ${
             buttonColor ? buttonColor : 'btn-primary border'
           } custom-button-property ${height ? `h-[${height}px]` : ''} `}
         >
@@ -72,9 +74,7 @@ export const CustomButton = ({
               await onSkip()
             }
           }}
-          className={`btn ${buttonColor ? buttonColor : 'btn-primary'} custom-button-property ${
-            height ? `h-md-${height}px` : ''
-          }`}
+          className={`btn btn-primary custom-button-property ${customClass}`}
         >
           <span className='indicator-label'>{buttonText}</span>
         </button>
@@ -82,9 +82,7 @@ export const CustomButton = ({
         <button
           type='submit'
           onClick={onSubmit}
-          className={`btn ${margin} ${
-            buttonColor ? buttonColor : 'btn-primary'
-          } custom-button-property ${height ? `h-md-${height}px` : ''}`}
+          className={`btn  ${buttonColor ? buttonColor : 'btn-primary'} ${customClass}`}
           disabled={isSubmitting || !isValid || (!isAcceptTerms && isAcceptTermsPresent)}
         >
           {!loading && (
