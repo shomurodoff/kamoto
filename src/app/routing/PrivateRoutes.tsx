@@ -42,7 +42,7 @@ const PrivateRoutes = () => {
         <Route element={<MasterLayout />}>
           <Route index element={<Navigate to='/dashboard' />} />
           <Route path='dashboard' element={<DashboardPage />} />
-          <Route path='my-ai' element={<AiPersonalityPage />} />
+          <Route path='my-ai/*' element={<AiPersonalityPage />} />
           <Route path='investor-crm/*' element={<InvestorCrmRoutes />} />
           <Route
             path='settings'

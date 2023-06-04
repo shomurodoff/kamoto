@@ -9,13 +9,12 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"
     />
-    <title>Foundercrate</title>
-    <link rel="shortcut icon" href="%PUBLIC_URL%/media/logos/favicon.ico" />
-    <link
-      rel="stylesheet"
-      id="layout-styles-anchor"
-      href="%PUBLIC_URL%/splash-screen.css"
-    />
+    <title>Kamoto AI</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" id="layout-styles-anchor" href="%PUBLIC_URL%/splash-screen.css" />
     <script src="https://accounts.google.com/gsi/client" async defer></script>
   </head>
 
@@ -24,19 +23,19 @@
     <!--begin::Theme mode setup on page load-->
     <script>
       if (document.documentElement) {
-        var defaultThemeMode = "system";
+        var defaultThemeMode = 'system'
 
-        var themeMode = localStorage.getItem("kt_theme_mode_value");
+        var themeMode = localStorage.getItem('kt_theme_mode_value')
         if (!themeMode) {
-          if (defaultThemeMode === "system") {
-            themeMode = "dark";
+          if (defaultThemeMode === 'system') {
+            themeMode = 'dark'
             //window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
           } else {
-            themeMode = defaultThemeMode;
+            themeMode = defaultThemeMode
           }
         }
 
-        document.documentElement.setAttribute("data-theme", "dark");
+        document.documentElement.setAttribute('data-theme', 'dark')
       }
     </script>
     <script
@@ -46,13 +45,12 @@
     ></script>
     <script>
       document.addEventListener(
-        "focus",
+        'focus',
         (e) => {
-          e.srcElement?.tagName === "BUGHERD-SIDEBAR" &&
-            e.stopImmediatePropagation();
+          e.srcElement?.tagName === 'BUGHERD-SIDEBAR' && e.stopImmediatePropagation()
         },
         !0
-      );
+      )
     </script>
     <!--end::Theme mode setup on page load-->
 

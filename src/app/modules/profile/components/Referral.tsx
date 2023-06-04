@@ -64,23 +64,23 @@ export function Referral({
             </div>
           </div>
           <div>
-            <div className='col-12  row'>
-              <div className='col-lg-5 col-md-5 col-xl-5 col-12 pe-2'>
-                <div className='input-group border-right-0 '>
-                  <label className='col-12 mb-2'>
-                    {formatMessage({id: 'Referral Link'})}{' '}
-                    <ToolTipUI tooltipText={'GLOBAL.TOOLTIP.REFFERAL.REFFERALLINK'} />
-                  </label>
+            <div className={'grid grid-cols-12 md:gap-x-[32px] gap-y-[16px]'}>
+              <div className='col-span-12 md:col-span-4'>
+                <label className='flex items-center mb-1'>
+                  {formatMessage({id: 'Referral Link'})}{' '}
+                  <ToolTipUI tooltipText={'GLOBAL.TOOLTIP.REFFERAL.REFFERALLINK'} />
+                </label>
+                <div className={'input-group flex  rounded p-1.5 bg-[#2E2F45]'}>
                   <input
                     type='text'
-                    className='form-control '
+                    className='flex-grow bg-transparent border-none focus:outline-0'
                     value={`${window.location.protocol}//${window.location.hostname}/auth/registration?r=${referral}`}
                     placeholder='Some path'
                     // id='copy-input'
                     readOnly
                   />
                   <span
-                    className='input-group-btn border border-left-0'
+                    className='bg-[#2E2F45]'
                     style={{borderColor: '#e4e6ef !important'}}
                     onClick={() => {
                       navigator.clipboard.writeText(
@@ -93,41 +93,38 @@ export function Referral({
                   </span>
                 </div>
               </div>
-              <div className='col-lg-5 col-md-5 col-xl-5 col-12'>
-                <div className='input-group border-right-0'>
-                  <label className='col-12 mb-2'>
-                    {formatMessage({id: 'Referral Code'})}{' '}
-                    <ToolTipUI tooltipText={'GLOBAL.TOOLTIP.REFFERAL.REFFERALCODE'} />
-                  </label>
+              <div className='col-span-12 md:col-span-4'>
+                <label className='flex items-center mb-1'>
+                  {formatMessage({id: 'Referral Link'})}{' '}
+                  <ToolTipUI tooltipText={'GLOBAL.TOOLTIP.REFFERAL.REFFERALLINK'} />
+                </label>
+                <div className={'input-group flex border rounded p-1.5 bg-[#2E2F45]'}>
                   <input
                     type='text'
-                    className='form-control '
+                    className='flex-grow border-r-0 bg-transparent focus:outline-0'
                     value={referral}
                     placeholder='Some path'
                     // id='copy-input'
                     readOnly
                   />
                   <span
-                    className='input-group-btn border border-left-0'
+                    className='bg-[#2E2F45]'
                     style={{borderColor: '#e4e6ef !important'}}
                     onClick={() => {
                       navigator.clipboard.writeText(`${referral}`)
                       toast.success(formatMessage({id: 'Copied Successfully'}))
                     }}
                   >
-                    <i className='fa fa-copy btn'></i>
+                    <i className='fa fa-copy  btn'></i>
                   </span>
                 </div>
               </div>
-
-              <div className='align-self-center col-lg-2 col-md-2 col-xl-2 col-12 d-flex flex-column px-4'>
-                <div>
-                  <label className=''>
-                    {formatMessage({id: 'Share'})}{' '}
-                    <ToolTipUI tooltipText={'GLOBAL.TOOLTIP.REFFERAL.SHARELINK'} />
-                  </label>
-                </div>
-                <div className='d-flex py-4'>
+              <div className='col-span-12 md:col-span-4'>
+                <label className='flex items-center mb-1'>
+                  {formatMessage({id: 'Share'})}{' '}
+                  <ToolTipUI tooltipText={'GLOBAL.TOOLTIP.REFFERAL.SHARELINK'} />
+                </label>
+                <div className='flex md:mt-[8px]'>
                   <span
                     className={`svg-icon svg-icon-1 cursor-pointer`}
                     onClick={() =>
@@ -157,6 +154,23 @@ export function Referral({
                   >
                     <img
                       src={toAbsoluteUrl('/media/svg/social-logos/telegram.svg')}
+                      height='25px'
+                      width='25px'
+                      alt='img_icon'
+                    />
+                  </span>
+                  <span
+                    className={`svg-icon svg-icon-1 social-media-icon cursor-pointer`}
+                    onClick={() =>
+                      window.open(
+                        `https://discord.com/share/url?url=${window.location.protocol}//${window.location.hostname}/auth/registration?r=${referral}`,
+                        '_blank',
+                        'noreferrer'
+                      )
+                    }
+                  >
+                    <img
+                      src={toAbsoluteUrl('/media/svg/social-logos/discord.svg')}
                       height='25px'
                       width='25px'
                       alt='img_icon'
@@ -236,45 +250,35 @@ export function Referral({
                 <p>{formatMessage({id: 'Total Referred Companies'})}</p>
               </div>{' '}
             </div>
+            <div className='grid grid-cols-12'>
+              <div className='col-span-12 mb-1'>
+                <label className='flex items-center'>
+                  {formatMessage({id: 'Your PayPal ID for referral earning payout'})}{' '}
+                  <ToolTipUI tooltipText={'GLOBAL.TOOLTIP.REFFERAL.PAYPAL_REFERRAL'} />
+                </label>
+              </div>
+              <div className='md:col-span-5 col-span-12'>
+                <div className='flex flex-col md:flex-row  gap-x-[20px] gap-y-[16px]'>
+                  <input
+                    type='email'
+                    className='flex-grow bg-[#2E2F45] form-control  border-r-0  focus:outline-0'
+                    placeholder='mypaypalid@paypal.com'
+                    onChange={(e) => setPaypalId(e.target.value)}
+                    value={paypalId}
+                  />
 
-            <div className='row'>
-              <div className='col-md-5'>
-                <div className='row mt-4'>
-                  <div className='col-md-12'>
-                    <label className=''>
-                      {formatMessage({id: 'Your PayPal ID for referral earning payout'})}{' '}
-                      <ToolTipUI tooltipText={'GLOBAL.TOOLTIP.REFFERAL.PAYPAL_REFERRAL'} />
-                    </label>
-                  </div>
-                  <div className='col-md-12 mt-3'>
-                    <div className='row d-flex align-items-center'>
-                      <div className='col-md-8'>
-                        <div className='form-group'>
-                          <input
-                            type='email'
-                            className='form-control'
-                            placeholder='mypaypalid@paypal.com'
-                            onChange={(e) => setPaypalId(e.target.value)}
-                            value={paypalId}
-                          />
-                        </div>
-                      </div>
-                      <div className='col-md-4'>
-                        <BasicButton
-                          disabled={loading}
-                          loading={loading}
-                          buttonText={formatMessage({id: 'Save'})}
-                          height='36px'
-                          border='none'
-                          color='#4776E6'
-                          textColor='#FFFFFF'
-                          minWidth={80}
-                          padding="8px 24px"
-                          onClick={addPaypalEmail}
-                        />
-                      </div>
-                    </div>
-                  </div>
+                  <BasicButton
+                    disabled={loading}
+                    loading={loading}
+                    buttonText={formatMessage({id: 'Save'})}
+                    height='44px'
+                    border='none'
+                    color='#C2D24B'
+                    textColor='#000000'
+                    customClass={'w-[120px]'}
+                    padding='8px 24px'
+                    onClick={addPaypalEmail}
+                  />
                 </div>
               </div>
             </div>

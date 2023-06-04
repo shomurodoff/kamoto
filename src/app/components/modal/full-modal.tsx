@@ -6,7 +6,7 @@ const FullModal: React.FC<any> = ({open, setOpen, children}) => {
     <div>
       <div
         className={clsx(
-          'bg-[#11121C] absolute inset-0 z-[99999] transition-all duration-1000 ',
+          'bg-[#11121C] z-[99999] fixed top-0 left-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto transition-all duration-1000',
           open ? 'translate-y-auto' : '-translate-y-full'
         )}
       >

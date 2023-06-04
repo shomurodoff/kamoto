@@ -13,10 +13,14 @@ import {InfoCard} from '../widgets/components/UI/InfoCard'
 import {useIntl} from 'react-intl'
 import {FullModal} from '../../components/modal'
 import EditProfile from './components/edit-profile'
+import {useLocation, useNavigate} from 'react-router-dom'
 const AiPersonalityPage = () => {
   const [expanded, setExpanded] = useState<false | number>(0)
   const {formatMessage} = useIntl()
   const [openEdit, setOpenEdit] = useState<boolean>(false)
+  const navigate = useNavigate()
+  const {pathname} = useLocation()
+
   return (
     <div className='overflow-scroll px-5 py-3'>
       <Breadcrumb />
@@ -53,11 +57,18 @@ const AiPersonalityPage = () => {
         </button>
       </div>
       <Tabs
-        activeTab={1}
+        activeTab={isEqual('/my-ai/chat', pathname) || isEqual('/my-ai', pathname) ? 1 : 2}
         className='font-size-13'
         ulClassName='text-muted  dark-border !justify-start'
         activityClassName='bg-primary !text-primary'
-        // onClick={(event, tab) => setKey(tab)}
+        onClick={(event, tab) => {
+          if (tab === 1) {
+            navigate('/my-ai/chat')
+          }
+          if (tab === 2) {
+            navigate('/my-ai/posts')
+          }
+        }}
       >
         <Tab title='Chat'>
           <div className='grid grid-cols-12 gap-[24px] bg-[#171825] shadow-[0px_1px_4px_0px_#0000001A] px-[16px] pb-10 md:p-[32px] md:pb-[100px] mt-4'>
@@ -136,7 +147,7 @@ const AiPersonalityPage = () => {
         </Tab>
       </Tabs>
       <FullModal open={openEdit} setOpen={setOpenEdit}>
-        <EditProfile />
+        <EditProfile setOpenEdit={setOpenEdit} />
       </FullModal>
     </div>
   )

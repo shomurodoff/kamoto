@@ -1,4 +1,5 @@
 import {useIntl} from 'react-intl'
+import clsx from 'clsx'
 
 export const BasicButton = ({
   buttonText,
@@ -38,9 +39,7 @@ export const BasicButton = ({
     <button
       id={id ? id : ''}
       type='button'
-      className={`h-${height} ${loading ? 'opacity-50' : ''} 
-      ${investorCard ? '' : `min-w-${minWidth ? `${minWidth}px` : '150px'} `}
-      btn custom-button-property ${customClass} w-${width}`}
+      className={clsx('rounded', loading ? 'opacity-50' : '', customClass)}
       style={{
         backgroundColor: color,
         border,
@@ -52,7 +51,7 @@ export const BasicButton = ({
     >
       {!loading && (
         <span
-          className={`indicator-label font-size-13`}
+          className='text-[14px] font-medium leading-5'
           style={{
             color: textColor,
           }}

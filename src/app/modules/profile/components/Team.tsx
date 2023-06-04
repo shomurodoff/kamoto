@@ -213,7 +213,6 @@ export const Team = ({
                             {formatMessage({id: 'Transfer Ownership'})}
                           </td>
                         </tr>
-                        <div></div>
                       </>
                     ) : (
                       ''
@@ -231,7 +230,9 @@ export const Team = ({
                               {user.firstName} {user.lastName}
                             </div>
                           </td>
-                          <td className='min-w-175px'>{user.roleId.length > 0 ? RolesName[user.roleId[0]] : '-'}</td>
+                          <td className='min-w-175px'>
+                            {user.roleId.length > 0 ? RolesName[user.roleId[0]] : '-'}
+                          </td>
                           <td className='min-w-250px'>{user.email}</td>
                           <td className='min-w-175px'>
                             {user.updatedAt
@@ -431,7 +432,7 @@ export const Team = ({
           <Modal.Footer>
             <button
               type='button'
-              className='btn btn-light'
+              className='btn !bg-[#C2D24B1A] text-[#C2D24B]'
               onClick={() => {
                 setModalShow(!modalShow)
                 setTransferOwnershipRadio(false)
@@ -473,7 +474,7 @@ export const Team = ({
           <Modal.Footer>
             <button
               type='button'
-              className='btn btn-light'
+              className='btn !bg-[#C2D24B1A] text-[#C2D24B]'
               onClick={() => {
                 setShowModal(!showModal)
                 setTransferOwnershipRadio(false)

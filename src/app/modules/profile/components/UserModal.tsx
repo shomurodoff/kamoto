@@ -30,7 +30,7 @@ const UserModal = ({
   userDetails,
   getUserList,
   getPendingUsers,
-  getUserApiSpinner
+  getUserApiSpinner,
 }: {
   title: string
   buttonText: string
@@ -306,8 +306,8 @@ const UserModal = ({
                         border='none'
                         color='#F5F8FA'
                         textColor='#5E6278'
-                        minWidth={90}
-                        height='44px'
+                        customClass={'px-[24px]'}
+                        height='42px'
                         onClick={() => formik.resetForm()}
                       />
 
@@ -319,9 +319,7 @@ const UserModal = ({
                         height={44}
                         widthLoading={1}
                         width={1}
-                        margin={'me-0'}
                         onSubmit={formik.handleSubmit}
-                        marginButtom='0'
                       />
                     </div>
                   </Modal.Footer>

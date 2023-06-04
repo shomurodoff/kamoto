@@ -17,7 +17,7 @@ import {toast} from 'react-toastify'
 import {CreateInvestorTabs} from '../components/CreateInvestorTabs'
 import {useNavigate, useParams} from 'react-router-dom'
 import Select from 'react-select'
-import { ToolTipUI } from '../../widgets/components/UI/ToolTipUI'
+import {ToolTipUI} from '../../widgets/components/UI/ToolTipUI'
 
 const initialValues = {
   investorName: '',
@@ -49,7 +49,7 @@ export function General() {
   const {id} = useParams()
   const [, setIndividualInvestor] = useState<any>([])
   const [initialIndustry, setInitialIndustry] = useState<any>()
-  
+
   const userSchema = Yup.object().shape({
     investorName: Yup.string()
       .min(1, formatMessage({id: 'Minimum 1 character is required'}))
@@ -101,7 +101,7 @@ export function General() {
       setLoading(true)
       const {
         data: {data: investor, success, errors},
-      } = await addInvestor({...values,industries})
+      } = await addInvestor({...values, industries})
       if (success) {
         setInvestorId(investor.investorId)
         toast.success(formatMessage({id: 'Investor added successfully'}))
@@ -125,8 +125,8 @@ export function General() {
         data: {data, success, errors},
       } = await getIndustry()
       if (success) {
-       let industryData= data.map((e:any)=>{
-          return {value:e.industryId,label:e.industryName}
+        let industryData = data.map((e: any) => {
+          return {value: e.industryId, label: e.industryName}
         })
         setIndustryData(industryData)
       } else {
@@ -150,20 +150,22 @@ export function General() {
       if (success) {
         setIndividualInvestor(data)
         setImgName(data.file.name)
-        initialValues.investorName=data.name
-        initialValues.description=data.description
-        initialValues.company=data.company
-        initialValues.phone=data.phone
-        initialValues.website=data.website
-        initialValues.exits=data.exits
-        initialValues.country=data.countryId
-        initialValues.socialMedia.facebook=data.facebook_url
-        initialValues.socialMedia.twitter=data.twitter_url
-        initialValues.socialMedia.linkedin=data.linkedin_url
-        initialValues.socialMedia.instagram=data.insta_url
-         setInitialIndustry(data.allIndustries.map((e:any)=>{
-          return {value:e.industryName,label:e.industryName}
-        }))
+        initialValues.investorName = data.name
+        initialValues.description = data.description
+        initialValues.company = data.company
+        initialValues.phone = data.phone
+        initialValues.website = data.website
+        initialValues.exits = data.exits
+        initialValues.country = data.countryId
+        initialValues.socialMedia.facebook = data.facebook_url
+        initialValues.socialMedia.twitter = data.twitter_url
+        initialValues.socialMedia.linkedin = data.linkedin_url
+        initialValues.socialMedia.instagram = data.insta_url
+        setInitialIndustry(
+          data.allIndustries.map((e: any) => {
+            return {value: e.industryName, label: e.industryName}
+          })
+        )
       } else {
         errors.forEach((error: string) => {
           toast.error(formatMessage({id: error}))
@@ -174,10 +176,9 @@ export function General() {
     }
   }
   useEffect(() => {
-    if(id){
+    if (id) {
       singleInvestor()
     }
-   
   }, [id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleOpen = () => {
@@ -301,12 +302,14 @@ export function General() {
                         isStarRequired={true}
                       />
                       <div className='highlight-multi-select font-size-12 text-bold  ms-2 mt-0'>
-                       <div className='d-flex'>
-                       <p className='mb-1 font-size-13 form-label text-dark'>{formatMessage({id:"Industry*"})}</p>
-                        <ToolTipUI
-                          tooltipText={formatMessage({id: 'GLOBAL.TOOLTIP.GENERAL.INDUSTRY'})}
-                        />
-                       </div>
+                        <div className='d-flex'>
+                          <p className='mb-1 font-size-13 form-label text-dark'>
+                            {formatMessage({id: 'Industry*'})}
+                          </p>
+                          <ToolTipUI
+                            tooltipText={formatMessage({id: 'GLOBAL.TOOLTIP.GENERAL.INDUSTRY'})}
+                          />
+                        </div>
                         <Select
                           isMulti
                           name='industry'
@@ -315,7 +318,7 @@ export function General() {
                           onChange={(industry) => setIndustry(industry)}
                           placeholder={formatMessage({id: 'Choose Investor type'})}
                           value={initialIndustry}
-                          classNamePrefix="react-select"
+                          classNamePrefix='react-select'
                         />
                       </div>
                       <div className='mt-md-3 mt-5 w-100'>

@@ -30,6 +30,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
+import 'rc-slider/assets/index.css'
 
 setupAxios(axios)
 Chart.register(...registerables)

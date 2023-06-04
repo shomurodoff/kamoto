@@ -34,4 +34,9 @@ export const personalities = [
     title: 'Voice & Audio',
     text: 'Give Voice to your AI Personality',
   },
+  {
+    name: 'avatar',
+    title: 'Avatar & Visuals',
+    text: 'Assign Avatar & give visual look to your AI Personality',
+  },
 ]

@@ -50,6 +50,7 @@ import {getCompanyMetaIdType} from '../../../../app/modules/profile/core/_models
 import {useInvestorDatabase} from '../../../../app/modules/investor-database/core/InvestorContext'
 import {Filter} from '../../../../app/modules/widgets/components/General/Filter'
 import useGetBillingData from '../../../../app/hooks/useGetBillingData'
+import {AiPersonality} from '../../../../app/modules/profile/components/AiPersonality'
 
 const ToolbarWrapper = () => {
   const location = useLocation()
@@ -519,7 +520,7 @@ const ToolbarWrapper = () => {
           <Tabs
             activeTab={1}
             className='font-size-13'
-            ulClassName='text-muted  dark-border setting-tabs'
+            ulClassName='text-muted dark-border overflow-x-auto whitespace-nowrap'
             activityClassName='bg-primary'
             onClick={(event, tab) => setKey(tab)}
           >
@@ -540,19 +541,36 @@ const ToolbarWrapper = () => {
                 />
               </div>
             </Tab>
-            <Tab title={formatMessage({id: 'Company'})} className='mr-3 mt-2'>
-              <div className='mt-4'>
-                <Company
+            <Tab title={formatMessage({id: 'AI Personality'})} className='mr-3 mt-2'>
+              <PageTitle
+                breadcrumbs={profileBreadCrumbs}
+                description={formatMessage({id: 'Settings'})}
+              >
+                {formatMessage({id: 'Settings'})}
+              </PageTitle>
+              <div className='mt-4 '>
+                <AiPersonality
                   key={key}
-                  getCompanyApiLoading={getCompanyApiLoading}
-                  setCompanyImgName={setCompanyImgName}
-                  companyImgName={companyImgName}
-                  setCountryId={setCountryId}
+                  getApiLoading={getApiLoading}
+                  setImgName={setImgName}
+                  imgName={imgName}
                   countryOptions={countryOptions}
-                  stateOptions={stateOptions}
                 />
               </div>
             </Tab>
+            {/*<Tab title={formatMessage({id: 'Company'})} className='mr-3 mt-2'>*/}
+            {/*  <div className='mt-4'>*/}
+            {/*    <Company*/}
+            {/*      key={key}*/}
+            {/*      getCompanyApiLoading={getCompanyApiLoading}*/}
+            {/*      setCompanyImgName={setCompanyImgName}*/}
+            {/*      companyImgName={companyImgName}*/}
+            {/*      setCountryId={setCountryId}*/}
+            {/*      countryOptions={countryOptions}*/}
+            {/*      stateOptions={stateOptions}*/}
+            {/*    />*/}
+            {/*  </div>*/}
+            {/*</Tab>*/}
             <Tab title={formatMessage({id: 'Billing'})} className='mr-3 mt-2'>
               <div className='mt-4'>
                 <Billing
@@ -577,25 +595,37 @@ const ToolbarWrapper = () => {
                 />
               </div>
             </Tab>
-            <Tab title={formatMessage({id: 'Email Integration'})} className='mr-3 mt-2'>
+            <Tab title={formatMessage({id: 'Referral'})} className='mr-3 mt-2'>
               <div className='mt-4'>
-                <EmailIntegration
+                <Referral
                   key={key}
-                  companyId={companyId}
-                  getMailInformation={getMailInformation}
-                  customsmtpRadio={customsmtpRadio}
-                  foundercrateRadio={foundercrateRadio}
-                  sendgridRadio={sendgridRadio}
-                  postmarkRadio={postmarkRadio}
-                  emailSignature={emailSignature}
+                  paypalId={paypalId}
+                  referral={referral}
+                  totalEarning={totalEarning}
+                  totalReferred={totalReferred}
+                  setPaypalId={setPaypalId}
                 />
               </div>
             </Tab>
-            <Tab title={formatMessage({id: 'BCC Tracking'})} className='mr-3 mt-2'>
-              <div className='mt-4'>
-                <BCCTracking key={key} bccEmail={bccEmail} />
-              </div>
-            </Tab>
+            {/*<Tab title={formatMessage({id: 'Email Integration'})} className='mr-3 mt-2'>*/}
+            {/*  <div className='mt-4'>*/}
+            {/*    <EmailIntegration*/}
+            {/*      key={key}*/}
+            {/*      companyId={companyId}*/}
+            {/*      getMailInformation={getMailInformation}*/}
+            {/*      customsmtpRadio={customsmtpRadio}*/}
+            {/*      foundercrateRadio={foundercrateRadio}*/}
+            {/*      sendgridRadio={sendgridRadio}*/}
+            {/*      postmarkRadio={postmarkRadio}*/}
+            {/*      emailSignature={emailSignature}*/}
+            {/*    />*/}
+            {/*  </div>*/}
+            {/*</Tab>*/}
+            {/*<Tab title={formatMessage({id: 'BCC Tracking'})} className='mr-3 mt-2'>*/}
+            {/*  <div className='mt-4'>*/}
+            {/*    <BCCTracking key={key} bccEmail={bccEmail} />*/}
+            {/*  </div>*/}
+            {/*</Tab>*/}
             <Tab title={formatMessage({id: 'Locale'})} className='mr-3 mt-2'>
               <div className='mt-4'>
                 <Locale key={key} getLocaleApiLoading={getLocaleApiLoading} />
@@ -608,18 +638,6 @@ const ToolbarWrapper = () => {
                   getPreferences={getPreferences}
                   setGetPreferences={setGetPreferences}
                   getPreferencesApiLoading={getPreferencesApiLoading}
-                />
-              </div>
-            </Tab>
-            <Tab title={formatMessage({id: 'Referral'})} className='mr-3 mt-2'>
-              <div className='mt-4'>
-                <Referral
-                  key={key}
-                  paypalId={paypalId}
-                  referral={referral}
-                  totalEarning={totalEarning}
-                  totalReferred={totalReferred}
-                  setPaypalId={setPaypalId}
                 />
               </div>
             </Tab>

@@ -30,11 +30,10 @@ export const DisplayImage = ({
         />
       ) : (
         <img
-          src={toAbsoluteUrl('/media/icons/duotune/general/user1.svg')}
+          src={toAbsoluteUrl('/media/avatars/300-1.jpg')}
           width={width}
           height={height}
           alt={alt}
-          style={{objectFit: fit}}
           className={className}
         />
       )}

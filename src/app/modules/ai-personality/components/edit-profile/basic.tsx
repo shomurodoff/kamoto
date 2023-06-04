@@ -5,15 +5,15 @@ import {Form, Formik} from 'formik'
 import TextArea from '../../../widgets/components/Input/TextArea'
 import {InfoCard} from '../../../widgets/components/UI/InfoCard'
 
-const Basic = () => {
+const Basic: React.FC<any> = ({setOpenEdit}) => {
   const {formatMessage} = useIntl()
 
   return (
-    <div className={'flex flex-col mf:flex-row gap-[40px]'}>
+    <div className={'grid grid-cols-12 gap-y-[20px] md:gap-x-[40px] px-[16px]'}>
       <Formik initialValues={{}} onSubmit={() => {}}>
         {(formik) => {
           return (
-            <Form className={'flex-grow '}>
+            <Form className={'col-span-12 md:col-span-7 order-0'}>
               <TextArea
                 label={formatMessage({id: 'Description'})}
                 fieldName={'description'}
@@ -48,7 +48,26 @@ const Basic = () => {
           )
         }}
       </Formik>
-      <div className={'md:max-w-lg mt-[24px]'}>
+      <div
+        className={'col-span-12 md:col-span-5 flex flex-col justify-start gap-[20px] md:mt-[24px]'}
+      >
+        <div className={'flex justify-end gap-[10px] md:order-1'}>
+          <button
+            onClick={() => setOpenEdit(false)}
+            className={
+              'bg-[#C2D24B1A] text-[#C2D24B] text-[14px] leading-5 font-medium py-[12px] w-1/2 md:w-[128px] rounded'
+            }
+          >
+            Cancel
+          </button>
+          <button
+            className={
+              'bg-[#C2D24B] text-black text-[14px] leading-5 font-medium py-[12px] w-1/2  md:w-[140px] rounded'
+            }
+          >
+            Save
+          </button>
+        </div>
         <InfoCard
           title={formatMessage({id: 'What is an AI Personality?'})}
           desc={formatMessage({

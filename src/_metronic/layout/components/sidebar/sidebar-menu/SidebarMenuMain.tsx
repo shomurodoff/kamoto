@@ -24,6 +24,13 @@ const SidebarMenuMain = () => {
         fontIcon='bi-app-indicator'
       />
       <SidebarMenuItem
+        to='/train-my-ai'
+        icon='/media/icons/sidebar/TrainAi.svg'
+        activeIcon='/media/icons/sidebar/TrainAiActive.svg'
+        title={intl.formatMessage({id: 'Train Your AI Personality'})}
+        fontIcon='bi-app-indicator'
+      />
+      <SidebarMenuItem
         to='/investor-crm'
         icon='/media/icons/sidebar/InvestorCrmIcon.svg'
         activeIcon='/media/icons/sidebar/InvestorCrmActiveIcon.svg'

@@ -56,11 +56,13 @@ export const CustomButton = ({
         <button
           type='button'
           onClick={() => setShowModal(true)}
-          className={`btn ${buttonColor ? buttonColor : 'btn-primary'} custom-button-property ${
-            height ? `h-md-${height}px` : ''
-          } `}
+          className={`btn ${
+            buttonColor ? buttonColor : 'btn-primary border'
+          } custom-button-property ${height ? `h-[${height}px]` : ''} `}
         >
-          <span className='indicator-label'>{buttonText}</span>
+          <span className='text-[14px] font-medium leading-5 text-black py-[12px]'>
+            {buttonText}
+          </span>
         </button>
       ) : isSkipButton ? (
         <button

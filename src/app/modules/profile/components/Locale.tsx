@@ -153,80 +153,89 @@ export const Locale = ({key, getLocaleApiLoading}: any) => {
   return (
     <>
       {getLocaleApiLoading ? <Spinner /> : null}
-      <div className='mx-1 ps-md-8 ps-4 pt-8 locale-container mt-0'>
-        <div className='fs-6 fw-semibold pb-4'>{formatMessage({id: 'Locale Settings'})}</div>
-        <div className='mt-md-8  w-100'>
-          <Formik
-            initialValues={localeInitialValues}
-            validationSchema={localSchema}
-            onSubmit={onSubmit}
-          >
-            {(formik) => {
-              return (
-                <Form>
-                  <div className='d-md-flex col-md-12 flex-wrap w-100'>
-                    <SelectInput
-                      label={formatMessage({id: 'Locale'})}
-                      fieldName={'locale'}
-                      placeholder={formatMessage({id: 'Select the Locale'})}
-                      formik={formik}
-                      isStarRequired={true}
-                      options={localeOptions}
-                      toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.LOCALE.LOCALE'})}
-                      margin='me-6'
-                      width={5}
-                    />
-                    <SelectInput
-                      label={formatMessage({id: 'Time Zone'})}
-                      fieldName={'timezone'}
-                      placeholder={formatMessage({id: 'Select the Time Zone'})}
-                      formik={formik}
-                      isStarRequired={true}
-                      options={timeZoneOptions}
-                      toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.LOCALE.TIME_ZONE'})}
-                      margin='me-6'
-                      width={5}
-                    />
-                    <SelectInput
-                      label={formatMessage({id: 'Date Format'})}
-                      fieldName={'dateFormat'}
-                      placeholder={formatMessage({id: 'Select the Date Format'})}
-                      formik={formik}
-                      isStarRequired={true}
-                      options={dateFormatOptions}
-                      toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.LOCALE.DATE_FORMAT'})}
-                      margin='me-6'
-                      width={5}
-                    />
-                    <SelectInput
-                      label={formatMessage({id: 'Time Format'})}
-                      fieldName={'timeFormat'}
-                      placeholder={formatMessage({id: 'Select the Time Format'})}
-                      formik={formik}
-                      isStarRequired={true}
-                      toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.LOCALE.TIME_FORMAT'})}
-                      options={timeFormatOptions}
-                      margin='me-6'
-                      width={5}
-                    />
-                  </div>
-                  <div className='d-flex justify-content-end button-margin me-10'>
-                    <CustomButton
-                      isSubmitting={formik.isSubmitting}
-                      isValid={formik.isValid}
-                      buttonText={formatMessage({id: 'Save Changes'})}
-                      loading={loading}
-                      width={2}
-                      widthLoading={2}
-                      margin={'me-3'}
-                      height={44}
-                    />
-                  </div>
-                </Form>
-              )
-            }}
-          </Formik>
+      <div className={'bg-[#171825] rounded p-[24px] pb-[50px] gap-y-[16px]'}>
+        <div className={'col-span-12 md:col-span-6 text-[#FFFFFFCC]'}>
+          <h3 className={'text-[16px] leading-[22px] font-medium mb-[8px]'}>Locale Setting</h3>
         </div>
+        <Formik
+          initialValues={localeInitialValues}
+          validationSchema={localSchema}
+          onSubmit={onSubmit}
+        >
+          {(formik) => {
+            return (
+              <Form>
+                <div className={'max-w-4xl'}>
+                  <div className='grid grid-cols-12 gap-x-[32px]'>
+                    <div className={'col-span-12 md:col-span-6'}>
+                      <SelectInput
+                        label={formatMessage({id: 'Locale'})}
+                        fieldName={'locale'}
+                        placeholder={formatMessage({id: 'Select the Locale'})}
+                        formik={formik}
+                        isStarRequired={true}
+                        options={localeOptions}
+                        toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.LOCALE.LOCALE'})}
+                        margin='me-6'
+                        width={5}
+                      />
+                    </div>
+                    <div className={'col-span-12 md:col-span-6'}>
+                      <SelectInput
+                        label={formatMessage({id: 'Time Zone'})}
+                        fieldName={'timezone'}
+                        placeholder={formatMessage({id: 'Select the Time Zone'})}
+                        formik={formik}
+                        isStarRequired={true}
+                        options={timeZoneOptions}
+                        toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.LOCALE.TIME_ZONE'})}
+                        margin='me-6'
+                        width={5}
+                      />
+                    </div>
+                    <div className={'col-span-12 md:col-span-6'}>
+                      <SelectInput
+                        label={formatMessage({id: 'Date Format'})}
+                        fieldName={'dateFormat'}
+                        placeholder={formatMessage({id: 'Select the Date Format'})}
+                        formik={formik}
+                        isStarRequired={true}
+                        options={dateFormatOptions}
+                        toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.LOCALE.DATE_FORMAT'})}
+                        margin='me-6'
+                        width={5}
+                      />
+                    </div>
+                    <div className={'col-span-12 md:col-span-6'}>
+                      <SelectInput
+                        label={formatMessage({id: 'Time Format'})}
+                        fieldName={'timeFormat'}
+                        placeholder={formatMessage({id: 'Select the Time Format'})}
+                        formik={formik}
+                        isStarRequired={true}
+                        toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.LOCALE.TIME_FORMAT'})}
+                        options={timeFormatOptions}
+                        margin='me-6'
+                        width={5}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className='d-flex justify-content-end button-margin'>
+                  <CustomButton
+                    isSubmitting={formik.isSubmitting}
+                    isValid={formik.isValid}
+                    buttonText={formatMessage({id: 'Save Changes'})}
+                    loading={loading}
+                    width={2}
+                    widthLoading={2}
+                    height={44}
+                  />
+                </div>
+              </Form>
+            )
+          }}
+        </Formik>
       </div>
     </>
   )

@@ -14,7 +14,6 @@ export const SelectInput = ({
   isTooltipNotRequired,
   width,
   isStarRequired,
-
   isSearchIcon,
   disabled,
 }: {
@@ -45,9 +44,9 @@ export const SelectInput = ({
   )
 
   return (
-    <div className={`fv-row mb-7 ${margin && margin} ${width ? `col-md-${width}` : ''}`}>
+    <div className={``}>
       {label && (
-        <label className='form-label font-size-13 text-dark text-capitalize ms-3 ms-md-0'>
+        <label className='text-[13px] leading-5 text-[#FFFFFFA6] mb-1'>
           {!isTooltipNotRequired ? (
             <div className={'flex items-center gap-1'}>
               {label}
@@ -64,7 +63,9 @@ export const SelectInput = ({
         name={fieldName}
         disabled={disabled}
         className={clsx(
-          `${isSearchIcon && 'form-search-select'} form-select h-40px font-size-13`,
+          `${
+            isSearchIcon && 'form-search-select !bg-[#2E2F45] border-[#FFFFFF1A] w-full'
+          } form-select h-40px font-size-13`,
           {'is-invalid-local': formik.touched[fieldName] && formik.errors[fieldName]},
           {
             'is-valid-local': formik.touched[fieldName] && !formik.errors[fieldName],

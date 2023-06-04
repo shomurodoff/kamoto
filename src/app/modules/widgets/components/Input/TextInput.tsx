@@ -36,6 +36,7 @@ const TextInput = ({
   isRadio,
   value,
   labelWidth,
+  withoutLabel,
 }: TextFieldProps) => {
   const [hidePassword, setHidePassword] = useState(true)
   const {formatMessage} = useIntl()
@@ -46,68 +47,71 @@ const TextInput = ({
       render={({form}: any) => {
         const error = getIn(form.errors, name)
         const touch = getIn(form.touched, name)
-
         return touch && error ? error : null
       }}
     />
   )
   return (
     <div
-      className={`fv-row  ${!isWidthNotRequired && 'col-12'} ${isBeside ? 'd-flex' : 'mb-8'} ${
-        margin ? margin : 'me-4'
+      className={`w-full mb-[16px] md:mb-[16px]  ${!isWidthNotRequired && 'col-12'} ${
+        isBeside ? 'd-flex' : ''
       } ${width ? `col-md-${width}` : ''}`}
     >
-      <div
-        className={`d-flex justify-content-between ${isBeside && 'w-md-90px'} ${
-          isBeside && labelWidth
-        }  `}
-      >
-        {!isCheckbox && (
-          <label
-            className={`${
-              isCheckbox ? 'form-check form-check-inline' : 'form-label'
-            }   font-size-13  text-dark text-capitalize ms-3 ms-md-0 ${
-              isBeside && isTooltipNotRequired
-                ? 'd-md-flex align-items-md-center  fw-normal mb-0 col-md-12'
-                : 'd-md-flex flex-md-row align-items-md-center '
-            }`}
-            htmlFor='kt_login_toc_agree'
-          >
-            {isStarRequired ? (
-              !isTooltipNotRequired ? (
+      {label && (
+        <div
+          className={`d-flex justify-content-between ${isBeside && 'w-md-90px'} ${
+            isBeside && labelWidth
+          }  `}
+        >
+          {!isCheckbox && (
+            <label
+              className={`${
+                isCheckbox ? 'form-check form-check-inline mb-1 ' : 'mb-1 '
+              }  text-[13px] leading-5 text-[#FFFFFFA6] ${
+                isBeside && isTooltipNotRequired
+                  ? 'd-md-flex align-items-md-center  fw-normal  col-md-12'
+                  : 'd-md-flex flex-md-row align-items-md-center '
+              }`}
+              htmlFor='kt_login_toc_agree'
+            >
+              {label && isStarRequired ? (
+                !isTooltipNotRequired ? (
+                  <span className={'flex items-center'}>
+                    {label}* <ToolTipUI tooltipText={toolTipText} />
+                  </span>
+                ) : (
+                  <>{label}*</>
+                )
+              ) : !isTooltipNotRequired && label ? (
                 <span className={'flex items-center'}>
-                  {label}* <ToolTipUI tooltipText={toolTipText} />
+                  {label} <ToolTipUI tooltipText={toolTipText} />
                 </span>
               ) : (
-                <>{label}*</>
-              )
-            ) : !isTooltipNotRequired ? (
-              <span className={'flex items-center'}>
-                {label} <ToolTipUI tooltipText={toolTipText} />
-              </span>
-            ) : (
-              <>{label}</>
-            )}
-          </label>
-        )}
+                <>{label}</>
+              )}
+            </label>
+          )}
 
-        {isForgetPassword && (
-          <div className='d-flex flex-stack flex-wrap gap-3 fs-base fw-bold '>
-            {/* begin::Link */}
-            <Link to='/auth/forgot-password' className='text-clr477'>
-              {formatMessage({id: 'Forgot Password'})} ?
-            </Link>
-            {/* end::Link */}
-          </div>
-        )}
-      </div>
+          {isForgetPassword && (
+            <div className='d-flex flex-stack flex-wrap gap-3 fs-base fw-bold '>
+              {/* begin::Link */}
+              <Link to='/auth/forgot-password' className='text-clr477'>
+                {formatMessage({id: 'Forgot Password'})} ?
+              </Link>
+              {/* end::Link */}
+            </div>
+          )}
+        </div>
+      )}
       <div className='d-md-flex flex-md-column w-100'>
         <div className={`position-relative d-md-flex  ${isBeside && 'w-md-50'}`}>
           {isRadio ? (
             <Field
               // id='t_login_toc_agree'
               className={`${
-                isCheckbox ? 'form-check-input ' : clsx('form-control h-[40px] font-size-12')
+                isCheckbox
+                  ? 'form-check-input '
+                  : clsx('form-control !bg-[#2E2F45] border-[#FFFFFF1A] font-size-12')
               }`}
               type={fieldType}
               name={fieldName}
@@ -120,7 +124,7 @@ const TextInput = ({
                 isCheckbox
                   ? 'form-check-input '
                   : clsx(
-                      'form-control h-[40px] font-size-12',
+                      'form-control !bg-[#2E2F45]  font-size-12',
                       {
                         'is-invalid-local':
                           !isSocialMedia && formik.touched[fieldName] && formik.errors[fieldName],
@@ -176,7 +180,6 @@ const TextInput = ({
               )}
             </span>
           )}
-
           {isPassword && (
             <div
               className='password'

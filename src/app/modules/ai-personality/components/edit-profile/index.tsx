@@ -1,17 +1,41 @@
 import React, {useState} from 'react'
 import {Swiper, SwiperSlide} from 'swiper/react'
 import {Navigation} from 'swiper'
-import {get, isEqual, map, range} from 'lodash'
+import {filter, get, isEqual, map, range} from 'lodash'
 import {personalities} from './constants'
 import clsx from 'clsx'
-const Index = () => {
+import Basic from './basic'
+import Welcome from './welcome'
+import Avatar from './avatar'
+import Voice from './voice'
+import Identity from './identity'
+import Dialog from './dialog'
+import Personality from './personality'
+const Index: React.FC<any> = ({setOpenEdit}) => {
   const [active, setActive] = useState(1)
+
+  const settings = {
+    breakpoints: {
+      '480': {
+        slidesPerView: 1.5,
+      },
+      '768': {
+        slidesPerView: 3,
+      },
+      '1024': {
+        slidesPerView: 4,
+      },
+      '1280': {
+        slidesPerView: 5,
+      },
+    },
+  }
   return (
-    <div>
+    <div className={''}>
       <Swiper
+        {...settings}
         modules={[Navigation]}
         className='w-full personality-swiper py-10'
-        slidesPerView={5}
         navigation={true}
         spaceBetween={0}
         pagination={{
@@ -38,7 +62,20 @@ const Index = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className={'mx-3'}>{get(personalities[active], 'component')}</div>
+      {filter(
+        [
+          <Basic setOpenEdit={setOpenEdit} />,
+          <Welcome setOpenEdit={setOpenEdit} />,
+          <Identity setOpenEdit={setOpenEdit} />,
+          <Dialog setOpenEdit={setOpenEdit} />,
+          <Personality setOpenEdit={setOpenEdit} />,
+          <Voice setOpenEdit={setOpenEdit} />,
+          <Avatar setOpenEdit={setOpenEdit} />,
+        ],
+        (item, index) => {
+          return index === active
+        }
+      )}
     </div>
   )
 }

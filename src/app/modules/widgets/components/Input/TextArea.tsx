@@ -13,6 +13,7 @@ const TextArea = ({
   placeholder,
   isTooltipNotRequired,
   isStarRequired,
+  defaultValue,
   className,
 }: {
   fieldName: string
@@ -21,23 +22,24 @@ const TextArea = ({
   margin?: string
   width?: number
   toolTipText: string
+  defaultValue?: string
   formik: any
   placeholder: string
   isTooltipNotRequired?: boolean
   isStarRequired?: boolean
 }) => {
   return (
-    <div className={`fv-row mb-8 ${margin} ${width ? `col-md-${width}` : ''}`}>
+    <div className={`w-full mb-[16px] md:mb-[16px]  ${margin} ${width ? `col-md-${width}` : ''}`}>
       <div className='d-flex justify-content-between'>
         <label
-          className={` form-label font-size-13 text-dark text-capitalize`}
+          className={`text-[13px] leading-5 text-[#FFFFFFA6] mb-1`}
           htmlFor='kt_login_toc_agree'
         >
           {isStarRequired ? (
             !isTooltipNotRequired ? (
-              <>
+              <span className={'flex gap-1'}>
                 {label}* <ToolTipUI tooltipText={toolTipText} />
-              </>
+              </span>
             ) : (
               <>{label}*</>
             )
@@ -63,6 +65,7 @@ const TextArea = ({
           )}
           aria-describedby='basic-addon2'
           as={'textarea'}
+          defaultValue={defaultValue}
           name={fieldName}
           placeholder={placeholder}
           autoComplete='off'

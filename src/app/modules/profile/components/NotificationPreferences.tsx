@@ -1,6 +1,6 @@
-import { useIntl } from 'react-intl'
+import {useIntl} from 'react-intl'
 import '../styles/index.scss'
-import { ToolTipUI } from '../../widgets/components/UI/ToolTipUI'
+import {ToolTipUI} from '../../widgets/components/UI/ToolTipUI'
 import {EmailPreferencesInput} from '../core/_constants'
 import {EmailPreferencesInputType, EmailPreferencesOutputType} from '../core/_models'
 import {Dispatch, SetStateAction, useState} from 'react'
@@ -22,7 +22,7 @@ export const NotificationPreferences = ({
   setGetPreferences: Dispatch<SetStateAction<EmailPreferencesOutputType[]>>
 }) => {
   const [loading, setLoading] = useState(false)
-  const { companyId } = useAuth()
+  const {companyId} = useAuth()
 
   const handleToogle = (id: number, checked: boolean) => {
     getPreferences.map((preference: EmailPreferencesOutputType) => {
@@ -38,16 +38,12 @@ export const NotificationPreferences = ({
       setLoading(true)
       if (companyId) {
         const {
-          data: { success, errors },
-        } = await createEmailPreferences(
-          JSON.stringify(getPreferences),
-          companyId
-        )
+          data: {success, errors},
+        } = await createEmailPreferences(JSON.stringify(getPreferences), companyId)
         if (success) {
-
           const {
             data: {
-              data: { preference },
+              data: {preference},
               success,
             },
           } = await getEmailPreferences(companyId)
@@ -55,48 +51,48 @@ export const NotificationPreferences = ({
             setGetPreferences(JSON.parse(preference))
           }
           setLoading(false)
-          toast.success(formatMessage({ id: 'Preferences updated successfully' }))
+          toast.success(formatMessage({id: 'Preferences updated successfully'}))
         } else {
           setLoading(false)
           errors.forEach((error: string) => {
-            toast.error(formatMessage({ id: error }))
+            toast.error(formatMessage({id: error}))
           })
         }
       }
-
     } catch (err) {
       setLoading(false)
       console.log(err)
     }
   }
 
-  const { formatMessage } = useIntl()
+  const {formatMessage} = useIntl()
   interface TooltipObj {
-    [key: number]: string;
+    [key: number]: string
   }
- const tooltipObj:TooltipObj = {
-  1:'GLOBAL.TOOLTIP.NOTIFICATIONS.SUCCESSFULPAYMENTS',
-  2:'GLOBAL.TOOLTIP.NOTIFICATIONS.NEW_INVESTOR_UPDATE',
-  3:'GLOBAL.TOOLTIP.NOTIFICATIONS.FEE_COLLECTION',
-  4:'GLOBAL.TOOLTIP.NOTIFICATIONS.CUSTOMER_PAYMENT_DISPUTE',
-  5:'GLOBAL.TOOLTIP.NOTIFICATIONS.REFUND_DETAILS',
-  6:'GLOBAL.TOOLTIP.NOTIFICATIONS.INVOICE_PAYMENT',
-  7:'GLOBAL.TOOLTIP.NOTIFICATIONS.BILLING UPDATES',
-  8:'GLOBAL.TOOLTIP.NOTIFICATIONS.NEW_TEAM_MEMBERS',
-  9:'GLOBAL.TOOLTIP.NOTIFICATIONS.COMPLETED_INVESTMENTS',
-  10:'GLOBAL.TOOLTIP.NOTIFICATIONS.NEWSLETTERS'
- }
+  const tooltipObj: TooltipObj = {
+    1: 'GLOBAL.TOOLTIP.NOTIFICATIONS.SUCCESSFULPAYMENTS',
+    2: 'GLOBAL.TOOLTIP.NOTIFICATIONS.NEW_INVESTOR_UPDATE',
+    3: 'GLOBAL.TOOLTIP.NOTIFICATIONS.FEE_COLLECTION',
+    4: 'GLOBAL.TOOLTIP.NOTIFICATIONS.CUSTOMER_PAYMENT_DISPUTE',
+    5: 'GLOBAL.TOOLTIP.NOTIFICATIONS.REFUND_DETAILS',
+    6: 'GLOBAL.TOOLTIP.NOTIFICATIONS.INVOICE_PAYMENT',
+    7: 'GLOBAL.TOOLTIP.NOTIFICATIONS.BILLING UPDATES',
+    8: 'GLOBAL.TOOLTIP.NOTIFICATIONS.NEW_TEAM_MEMBERS',
+    9: 'GLOBAL.TOOLTIP.NOTIFICATIONS.COMPLETED_INVESTMENTS',
+    10: 'GLOBAL.TOOLTIP.NOTIFICATIONS.NEWSLETTERS',
+  }
 
   return (
     <>
       {getPreferencesApiLoading ? <Spinner /> : null}
-      <div className=' mx-1 ps-4 ps-md-8 pt-8 company-container mt-0'>
-        <div className='fs-6 fw-semibold pb-5'>{formatMessage({ id: 'Notification Preferences' })}</div>
-
+      <div className='pt-8 company-container mt-0 px-[20px]'>
+        <div className='fs-6 fw-semibold pb-5'>
+          {formatMessage({id: 'Notification Preferences'})}
+        </div>
         {EmailPreferencesInput.map(
-          ({ id, title, subtitle }: EmailPreferencesInputType, index: number) => (
-            <div className='border-bottom ' key={id}>
-              <form className='form-check form-check-custom form-check-solid form-check-primary form-switch pb-3 pt-3'>
+          ({id, title, subtitle}: EmailPreferencesInputType, index: number) => (
+            <div className='border-bottom' key={id}>
+              <form className='form-check foΩrm-check-custom form-check-solid form-check-primary form-switch flex items-center gap-x-[8px]'>
                 <input
                   className='form-check-input'
                   type='checkbox'
@@ -119,11 +115,7 @@ export const NotificationPreferences = ({
                         {title}
                       </label>
                     </div>
-                    <div>
-                      {
-                        <ToolTipUI tooltipText={tooltipObj[id]}/>
-                      }
-                    </div>
+                    <div>{<ToolTipUI tooltipText={tooltipObj[id]} />}</div>
                   </div>
                   <label
                     className='form-check-label text-clr58 fw-normal fs-7'
@@ -138,16 +130,17 @@ export const NotificationPreferences = ({
             </div>
           )
         )}
-        <div className='d-flex justify-content-end button-margin pb-md-8 me-md-8 me-10'>
+        <div className='flex justify-end mt-[20px] md:mt-[135px]'>
           <BasicButton
-            buttonText={formatMessage({ id: 'Save Changes' })}
+            buttonText={formatMessage({id: 'Save Changes'})}
             onClick={handleSumbit}
             disabled={loading}
             loading={loading}
             height='44px'
-            border='1px solid #4776E6'
-            color='#4776E6'
-            textColor='white'
+            customClass={'w-full md:w-auto'}
+            border='1px solid #C2D24B'
+            color='#C2D24B'
+            textColor='#000000'
             padding='12px 24px'
           />
         </div>
