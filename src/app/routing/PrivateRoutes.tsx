@@ -41,7 +41,7 @@ const PrivateRoutes = () => {
   return ready ? (
     <Routes>
       {/* Redirect to Dashboard after success login/registartion */}
-      {ready ? (
+      {newCompany ?? companyId ? (
         <>
           <Route element={<MasterLayout />}>
             <Route index element={<Navigate to='/dashboard' />} />
