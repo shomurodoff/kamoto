@@ -18,6 +18,7 @@ import {DashboardPage} from '../modules/dashboard/DashboardPage'
 import {AiPersonalityPage} from '../modules/ai-personality/AiPersonalityPage'
 import SupportPage from '../modules/support'
 import Sitemap from '../modules/sitemap'
+import ChatCreditsPage from '../modules/chat-credits'
 
 const InvestorDBRoutes = lazy(() => import('../modules//investor-database/InvestorDBRoutes'))
 
@@ -40,7 +41,7 @@ const PrivateRoutes = () => {
   return ready ? (
     <Routes>
       {/* Redirect to Dashboard after success login/registartion */}
-      {newCompany ?? companyId ? (
+      {ready ? (
         <>
           <Route element={<MasterLayout />}>
             <Route index element={<Navigate to='/dashboard' />} />
@@ -73,6 +74,14 @@ const PrivateRoutes = () => {
               }
             />
             <Route
+              path='chat-credits'
+              element={
+                <SuspensedView>
+                  <ChatCreditsPage />
+                </SuspensedView>
+              }
+            />
+            <Route
               path='support'
               element={
                 <SuspensedView>
@@ -83,11 +92,11 @@ const PrivateRoutes = () => {
             <Route path='/sitemap/*' element={<Sitemap />} />
             <Route path='*' element={<ErrorsPage />} />
           </Route>
-          <Route index element={<Navigate to='/onboarding/' />} />
-          <Route path='/onboarding/*' element={<OnboardingRoutes />} />
         </>
       ) : (
         <>
+          <Route index element={<Navigate to='/onboarding/' />} />
+          <Route path='/onboarding/*' element={<OnboardingRoutes />} />
           <Route element={<MasterLayout />}></Route>
           <Route path='*' element={<ErrorsPage />} />
         </>

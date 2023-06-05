@@ -62,31 +62,34 @@ export const TeamMembers = () => {
   }
 
   const onSubmit = async (values: any) => {
-    try {
-      setInviteLoading(true)
-      if (!companyId) {
-        setInviteLoading(false)
-        throw new Error(formatMessage({id: 'Company ID is required.'}))
-      }
-      const {
-        data: {success, errors},
-      } = await inviteUser(companyId.toString(), values.teamMembers)
-      if (success) {
-        setNewCompany(undefined)
-        setInviteLoading(false)
-        navigate('/dashboard')
-      } else {
-        setInviteLoading(false)
-        setNewCompany(undefined)
-        errors.forEach((error: string) => {
-          toast.error(formatMessage({id: error}))
-        })
-      }
-    } catch (error) {
-      setInviteLoading(false)
-      setNewCompany(undefined)
-      console.error(error)
-    }
+    setNewCompany(undefined)
+    setInviteLoading(false)
+    navigate('/dashboard')
+    // try {
+    //   setInviteLoading(true)
+    //   if (!companyId) {
+    //     setInviteLoading(false)
+    //     throw new Error(formatMessage({id: 'Company ID is required.'}))
+    //   }
+    //   const {
+    //     data: {success, errors},
+    //   } = await inviteUser(companyId.toString(), values.teamMembers)
+    //   if (success) {
+    //     setNewCompany(undefined)
+    //     setInviteLoading(false)
+    //     navigate('/dashboard')
+    //   } else {
+    //     setInviteLoading(false)
+    //     setNewCompany(undefined)
+    //     errors.forEach((error: string) => {
+    //       toast.error(formatMessage({id: error}))
+    //     })
+    //   }
+    // } catch (error) {
+    //   setInviteLoading(false)
+    //   setNewCompany(undefined)
+    //   console.error(error)
+    // }
   }
 
   return (
@@ -94,7 +97,7 @@ export const TeamMembers = () => {
       <Toaster />
       {!loading ? (
         <Formik
-          validationSchema={teamMembersSchema}
+          // validationSchema={teamMembersSchema}
           initialValues={initialValues}
           onSubmit={onSubmit}
         >
@@ -257,8 +260,10 @@ export const TeamMembers = () => {
                     height={44}
                   />
                   <CustomButton
-                    isSubmitting={formik.isSubmitting}
+                    // isSubmitting={formik.isSubmitting}
                     // isValid={formik.isValid}
+                    isSubmitting={false}
+                    isValid={true}
                     buttonText={formatMessage({id: 'Send invite and continue'})}
                     loading={inviteLoading}
                     customClass={'!w-full md:w-auto'}

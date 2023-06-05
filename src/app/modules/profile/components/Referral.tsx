@@ -266,7 +266,6 @@ export function Referral({
                     onChange={(e) => setPaypalId(e.target.value)}
                     value={paypalId}
                   />
-
                   <BasicButton
                     disabled={loading}
                     loading={loading}
@@ -275,7 +274,7 @@ export function Referral({
                     border='none'
                     color='#C2D24B'
                     textColor='#000000'
-                    customClass={'w-[120px]'}
+                    customClass={'min-w-[120px] flex-grow'}
                     padding='8px 24px'
                     onClick={addPaypalEmail}
                   />

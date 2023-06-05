@@ -12,7 +12,7 @@ const Error404: FC = () => {
   return (
     <div className={'flex flex-col items-center text-center'}>
       {mode === 'dark' ? (
-        <img src={toAbsoluteUrl('/media/illustrations/error/illustration404Dark.svg')} alt='' />
+        <img src={toAbsoluteUrl('/media/illustrations/error/illustration500Dark.svg')} alt='' />
       ) : (
         <img src={toAbsoluteUrl('/media/illustrations/error/illustration404.svg')} alt='' />
       )}

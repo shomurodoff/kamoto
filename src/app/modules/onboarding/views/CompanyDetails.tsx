@@ -97,6 +97,9 @@ export const CompanyDetails = () => {
 
   const onSubmit = async (values: any) => {
     setLoading(true)
+
+    navigate('/onboarding/initialize-round')
+
     try {
       const chargebeePlanId = `${selected}-${currencyBill}-${currentState}`
 
@@ -145,7 +148,7 @@ export const CompanyDetails = () => {
     <>
       <Toaster />
       <Formik
-        validationSchema={companyDetailsSchema}
+        // validationSchema={companyDetailsSchema}
         initialValues={initialValues}
         enableReinitialize={true}
         onSubmit={onSubmit}
@@ -264,15 +267,7 @@ export const CompanyDetails = () => {
                     })}
                     slug={'#'}
                   />
-                  <TextInput
-                    fieldType={'text'}
-                    label={formatMessage({id: 'Company Name'})}
-                    fieldName={'companyName'}
-                    placeholder={formatMessage({id: 'Enter Company Name'})}
-                    formik={formik}
-                    margin='me-4'
-                    toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.COMPANY_DETAILS.COMPANY_NAME'})}
-                  />
+
                   <SelectInput
                     label={formatMessage({id: 'Industry'})}
                     fieldName={'industry'}
@@ -280,6 +275,17 @@ export const CompanyDetails = () => {
                     formik={formik}
                     toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.COMPANY_DETAILS.INDUSTRY'})}
                     options={industryOptions}
+                  />
+                  <SelectInput
+                    label={formatMessage({id: 'How did you hear about us'})}
+                    fieldName={'hear-about'}
+                    placeholder={formatMessage({id: 'How did you hear about us'})}
+                    formik={formik}
+                    toolTipText={formatMessage({id: 'How did you hear about us'})}
+                    options={[
+                      {name: 'Social media', value: 'social'},
+                      {name: 'News media', value: 'news'},
+                    ]}
                   />
                   <Country
                     initialValues={initialValues}
@@ -298,8 +304,8 @@ export const CompanyDetails = () => {
                 </div>
                 <div className='mt-md-15 d-flex justify-content-end '>
                   <CustomButton
-                    isSubmitting={formik.isSubmitting}
-                    isValid={formik.isValid}
+                    isSubmitting={false}
+                    isValid={true}
                     buttonText={formatMessage({id: 'Next'})}
                     loading={loading}
                     width={2}

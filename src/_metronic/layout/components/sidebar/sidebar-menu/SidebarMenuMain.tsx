@@ -88,6 +88,13 @@ const SidebarMenuMain = () => {
         fontIcon='bi-layers'
       />
       <SidebarMenuItem
+        to='/chat-credits'
+        icon='/media/icons/sidebar/ChatCredits.svg'
+        activeIcon='/media/icons/sidebar/ChatCreditsActive.svg'
+        title={intl.formatMessage({id: 'Chat Credits'})}
+        fontIcon='bi-app-indicator'
+      />
+      <SidebarMenuItem
         to='/support'
         icon='/media/icons/sidebar/Support.svg'
         activeIcon='/media/icons/sidebar/SupportActive.svg'

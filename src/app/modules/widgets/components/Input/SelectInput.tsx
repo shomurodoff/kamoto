@@ -46,7 +46,7 @@ export const SelectInput = ({
   return (
     <div className={`mb-[16px] md:mb-[16px] `}>
       {label && (
-        <label className='text-[13px] leading-5 text-[#FFFFFFA6] mb-1'>
+        <label className='text-[13px] leading-5 text-[#FFFFFFA6] mb-[4px] md:mb-[8px]'>
           {!isTooltipNotRequired ? (
             <div className={'flex items-center gap-1'}>
               {label}
@@ -64,15 +64,20 @@ export const SelectInput = ({
         disabled={disabled}
         className={clsx(
           `${
-            isSearchIcon && 'form-search-select !bg-[#2E2F45] border-[#FFFFFF1A] w-full'
-          } form-select h-40px font-size-13`,
+            isSearchIcon && 'form-search-select !bg-[#2E2F45] border-[#FFFFFF1A] w-full '
+          } form-select h-40px text-[12px] text-[#FFFFFFCC]`,
           {'is-invalid-local': formik.touched[fieldName] && formik.errors[fieldName]},
           {
             'is-valid-local': formik.touched[fieldName] && !formik.errors[fieldName],
           }
         )}
       >
-        <option className='text-muted' hidden>
+        <option
+          hidden
+          style={{
+            color: 'red',
+          }}
+        >
           {placeholder}
         </option>
         {options?.map(({name, id, value}: {name: string; id: number; value: string}) => (

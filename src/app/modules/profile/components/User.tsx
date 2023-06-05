@@ -243,7 +243,7 @@ export function User({
                   <div className={'col-span-12 md:col-span-6'}>
                     <TextInput
                       fieldType={'email'}
-                      label={formatMessage({id: 'Email'})}
+                      label={formatMessage({id: 'Email Address'})}
                       fieldName={'email'}
                       formik={formik}
                       placeholder=''
@@ -297,7 +297,7 @@ export function User({
                       fieldName={'webpage'}
                       withoutLabel={true}
                       formik={formik}
-                      placeholder=''
+                      placeholder='www.example.com'
                       toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.EMAIL'})}
                       isStarRequired={true}
                       fieldType={'text'}
@@ -311,6 +311,7 @@ export function User({
                       placeholder='Short description'
                       toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.EMAIL'})}
                       isStarRequired={true}
+                      className={'!min-h-[80px]'}
                     />
                   </div>
                   <div
@@ -371,7 +372,7 @@ export function User({
                     onClick={getForgotedPassword}
                     disabled={changePasswordLoading}
                     loading={changePasswordLoading}
-                    height='41px'
+                    height='44px'
                     border='1px solid #C2D24B'
                     customClass={'!bg-[#171825]'}
                     textColor={'#C2D24B'}

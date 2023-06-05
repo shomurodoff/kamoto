@@ -26,44 +26,45 @@ export const InitializeRound = () => {
   const {currencyOptions} = useCurrency()
 
   const onSubmit = async (values: any) => {
-    try {
-      setLoading(true)
-      if (!companyId) {
-        setLoading(false)
-        throw formatMessage({id: 'Company ID is required.'})
-      }
-
-      const {
-        data: {success, errors},
-      } = await createRound(
-        values.roundName,
-        values.roundType,
-        values.amountTargeted,
-        values.amountAchieved,
-        values.currency,
-        companyId
-      )
-
-      if (success) {
-        setLoading(false)
-        navigate('/onboarding/team-members')
-      } else {
-        errors.forEach((error: string) => {
-          toast.error(formatMessage({id: error}))
-        })
-        setLoading(false)
-      }
-    } catch (error) {
-      setLoading(false)
-      console.error(error)
-    }
+    navigate('/onboarding/team-members')
+    // try {
+    //   setLoading(true)
+    //   if (!companyId) {
+    //     setLoading(false)
+    //     throw formatMessage({id: 'Company ID is required.'})
+    //   }
+    //
+    //   const {
+    //     data: {success, errors},
+    //   } = await createRound(
+    //     values.roundName,
+    //     values.roundType,
+    //     values.amountTargeted,
+    //     values.amountAchieved,
+    //     values.currency,
+    //     companyId
+    //   )
+    //
+    //   if (success) {
+    //     setLoading(false)
+    //     navigate('/onboarding/team-members')
+    //   } else {
+    //     errors.forEach((error: string) => {
+    //       toast.error(formatMessage({id: error}))
+    //     })
+    //     setLoading(false)
+    //   }
+    // } catch (error) {
+    //   setLoading(false)
+    //   console.error(error)
+    // }
   }
 
   return (
     <>
       <Toaster />
       <Formik
-        validationSchema={intializeRoundSchema}
+        // validationSchema={intializeRoundSchema}
         initialValues={roundInitialValues}
         onSubmit={onSubmit}
       >

@@ -19,6 +19,8 @@ import {Spinner} from '../../widgets/components/General/Spinner'
 import {ToolTipUI} from '../../widgets/components/UI/ToolTipUI'
 import {BasicButton} from '../../widgets/components/UI/BasicButton'
 import TextArea from '../../widgets/components/Input/TextArea'
+import {Country} from '../../widgets/components/General/Country'
+import {State} from '../../widgets/components/General/State'
 
 export function AiPersonality({
   key,
@@ -199,10 +201,10 @@ export function AiPersonality({
                   <div className={'col-span-12 md:col-span-6'}>
                     <TextInput
                       fieldType={'text'}
-                      label={formatMessage({id: 'First Name'})}
-                      fieldName={'firstName'}
+                      label={formatMessage({id: 'Personality Name'})}
+                      fieldName={'personalName'}
                       formik={formik}
-                      placeholder=''
+                      placeholder='Shahrukh Khan'
                       toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.FIRST_NAME'})}
                       isStarRequired={true}
                     />
@@ -210,85 +212,73 @@ export function AiPersonality({
                   <div className={'col-span-12 md:col-span-6'}>
                     <TextInput
                       fieldType={'text'}
-                      label={formatMessage({id: 'Last Name'})}
-                      fieldName={'lastName'}
+                      label={formatMessage({id: 'Tagline'})}
+                      fieldName={'tagline'}
                       formik={formik}
-                      placeholder=''
+                      placeholder='King of Bollywood'
                       toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.LAST_NAME'})}
                       width={5}
                       isStarRequired={true}
                     />
                   </div>
-                  <div className={'col-span-12 md:col-span-6'}>
-                    <TextInput
-                      fieldType={'text'}
-                      label={formatMessage({id: 'Username'})}
-                      fieldName={'lastName'}
+                  <div className={'col-span-12 md:col-span-6 '}>
+                    <TextArea
+                      label={formatMessage({id: 'Description'})}
+                      fieldName={'description'}
                       formik={formik}
-                      placeholder=''
-                      toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.LAST_NAME'})}
-                      isStarRequired={true}
-                    />
-                  </div>
-                  <div className={'col-span-12 md:col-span-6'}>
-                    <SelectInput
-                      label={formatMessage({id: 'Position'})}
-                      fieldName={'designation'}
-                      placeholder={formatMessage({id: 'Select your Position'})}
-                      formik={formik}
-                      toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.POSITION'})}
-                      options={designationOptions}
-                    />
-                  </div>
-                  <div className={'col-span-12 md:col-span-6'}>
-                    <TextInput
-                      fieldType={'email'}
-                      label={formatMessage({id: 'Email'})}
-                      fieldName={'email'}
-                      formik={formik}
-                      placeholder=''
+                      placeholder='Short description'
+                      className={'!min-h-[80px]'}
                       toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.EMAIL'})}
                       isStarRequired={true}
                     />
                   </div>
                   <div className={'col-span-12 md:col-span-6'}>
-                    <label className={'mb-1  text-[13px] leading-5 text-[#FFFFFFA6] flex'}>
-                      Contact Number <ToolTipUI tooltipText={'Contact Number'} />
-                    </label>
-                    <div className={'flex gap-[8px]'}>
-                      <div className={'w-[100px]'}>
-                        <SelectInput
-                          fieldName={'contact_number'}
-                          placeholder={'+998'}
-                          // label={formatMessage({id: 'Contact Number'})}
-                          formik={formik}
-                          toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.CONTACT_NUMBER'})}
-                          options={[]}
-                        />
-                      </div>
-                      <div className={'flex-grow'}>
-                        <TextInput
-                          fieldType={'email'}
-                          withoutLabel={true}
-                          fieldName={'email'}
-                          formik={formik}
-                          placeholder=''
-                          toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.EMAIL'})}
-                          isStarRequired={true}
-                        />
-                      </div>
-                    </div>
+                    <SelectInput
+                      label={formatMessage({id: 'Gender'})}
+                      fieldName={'gender'}
+                      placeholder={formatMessage({id: 'Select your Position'})}
+                      formik={formik}
+                      toolTipText={formatMessage({id: 'Select your gender'})}
+                      options={[
+                        {name: 'Male', value: 'male'},
+                        {name: 'Female', value: 'female'},
+                      ]}
+                    />
                   </div>
                   <div className={'col-span-12 md:col-span-6'}>
                     <SelectInput
-                      label={formatMessage({id: 'User’s Country'})}
-                      fieldName={'country'}
-                      placeholder={formatMessage({id: 'Select the Country'})}
+                      label={formatMessage({id: 'Personality Type'})}
+                      fieldName={'personality'}
+                      placeholder={formatMessage({id: 'Select your Fictional character'})}
                       formik={formik}
-                      toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.COUNTRY'})}
-                      options={countryOptions}
-                      width={5}
-                      margin={'me-6'}
+                      toolTipText={formatMessage({id: 'Select your Fictional character'})}
+                      options={[{name: 'Fictional character', value: 'fictional'}]}
+                    />
+                  </div>
+                  <div className={'col-span-12 md:col-span-6'}>
+                    <SelectInput
+                      label={formatMessage({id: 'Visibility'})}
+                      fieldName={'visibility'}
+                      placeholder={formatMessage({id: 'Select your Fictional character'})}
+                      formik={formik}
+                      toolTipText={formatMessage({id: 'Select your Fictional character'})}
+                      options={[
+                        {name: 'Public', value: 'public'},
+                        {name: 'Private', value: 'private'},
+                      ]}
+                    />
+                  </div>
+                  <div className={'col-span-12 md:col-span-6'}>
+                    <SelectInput
+                      label={formatMessage({id: 'Industry'})}
+                      fieldName={'industry'}
+                      placeholder={formatMessage({id: 'Select your Industry'})}
+                      formik={formik}
+                      toolTipText={formatMessage({id: 'Select your Industry'})}
+                      options={[
+                        {name: 'Agro', value: 'Industry'},
+                        {name: 'Tech', value: 'Tech'},
+                      ]}
                     />
                   </div>
                   <div className={'col-span-12 md:col-span-6'}>
@@ -297,20 +287,32 @@ export function AiPersonality({
                       fieldName={'webpage'}
                       withoutLabel={true}
                       formik={formik}
-                      placeholder=''
+                      placeholder='www.example.com'
                       toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.EMAIL'})}
                       isStarRequired={true}
                       fieldType={'text'}
                     />
                   </div>
-                  <div className={'col-span-12 md:col-span-6 '}>
-                    <TextArea
-                      label={formatMessage({id: 'Description'})}
-                      fieldName={'webpage'}
+                  <div className={'col-span-12 md:col-span-6'}>
+                    <SelectInput
+                      label={formatMessage({id: 'Country'})}
+                      fieldName={'country'}
+                      placeholder={formatMessage({id: 'Select Your Country'})}
                       formik={formik}
-                      placeholder='Short description'
-                      toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.EMAIL'})}
-                      isStarRequired={true}
+                      toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.COUNTRY'})}
+                      options={countryOptions}
+                      width={5}
+                      margin={'me-6'}
+                    />
+                  </div>
+                  <div className={'col-span-12 md:col-span-6'}>
+                    <SelectInput
+                      label={formatMessage({id: 'State/Province*'})}
+                      fieldName={'state'}
+                      placeholder={formatMessage({id: 'Select Your State or Province'})}
+                      formik={formik}
+                      toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.COUNTRY'})}
+                      options={countryOptions}
                     />
                   </div>
                   <div
@@ -574,7 +576,7 @@ export function AiPersonality({
                     onClick={getForgotedPassword}
                     disabled={changePasswordLoading}
                     loading={changePasswordLoading}
-                    height='41px'
+                    height='44px'
                     border='1px solid #C2D24B'
                     customClass={'!bg-[#171825]'}
                     textColor={'#C2D24B'}

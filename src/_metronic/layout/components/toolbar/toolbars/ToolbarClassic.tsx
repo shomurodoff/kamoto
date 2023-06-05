@@ -46,7 +46,7 @@ const ToolbarClassic = () => {
               <div
                 className='rounded h-8px'
                 role='progressbar'
-                style={{width: `${status}%`, backgroundColor: '#4776E6'}}
+                style={{width: `${status}%`, backgroundColor: '#C2D24B'}}
               ></div>
             </div>
           </div>

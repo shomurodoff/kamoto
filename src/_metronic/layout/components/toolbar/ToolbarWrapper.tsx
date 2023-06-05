@@ -497,7 +497,7 @@ const ToolbarWrapper = () => {
     : 'bg-body btn-color-gray-700 btn-active-color-primary'
 
   return (
-    <div id='kt_app_toolbar' className={clsx('app-toolbar pt-4')}>
+    <div id='kt_app_toolbar' className={clsx('app-toolbar')}>
       <div
         id='kt_app_toolbar_container'
         className={clsx(

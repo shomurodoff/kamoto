@@ -28,9 +28,9 @@ export const AuthLayout = () => {
         >
           <Outlet />
         </div>
-        <div className='flex flex-wrap justify-center md:justify-between mt-[12px] text-[#FFFFFFA6] text-[13px] leading-5'>
-          <p className={'w-full md:w-auto text-center'}>2023© KamotoAI.</p>
-          <div className={'flex justify-between gap-[25px]'}>
+        <div className='flex flex-wrap justify-center md:justify-between mt-[24px] md:mt-[12px] text-[#FFFFFFA6] text-[13px] leading-5'>
+          <p className={'w-full md:w-auto text-center mb-[8px]'}>2023© KamotoAI.</p>
+          <div className={'flex justify-between gap-[25px]  mb-[8px]'}>
             <Link to='/terms-of-use'>{formatMessage({id: 'Terms of use'})}</Link>
 
             <Link to='/privacy-policy'>{formatMessage({id: 'Privacy Policy'})}</Link>

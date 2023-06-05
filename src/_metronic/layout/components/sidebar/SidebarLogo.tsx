@@ -165,7 +165,7 @@ const SidebarLogo = () => {
                   buttonText={formatMessage({id: 'Add New Company'})}
                   height='44px'
                   border='none'
-                  color='#4776E6'
+                  color='#C2D24B'
                   textColor='#FFFFFF'
                   padding='12px 21px'
                   onClick={() => {

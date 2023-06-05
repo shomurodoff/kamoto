@@ -66,7 +66,7 @@ const TextInput = ({
           {!isCheckbox && (
             <label
               className={`${
-                isCheckbox ? 'form-check form-check-inline mb-1 ' : 'mb-1 '
+                isCheckbox ? 'form-check form-check-inline mb-[4px] md:mb-[8px]' : 'mb-[4px] md:mb-[8px]'
               }  text-[13px] leading-5 text-[#FFFFFFA6] ${
                 isBeside && isTooltipNotRequired
                   ? 'd-md-flex align-items-md-center  fw-normal  col-md-12'
@@ -124,7 +124,8 @@ const TextInput = ({
                 isCheckbox
                   ? 'form-check-input '
                   : clsx(
-                      'form-control !bg-[#2E2F45]  font-size-12',
+                      'form-control font-size-12 text-[#FFFFFFCC] !bg-[#2E2F45] !border-[#FFFFFF1A]',
+                        !isSocialMedia && formik.touched[fieldName] && formik.errors[fieldName] ?"!bg-[#D24B4B1A] !border-[#D24B4B] !text-[#D24B4B]":"!bg-[#2E2F45] !border-[#FFFFFF1A]",
                       {
                         'is-invalid-local':
                           !isSocialMedia && formik.touched[fieldName] && formik.errors[fieldName],

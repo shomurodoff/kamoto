@@ -5,11 +5,11 @@ import {useIntl} from 'react-intl'
 export const ChangePasswordModal = ({
   show,
   handleClose,
-  setShowModal
+  setShowModal,
 }: {
   show: boolean
   handleClose?: () => void
-  setShowModal:(show:boolean)=>void;
+  setShowModal: (show: boolean) => void
 }) => {
   const {formatMessage} = useIntl()
   return (
@@ -23,8 +23,10 @@ export const ChangePasswordModal = ({
       backdrop={true}
     >
       <div className='modal-body py-lg-10 px-lg-10 d-md-flex flex-md-column align-items-md-center'>
-        <div className='text-center mb-md-5 fw-bold fs-4'>{formatMessage({id: 'SETTINGS.USER.CHANGE_PASSWORD.TEXT'})}</div>
-        <button className='btn btn-primary ' onClick={()=>setShowModal(false)}>
+        <div className='text-center mb-md-5 fw-bold fs-4'>
+          {formatMessage({id: 'SETTINGS.USER.CHANGE_PASSWORD.TEXT'})}
+        </div>
+        <button className='btn btn-primary !text-[#000]' onClick={() => setShowModal(false)}>
           {formatMessage({id: 'SETTINGS.USER.CHANGE_PASSWORD.BUTTON'})}
         </button>
       </div>
