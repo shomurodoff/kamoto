@@ -21,12 +21,12 @@ import {BasicButton} from '../../widgets/components/UI/BasicButton'
 import TextArea from '../../widgets/components/Input/TextArea'
 
 export function User({
-  key,
-  setImgName,
-  imgName,
-  getApiLoading,
-  countryOptions,
-}: {
+                       key,
+                       setImgName,
+                       imgName,
+                       getApiLoading,
+                       countryOptions,
+                     }: {
   key: number
   setImgName: Dispatch<SetStateAction<string | undefined>>
   imgName: string | undefined
@@ -44,24 +44,24 @@ export function User({
 
   const userSchema = Yup.object().shape({
     firstName: Yup.string()
-      .min(3, formatMessage({id: 'Minimum 3 characters'}))
-      .max(50, formatMessage({id: 'Maximum 50 characters'}))
-      .required(formatMessage({id: 'First name is required'})),
+        .min(3, formatMessage({id: 'Minimum 3 characters'}))
+        .max(50, formatMessage({id: 'Maximum 50 characters'}))
+        .required(formatMessage({id: 'First name is required'})),
     lastName: Yup.string()
-      .max(50, formatMessage({id: 'Maximum 50 characters'}))
-      .required(formatMessage({id: 'Last name is required'})),
+        .max(50, formatMessage({id: 'Maximum 50 characters'}))
+        .required(formatMessage({id: 'Last name is required'})),
     email: Yup.string()
-      .email(formatMessage({id: 'Invalid email format'}))
-      .max(50, formatMessage({id: 'Maximum 50 characters'}))
-      .required(formatMessage({id: 'Email is required'})),
+        .email(formatMessage({id: 'Invalid email format'}))
+        .max(50, formatMessage({id: 'Maximum 50 characters'}))
+        .required(formatMessage({id: 'Email is required'})),
     contact: Yup.string()
-      .required(formatMessage({id: 'Contact number is required'}))
-      .min(6, formatMessage({id: 'Minimum 6 digits'}))
-      .max(10, formatMessage({id: 'Maximum 10 digits'}))
-      .nullable(),
+        .required(formatMessage({id: 'Contact number is required'}))
+        .min(6, formatMessage({id: 'Minimum 6 digits'}))
+        .max(10, formatMessage({id: 'Maximum 10 digits'}))
+        .nullable(),
     country: Yup.string()
-      .required(formatMessage({id: 'Country is required'}))
-      .nullable(),
+        .required(formatMessage({id: 'Country is required'}))
+        .nullable(),
     communication: Yup.object().shape({
       email: Yup.bool(),
       phone: Yup.bool(),
@@ -146,256 +146,245 @@ export function User({
   }
 
   return (
-    <>
-      {getApiLoading ? <Spinner /> : null}
-      <div className='flex flex-col md:flex-row gap-y-[20px] gap-x-[40px]'>
-        <div className={'flex '}>
-          <div className={`relative !rounded`}>
-            <DisplayImage
-              imgName={imgName}
-              width={140}
-              height={120}
-              fit='contain'
-              alt='profile'
-              className={'w-[140px] h-[120px] rounded'}
-            />
-            <div
-              className='rounded-full  bg-[#21233A] absolute -top-2 -right-3 p-2 shadow-[0px_2px_4px_0px_#0000001A]'
-              onClick={handleOpen}
-            >
-              <svg
-                width='16'
-                height='16'
-                viewBox='0 0 16 16'
-                fill='none'
-                xmlns='http://www.w3.org/2000/svg'
+      <>
+        {getApiLoading ? <Spinner /> : null}
+        <div className='flex flex-col md:flex-row gap-y-[20px] gap-x-[40px] bg-[#171825] md:px-[50px] px-[16px] py-[16px] md:pb-[40px] shadow-default rounded'>
+          <div className={'flex '}>
+            <div className={`relative !rounded`}>
+              <DisplayImage
+                  imgName={imgName}
+                  fit='contain'
+                  alt='profile'
+                  className={'md:w-[140px] w-[120px] h-[120px] rounded'}
+              />
+              <div
+                  className='rounded-full  bg-[#21233A] absolute -top-2 -right-3 p-2 shadow-[0px_2px_4px_0px_#0000001A]'
+                  onClick={handleOpen}
               >
-                <g clipPath='url(#clip0_344_12864)'>
-                  <path
-                    d='M12.8667 5.94967L10.0333 3.14967L10.9667 2.21634C11.2222 1.96079 11.5362 1.83301 11.9087 1.83301C12.2807 1.83301 12.5944 1.96079 12.85 2.21634L13.7833 3.14967C14.0389 3.40523 14.1722 3.71367 14.1833 4.07501C14.1944 4.4359 14.0722 4.74412 13.8167 4.99967L12.8667 5.94967ZM11.9 6.93301L4.83333 13.9997H2V11.1663L9.06667 4.09967L11.9 6.93301Z'
-                    fill='white'
-                    fillOpacity='0.65'
-                  />
-                </g>
-                <defs>
-                  <clipPath id='clip0_344_12864'>
-                    <rect width='16' height='16' fill='white' />
-                  </clipPath>
-                </defs>
-              </svg>
+                <svg
+                    width='16'
+                    height='16'
+                    viewBox='0 0 16 16'
+                    fill='none'
+                    xmlns='http://www.w3.org/2000/svg'
+                >
+                  <g clipPath='url(#clip0_344_12864)'>
+                    <path
+                        d='M12.8667 5.94967L10.0333 3.14967L10.9667 2.21634C11.2222 1.96079 11.5362 1.83301 11.9087 1.83301C12.2807 1.83301 12.5944 1.96079 12.85 2.21634L13.7833 3.14967C14.0389 3.40523 14.1722 3.71367 14.1833 4.07501C14.1944 4.4359 14.0722 4.74412 13.8167 4.99967L12.8667 5.94967ZM11.9 6.93301L4.83333 13.9997H2V11.1663L9.06667 4.09967L11.9 6.93301Z'
+                        fill='white'
+                        fillOpacity='0.65'
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id='clip0_344_12864'>
+                      <rect width='16' height='16' fill='white' />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div>
             </div>
           </div>
-        </div>
-        <Formik
-          initialValues={userInitialValues}
-          validationSchema={userSchema}
-          onSubmit={onSubmit}
-          className={'flex-grow'}
-        >
-          {(formik) => {
-            return (
-              <Form className={'w-full'}>
-                <div className={'grid grid-cols-12 md:gap-x-[24px]'}>
-                  <div className={'col-span-12 md:col-span-6'}>
-                    <TextInput
-                      fieldType={'text'}
-                      label={formatMessage({id: 'First Name'})}
-                      fieldName={'firstName'}
-                      formik={formik}
-                      placeholder=''
-                      toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.FIRST_NAME'})}
-                      isStarRequired={true}
-                    />
-                  </div>
-                  <div className={'col-span-12 md:col-span-6'}>
-                    <TextInput
-                      fieldType={'text'}
-                      label={formatMessage({id: 'Last Name'})}
-                      fieldName={'lastName'}
-                      formik={formik}
-                      placeholder=''
-                      toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.LAST_NAME'})}
-                      width={5}
-                      isStarRequired={true}
-                    />
-                  </div>
-                  <div className={'col-span-12 md:col-span-6'}>
-                    <TextInput
-                      fieldType={'text'}
-                      label={formatMessage({id: 'Username'})}
-                      fieldName={'lastName'}
-                      formik={formik}
-                      placeholder=''
-                      toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.LAST_NAME'})}
-                      isStarRequired={true}
-                    />
-                  </div>
-                  <div className={'col-span-12 md:col-span-6'}>
-                    <SelectInput
-                      label={formatMessage({id: 'Position'})}
-                      fieldName={'designation'}
-                      placeholder={formatMessage({id: 'Select your Position'})}
-                      formik={formik}
-                      toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.POSITION'})}
-                      options={designationOptions}
-                    />
-                  </div>
-                  <div className={'col-span-12 md:col-span-6'}>
-                    <TextInput
-                      fieldType={'email'}
-                      label={formatMessage({id: 'Email Address'})}
-                      fieldName={'email'}
-                      formik={formik}
-                      placeholder=''
-                      toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.EMAIL'})}
-                      isStarRequired={true}
-                    />
-                  </div>
-                  <div className={'col-span-12 md:col-span-6'}>
-                    <label className={'mb-1  text-[13px] leading-5 text-[#FFFFFFA6] flex'}>
-                      Contact Number <ToolTipUI tooltipText={'Contact Number'} />
-                    </label>
-                    <div className={'flex gap-[8px]'}>
-                      <div className={'w-[100px]'}>
-                        <SelectInput
-                          fieldName={'contact_number'}
-                          placeholder={'+998'}
-                          // label={formatMessage({id: 'Contact Number'})}
-                          formik={formik}
-                          toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.CONTACT_NUMBER'})}
-                          options={[]}
-                        />
-                      </div>
-                      <div className={'flex-grow'}>
+          <Formik
+              initialValues={userInitialValues}
+              validationSchema={userSchema}
+              onSubmit={onSubmit}
+              className={'flex-grow'}
+          >
+            {(formik) => {
+              return (
+                  <Form className={'w-full'}>
+                    <div className={'grid grid-cols-12 md:gap-x-[24px]'}>
+                      <div className={'col-span-12 md:col-span-6'}>
                         <TextInput
-                          fieldType={'email'}
-                          withoutLabel={true}
-                          fieldName={'email'}
-                          formik={formik}
-                          placeholder=''
-                          toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.EMAIL'})}
-                          isStarRequired={true}
+                            fieldType={'text'}
+                            label={formatMessage({id: 'First Name'})}
+                            fieldName={'firstName'}
+                            formik={formik}
+                            placeholder=''
+                            toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.FIRST_NAME'})}
+                        />
+                      </div>
+                      <div className={'col-span-12 md:col-span-6'}>
+                        <TextInput
+                            fieldType={'text'}
+                            label={formatMessage({id: 'Last Name'})}
+                            fieldName={'lastName'}
+                            formik={formik}
+                            placeholder=''
+                            toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.LAST_NAME'})}
+                        />
+                      </div>
+                      <div className={'col-span-12 md:col-span-6'}>
+                        <TextInput
+                            fieldType={'text'}
+                            label={formatMessage({id: 'Username'})}
+                            fieldName={'lastName'}
+                            formik={formik}
+                            placeholder=''
+                            toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.LAST_NAME'})}
+                        />
+                      </div>
+                      <div className={'col-span-12 md:col-span-6'}>
+                        <SelectInput
+                            label={formatMessage({id: 'Position'})}
+                            fieldName={'designation'}
+                            isStarRequired={false}
+                            placeholder={formatMessage({id: 'Select your Position'})}
+                            formik={formik}
+                            toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.POSITION'})}
+                            options={designationOptions}
+                        />
+                      </div>
+                      <div className={'col-span-12 md:col-span-6'}>
+                        <TextInput
+                            fieldType={'email'}
+                            label={formatMessage({id: 'Email Address'})}
+                            fieldName={'email'}
+                            formik={formik}
+                            placeholder=''
+                            toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.EMAIL'})}
+                        />
+                      </div>
+                      <div className={'col-span-12 md:col-span-6'}>
+                        <label className={'mb-1  text-[13px] leading-5 text-[#FFFFFFA6] flex'}>
+                          Contact Number <ToolTipUI tooltipText={'Contact Number'} />
+                        </label>
+                        <div className={'flex gap-[8px]'}>
+                          <div className={'w-[100px]'}>
+                            <SelectInput
+                                fieldName={'contact_number'}
+                                placeholder={'+998'}
+                                // label={formatMessage({id: 'Contact Number'})}
+                                formik={formik}
+                                toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.CONTACT_NUMBER'})}
+                                options={[]}
+                            />
+                          </div>
+                          <div className={'flex-grow'}>
+                            <TextInput
+                                fieldType={'email'}
+                                withoutLabel={true}
+                                fieldName={'email'}
+                                formik={formik}
+                                placeholder=''
+                                toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.EMAIL'})}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className={'col-span-12 md:col-span-6'}>
+                        <SelectInput
+                            label={formatMessage({id: 'User’s Country'})}
+                            fieldName={'country'}
+                            placeholder={formatMessage({id: 'Select the Country'})}
+                            formik={formik}
+                            toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.COUNTRY'})}
+                            options={countryOptions}
+                        />
+                      </div>
+                      <div className={'col-span-12 md:col-span-6'}>
+                        <TextInput
+                            label={formatMessage({id: 'Website URL'})}
+                            fieldName={'webpage'}
+                            withoutLabel={true}
+                            formik={formik}
+                            placeholder='www.example.com'
+                            toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.EMAIL'})}
+                            fieldType={'text'}
+                        />
+                      </div>
+                      <div className={'col-span-12 md:col-span-6 '}>
+                        <TextArea
+                            label={formatMessage({id: 'Description'})}
+                            fieldName={'description'}
+                            formik={formik}
+                            placeholder='Short description'
+                            toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.EMAIL'})}
+                            className={'!min-h-[80px]'}
+                        />
+                      </div>
+                      <div
+                          className={
+                            'col-span-12 bg-[#2E2F45] p-[8px] shadow-[0px_2px_4px_0px_#0000001A] rounded relative'
+                          }
+                      >
+                        <div
+                            className='rounded-full  bg-[#21233A] absolute -top-2 -right-3 p-2 shadow-[0px_2px_4px_0px_#0000001A]'
+                            onClick={handleOpen}
+                        >
+                          <svg
+                              width='16'
+                              height='16'
+                              viewBox='0 0 16 16'
+                              fill='none'
+                              xmlns='http://www.w3.org/2000/svg'
+                          >
+                            <g clipPath='url(#clip0_344_12864)'>
+                              <path
+                                  d='M12.8667 5.94967L10.0333 3.14967L10.9667 2.21634C11.2222 1.96079 11.5362 1.83301 11.9087 1.83301C12.2807 1.83301 12.5944 1.96079 12.85 2.21634L13.7833 3.14967C14.0389 3.40523 14.1722 3.71367 14.1833 4.07501C14.1944 4.4359 14.0722 4.74412 13.8167 4.99967L12.8667 5.94967ZM11.9 6.93301L4.83333 13.9997H2V11.1663L9.06667 4.09967L11.9 6.93301Z'
+                                  fill='white'
+                                  fillOpacity='0.65'
+                              />
+                            </g>
+                            <defs>
+                              <clipPath id='clip0_344_12864'>
+                                <rect width='16' height='16' fill='white' />
+                              </clipPath>
+                            </defs>
+                          </svg>
+                        </div>
+                        <img
+                            src={toAbsoluteUrl('/media/avatars/banner-image.png')}
+                            className={'w-full h-[110px]'}
                         />
                       </div>
                     </div>
-                  </div>
-                  <div className={'col-span-12 md:col-span-6'}>
-                    <SelectInput
-                      label={formatMessage({id: 'User’s Country'})}
-                      fieldName={'country'}
-                      placeholder={formatMessage({id: 'Select the Country'})}
-                      formik={formik}
-                      toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.COUNTRY'})}
-                      options={countryOptions}
-                      width={5}
-                      margin={'me-6'}
+                    <FileUpload
+                        fileSize={2097152}
+                        maxFileNumber={1}
+                        allowType={['image/*', '.jpg', '.jpeg', '.png']}
+                        metaData={{module: 'profileimg', isProtected: true}}
+                        modalStatus={modelStatus}
+                        handleClose={handleClose}
+                        handleSuccess={(id: number, name: string) => {
+                          setImgName(name)
+                          formik.setFieldValue('profileImageId', id)
+                        }}
                     />
-                  </div>
-                  <div className={'col-span-12 md:col-span-6'}>
-                    <TextInput
-                      label={formatMessage({id: 'Website URL'})}
-                      fieldName={'webpage'}
-                      withoutLabel={true}
-                      formik={formik}
-                      placeholder='www.example.com'
-                      toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.EMAIL'})}
-                      isStarRequired={true}
-                      fieldType={'text'}
-                    />
-                  </div>
-                  <div className={'col-span-12 md:col-span-6 '}>
-                    <TextArea
-                      label={formatMessage({id: 'Description'})}
-                      fieldName={'webpage'}
-                      formik={formik}
-                      placeholder='Short description'
-                      toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.USER.EMAIL'})}
-                      isStarRequired={true}
-                      className={'!min-h-[80px]'}
-                    />
-                  </div>
-                  <div
-                    className={
-                      'col-span-12 bg-[#2E2F45] p-[8px] shadow-[0px_2px_4px_0px_#0000001A] rounded relative'
-                    }
-                  >
                     <div
-                      className='rounded-full  bg-[#21233A] absolute -top-2 -right-3 p-2 shadow-[0px_2px_4px_0px_#0000001A]'
-                      onClick={handleOpen}
+                        className={
+                          'flex flex-col md:flex-row justify-end mt-5 gap-y-[14px] md:gap-x-[20px]'
+                        }
                     >
-                      <svg
-                        width='16'
-                        height='16'
-                        viewBox='0 0 16 16'
-                        fill='none'
-                        xmlns='http://www.w3.org/2000/svg'
-                      >
-                        <g clipPath='url(#clip0_344_12864)'>
-                          <path
-                            d='M12.8667 5.94967L10.0333 3.14967L10.9667 2.21634C11.2222 1.96079 11.5362 1.83301 11.9087 1.83301C12.2807 1.83301 12.5944 1.96079 12.85 2.21634L13.7833 3.14967C14.0389 3.40523 14.1722 3.71367 14.1833 4.07501C14.1944 4.4359 14.0722 4.74412 13.8167 4.99967L12.8667 5.94967ZM11.9 6.93301L4.83333 13.9997H2V11.1663L9.06667 4.09967L11.9 6.93301Z'
-                            fill='white'
-                            fillOpacity='0.65'
-                          />
-                        </g>
-                        <defs>
-                          <clipPath id='clip0_344_12864'>
-                            <rect width='16' height='16' fill='white' />
-                          </clipPath>
-                        </defs>
-                      </svg>
+                      <BasicButton
+                          buttonText={formatMessage({id: 'Change password'})}
+                          onClick={getForgotedPassword}
+                          disabled={changePasswordLoading}
+                          loading={changePasswordLoading}
+                          height='44px'
+                          border='1px solid #C2D24B'
+                          customClass={'!bg-[#171825]'}
+                          textColor={'#C2D24B'}
+                          padding='12px 24px'
+                      />
+                      <CustomButton
+                          isSubmitting={formik.isSubmitting}
+                          isValid={formik.isValid}
+                          buttonText={formatMessage({id: 'Save Changes'})}
+                          loading={loading}
+                          height={44}
+                      />
                     </div>
-                    <img
-                      src={toAbsoluteUrl('/media/avatars/banner-image.png')}
-                      className={'w-full h-[110px]'}
-                    />
-                  </div>
-                </div>
-                <FileUpload
-                  fileSize={2097152}
-                  maxFileNumber={1}
-                  allowType={['image/*', '.jpg', '.jpeg', '.png']}
-                  metaData={{module: 'profileimg', isProtected: true}}
-                  modalStatus={modelStatus}
-                  handleClose={handleClose}
-                  handleSuccess={(id: number, name: string) => {
-                    setImgName(name)
-                    formik.setFieldValue('profileImageId', id)
-                  }}
-                />
-                <div
-                  className={
-                    'flex flex-col md:flex-row justify-end mt-5 gap-y-[14px] md:gap-x-[20px]'
-                  }
-                >
-                  <BasicButton
-                    buttonText={formatMessage({id: 'Change password'})}
-                    onClick={getForgotedPassword}
-                    disabled={changePasswordLoading}
-                    loading={changePasswordLoading}
-                    height='44px'
-                    border='1px solid #C2D24B'
-                    customClass={'!bg-[#171825]'}
-                    textColor={'#C2D24B'}
-                    padding='12px 24px'
-                  />
-                  <CustomButton
-                    isSubmitting={formik.isSubmitting}
-                    isValid={formik.isValid}
-                    buttonText={formatMessage({id: 'Save Changes'})}
-                    loading={loading}
-                    height={44}
-                  />
-                </div>
-              </Form>
-            )
-          }}
-        </Formik>
-      </div>
-      <ChangePasswordModal
-        show={showModal}
-        handleClose={() => setShowModal(false)}
-        setShowModal={setShowModal}
-      />
-    </>
+                  </Form>
+              )
+            }}
+          </Formik>
+        </div>
+        <ChangePasswordModal
+            show={showModal}
+            handleClose={() => setShowModal(false)}
+            setShowModal={setShowModal}
+        />
+      </>
   )
 }

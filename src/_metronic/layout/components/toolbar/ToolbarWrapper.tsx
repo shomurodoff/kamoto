@@ -558,19 +558,7 @@ const ToolbarWrapper = () => {
                 />
               </div>
             </Tab>
-            {/*<Tab title={formatMessage({id: 'Company'})} className='mr-3 mt-2'>*/}
-            {/*  <div className='mt-4'>*/}
-            {/*    <Company*/}
-            {/*      key={key}*/}
-            {/*      getCompanyApiLoading={getCompanyApiLoading}*/}
-            {/*      setCompanyImgName={setCompanyImgName}*/}
-            {/*      companyImgName={companyImgName}*/}
-            {/*      setCountryId={setCountryId}*/}
-            {/*      countryOptions={countryOptions}*/}
-            {/*      stateOptions={stateOptions}*/}
-            {/*    />*/}
-            {/*  </div>*/}
-            {/*</Tab>*/}
+
             <Tab title={formatMessage({id: 'Billing'})} className='mr-3 mt-2'>
               <div className='mt-4'>
                 <Billing
@@ -607,25 +595,7 @@ const ToolbarWrapper = () => {
                 />
               </div>
             </Tab>
-            {/*<Tab title={formatMessage({id: 'Email Integration'})} className='mr-3 mt-2'>*/}
-            {/*  <div className='mt-4'>*/}
-            {/*    <EmailIntegration*/}
-            {/*      key={key}*/}
-            {/*      companyId={companyId}*/}
-            {/*      getMailInformation={getMailInformation}*/}
-            {/*      customsmtpRadio={customsmtpRadio}*/}
-            {/*      foundercrateRadio={foundercrateRadio}*/}
-            {/*      sendgridRadio={sendgridRadio}*/}
-            {/*      postmarkRadio={postmarkRadio}*/}
-            {/*      emailSignature={emailSignature}*/}
-            {/*    />*/}
-            {/*  </div>*/}
-            {/*</Tab>*/}
-            {/*<Tab title={formatMessage({id: 'BCC Tracking'})} className='mr-3 mt-2'>*/}
-            {/*  <div className='mt-4'>*/}
-            {/*    <BCCTracking key={key} bccEmail={bccEmail} />*/}
-            {/*  </div>*/}
-            {/*</Tab>*/}
+
             <Tab title={formatMessage({id: 'Locale'})} className='mr-3 mt-2'>
               <div className='mt-4'>
                 <Locale key={key} getLocaleApiLoading={getLocaleApiLoading} />

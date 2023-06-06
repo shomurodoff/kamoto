@@ -51,7 +51,7 @@ export const BasicButton = ({
     >
       {!loading && (
         <span
-          className='text-[14px] font-medium leading-5'
+          className='text-[14px] font-normal leading-5'
           style={{
             color: textColor,
           }}

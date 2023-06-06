@@ -1,6 +1,6 @@
-import {ErrorMessage, Field, getIn} from 'formik'
-import {ToolTipUI} from '../UI/ToolTipUI'
-import clsx from 'clsx'
+import { ErrorMessage, Field, getIn } from "formik";
+import { ToolTipUI } from "../UI/ToolTipUI";
+import clsx from "clsx";
 
 export const SelectInput = ({
   fieldName,
@@ -17,40 +17,40 @@ export const SelectInput = ({
   isSearchIcon,
   disabled,
 }: {
-  fieldName: string
-  label?: string
-  toolTipText?: string
-  placeholder: string
-  formik: any
-  options: any
-  margin?: string
-  isFieldArray?: boolean
-  isTooltipNotRequired?: boolean
-  width?: number
-  isStarRequired?: boolean
-  isSearchIcon?: boolean
-  disabled?: boolean
+  fieldName: string;
+  label?: string;
+  toolTipText?: string;
+  placeholder: string;
+  formik: any;
+  options: any;
+  margin?: string;
+  isFieldArray?: boolean;
+  isTooltipNotRequired?: boolean;
+  width?: number;
+  isStarRequired?: boolean;
+  isSearchIcon?: boolean;
+  disabled?: boolean;
 }) => {
-  const FieldArrayErrorMessage = ({name}: any) => (
+  const FieldArrayErrorMessage = ({ name }: any) => (
     <Field
       name={name}
-      render={({form}: any) => {
-        const error = getIn(form.errors, name)
-        const touch = getIn(form.touched, name)
+      render={({ form }: any) => {
+        const error = getIn(form.errors, name);
+        const touch = getIn(form.touched, name);
 
-        return touch && error ? error : null
+        return touch && error ? error : null;
       }}
     />
-  )
+  );
 
   return (
     <div className={`mb-[16px] md:mb-[16px] `}>
       {label && (
-        <label className='text-[13px] leading-5 text-[#FFFFFFA6] mb-[4px] md:mb-[8px]'>
+        <label className="text-[13px] leading-5 text-[#FFFFFFA6] mb-[4px] md:mb-[8px]">
           {!isTooltipNotRequired ? (
-            <div className={'flex items-center gap-1'}>
+            <div className={"flex items-center gap-1"}>
               {label}
-              {!isStarRequired && '*'} <ToolTipUI tooltipText={toolTipText} />
+              {isStarRequired && "*"} <ToolTipUI tooltipText={toolTipText} />
             </div>
           ) : (
             <>{label}</>
@@ -59,34 +59,49 @@ export const SelectInput = ({
       )}
 
       <Field
-        as='select'
+        as="select"
         name={fieldName}
         disabled={disabled}
         className={clsx(
           `${
-            isSearchIcon && 'form-search-select !bg-[#2E2F45] border-[#FFFFFF1A] w-full '
+            isSearchIcon &&
+            "form-search-select !bg-[#2E2F45] border-[#FFFFFF1A] w-full "
           } form-select h-40px text-[12px] text-[#FFFFFFCC]`,
-          {'is-invalid-local': formik.touched[fieldName] && formik.errors[fieldName]},
           {
-            'is-valid-local': formik.touched[fieldName] && !formik.errors[fieldName],
+            "is-invalid-local":
+              formik.touched[fieldName] && formik.errors[fieldName],
+          },
+          {
+            "is-valid-local":
+              formik.touched[fieldName] && !formik.errors[fieldName],
           }
         )}
       >
         <option
           hidden
           style={{
-            color: 'red',
+            color: "red",
           }}
         >
           {placeholder}
         </option>
-        {options?.map(({name, id, value}: {name: string; id: number; value: string}) => (
-          <option key={id} value={value}>
-            {name}
-          </option>
-        ))}
+        {options?.map(
+          ({
+            name,
+            id,
+            value,
+          }: {
+            name: string;
+            id: number;
+            value: string;
+          }) => (
+            <option key={id} value={value}>
+              {name}
+            </option>
+          )
+        )}
       </Field>
-      <div className='text-danger mt-2'>
+      <div className="text-danger mt-2">
         {isFieldArray ? (
           <FieldArrayErrorMessage name={fieldName} />
         ) : (
@@ -94,5 +109,5 @@ export const SelectInput = ({
         )}
       </div>
     </div>
-  )
-}
+  );
+};

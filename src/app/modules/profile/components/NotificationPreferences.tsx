@@ -11,11 +11,11 @@ import {Spinner} from '../../widgets/components/General/Spinner'
 import {BasicButton} from '../../widgets/components/UI/BasicButton'
 
 export const NotificationPreferences = ({
-  key,
-  getPreferences,
-  getPreferencesApiLoading,
-  setGetPreferences,
-}: {
+                                          key,
+                                          getPreferences,
+                                          getPreferencesApiLoading,
+                                          setGetPreferences,
+                                        }: {
   key: number
   getPreferences: any
   getPreferencesApiLoading: boolean
@@ -83,68 +83,70 @@ export const NotificationPreferences = ({
   }
 
   return (
-    <>
-      {getPreferencesApiLoading ? <Spinner /> : null}
-      <div className='pt-8 company-container mt-0 px-[20px]'>
-        <div className='fs-6 fw-semibold pb-5'>
-          {formatMessage({id: 'Notification Preferences'})}
-        </div>
-        {EmailPreferencesInput.map(
-          ({id, title, subtitle}: EmailPreferencesInputType, index: number) => (
-            <div className='border-bottom' key={id}>
-              <form className='form-check foΩrm-check-custom form-check-solid form-check-primary form-switch flex items-center gap-x-[8px]'>
-                <input
-                  className='form-check-input'
-                  type='checkbox'
-                  id={id.toString()}
-                  name='model.app.sidebar.default.minimize.desktop.hoverable'
-                  defaultChecked={getPreferences && getPreferences[index]?.value}
-                  onChange={(e) => {
-                    handleToogle(id, e.target.checked)
-                  }}
-                />
-                <div className='d-flex flex-column justify-content-end mt-2'>
-                  <div className='d-flex'>
-                    <div>
-                      <label
-                        className='form-check-label fw-semibold font-size-13 title-notification'
-                        htmlFor={id.toString()}
-                        data-bs-toggle='tooltip'
-                        data-kt-initialized='1'
-                      >
-                        {title}
-                      </label>
-                    </div>
-                    <div>{<ToolTipUI tooltipText={tooltipObj[id]} />}</div>
+      <>
+        {getPreferencesApiLoading ? <Spinner /> : null}
+        <div className='!bg-[#171825] md:px-[50px] px-[16px] py-[16px] md:pb-[40px] shadow-default rounded text-[#FFFFFFCC] company-container'>
+          <h3 className={'text-[16px] leading-[22px] font-medium mb-[8px]'}>
+            {formatMessage({id: 'Notification Preferences'})}
+          </h3>
+          {EmailPreferencesInput.map(
+              ({id, title, subtitle}: EmailPreferencesInputType, index: number) => (
+                  <div className='border-bottom' key={id}>
+                    <form className='form-check  foΩrm-check-custom form-check-solid form-check-primary form-switch flex items-center gap-x-[8px]'>
+                      <div>
+                        <input
+                            className='form-check-input flex-grow !w-[45px]'
+                            type='checkbox'
+                            id={id.toString()}
+                            name='model.app.sidebar.default.minimize.desktop.hoverable'
+                            defaultChecked={getPreferences && getPreferences[index]?.value}
+                            onChange={(e) => {
+                              handleToogle(id, e.target.checked)
+                            }}
+                        />
+                      </div>
+                      <div className='d-flex flex-column justify-content-end py-[4px] md:py-2'>
+                        <div className='d-flex'>
+                          <div>
+                            <label
+                                className='text-[13px] leading-5 text-[#FFFFFFCC] font-semibold'
+                                htmlFor={id.toString()}
+                                data-bs-toggle='tooltip'
+                                data-kt-initialized='1'
+                            >
+                              {title}
+                            </label>
+                          </div>
+                          <div>{<ToolTipUI tooltipText={tooltipObj[id]} />}</div>
+                        </div>
+                        <label
+                            className='text-[12px] leading-4 text-[#FFFFFFA6]'
+                            htmlFor={id.toString()}
+                            data-bs-toggle='tooltip'
+                            data-kt-initialized='1'
+                        >
+                          {subtitle}
+                        </label>
+                      </div>
+                    </form>
                   </div>
-                  <label
-                    className='form-check-label text-clr58 fw-normal fs-7'
-                    htmlFor={id.toString()}
-                    data-bs-toggle='tooltip'
-                    data-kt-initialized='1'
-                  >
-                    {subtitle}
-                  </label>
-                </div>
-              </form>
-            </div>
-          )
-        )}
-        <div className='flex justify-end mt-[20px] md:mt-[135px]'>
-          <BasicButton
-            buttonText={formatMessage({id: 'Save Changes'})}
-            onClick={handleSumbit}
-            disabled={loading}
-            loading={loading}
-            height='44px'
-            customClass={'w-full md:w-auto'}
-            border='1px solid #C2D24B'
-            color='#C2D24B'
-            textColor='#000000'
-            padding='12px 24px'
-          />
+              )
+          )}
+          <div className='flex justify-end mt-[20px] md:mt-[135px]'>
+            <BasicButton
+                buttonText={formatMessage({id: 'Save Changes'})}
+                onClick={handleSumbit}
+                disabled={loading}
+                loading={loading}
+                height='44px'
+                customClass={'w-full md:w-auto'}
+                border='1px solid #C2D24B'
+                color='#C2D24B'
+                textColor='#000000'
+                padding='12px 24px'
+            />
+          </div>
         </div>
-      </div>
-    </>
+      </>
   )
 }

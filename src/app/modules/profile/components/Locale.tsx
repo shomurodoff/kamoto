@@ -151,92 +151,95 @@ export const Locale = ({key, getLocaleApiLoading}: any) => {
     }
   }
   return (
-    <>
-      {getLocaleApiLoading ? <Spinner /> : null}
-      <div className={'bg-[#171825] rounded p-[24px] pb-[50px] gap-y-[16px]'}>
-        <div className={'col-span-12 md:col-span-6 text-[#FFFFFFCC]'}>
-          <h3 className={'text-[16px] leading-[22px] font-medium mb-[8px]'}>Locale Setting</h3>
-        </div>
-        <Formik
-          initialValues={localeInitialValues}
-          validationSchema={localSchema}
-          onSubmit={onSubmit}
+      <>
+        {getLocaleApiLoading ? <Spinner /> : null}
+        <div
+            className={
+              'bg-[#171825] md:px-[50px] px-[16px] py-[16px] md:pb-[40px] shadow-default rounded'
+            }
         >
-          {(formik) => {
-            return (
-              <Form>
-                <div className={'max-w-4xl'}>
-                  <div className='grid grid-cols-12 gap-x-[32px]'>
-                    <div className={'col-span-12 md:col-span-6'}>
-                      <SelectInput
-                        label={formatMessage({id: 'Locale'})}
-                        fieldName={'locale'}
-                        placeholder={formatMessage({id: 'Select the Locale'})}
-                        formik={formik}
-                        isStarRequired={true}
-                        options={localeOptions}
-                        toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.LOCALE.LOCALE'})}
-                        margin='me-6'
-                        width={5}
-                      />
+          <div className={'col-span-12 md:col-span-6 text-[#FFFFFFCC]'}>
+            <h3 className={'text-[16px] leading-[22px] font-medium mb-[8px]'}>Locale Setting</h3>
+          </div>
+          <Formik
+              initialValues={localeInitialValues}
+              validationSchema={localSchema}
+              onSubmit={onSubmit}
+          >
+            {(formik) => {
+              return (
+                  <Form>
+                    <div className={'max-w-4xl'}>
+                      <div className='grid grid-cols-12 gap-x-[32px]'>
+                        <div className={'col-span-12 md:col-span-6'}>
+                          <SelectInput
+                              label={formatMessage({id: 'Locale'})}
+                              fieldName={'locale'}
+                              placeholder={formatMessage({id: 'Select the Locale'})}
+                              formik={formik}
+                              options={localeOptions}
+                              toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.LOCALE.LOCALE'})}
+                          />
+                        </div>
+                        <div className={'col-span-12 md:col-span-6'}>
+                          <SelectInput
+                              label={formatMessage({id: 'Time Zone'})}
+                              fieldName={'timezone'}
+                              placeholder={formatMessage({id: 'Select the Time Zone'})}
+                              formik={formik}
+                              options={timeZoneOptions}
+                              toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.LOCALE.TIME_ZONE'})}
+                          />
+                        </div>
+                        <div className={'col-span-12 md:col-span-6'}>
+                          <SelectInput
+                              label={formatMessage({id: 'Date Format'})}
+                              fieldName={'dateFormat'}
+                              placeholder={formatMessage({id: 'Select the Date Format'})}
+                              formik={formik}
+                              options={dateFormatOptions}
+                              toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.LOCALE.DATE_FORMAT'})}
+                          />
+                        </div>
+                        <div className={'col-span-12 md:col-span-6'}>
+                          <SelectInput
+                              label={formatMessage({id: 'Time Format'})}
+                              fieldName={'timeFormat'}
+                              placeholder={formatMessage({id: 'Select the Time Format'})}
+                              formik={formik}
+                              toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.LOCALE.TIME_FORMAT'})}
+                              options={timeFormatOptions}
+                          />
+                        </div>
+                        <div className={'col-span-12 md:col-span-6'}>
+                          <SelectInput
+                              label={formatMessage({id: 'Timestamp Format'})}
+                              fieldName={'timeStampFormat'}
+                              placeholder={formatMessage({id: 'Select the Timestamp Format'})}
+                              formik={formik}
+                              toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.LOCALE.TIME_FORMAT'})}
+                              options={timeFormatOptions}
+                          />
+                        </div>
+                      </div>
                     </div>
-                    <div className={'col-span-12 md:col-span-6'}>
-                      <SelectInput
-                        label={formatMessage({id: 'Time Zone'})}
-                        fieldName={'timezone'}
-                        placeholder={formatMessage({id: 'Select the Time Zone'})}
-                        formik={formik}
-                        isStarRequired={true}
-                        options={timeZoneOptions}
-                        toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.LOCALE.TIME_ZONE'})}
-                        margin='me-6'
-                        width={5}
-                      />
+                    <div className='flex justify-end md:mt-[135px]'>
+                      <div className={'flex-grow md:flex-grow-0'}>
+                        <CustomButton
+                            isSubmitting={formik.isSubmitting}
+                            isValid={formik.isValid}
+                            buttonText={formatMessage({id: 'Save Changes'})}
+                            loading={loading}
+                            customClass={'w-full md:w-auto'}
+                            height={44}
+                        />
+                      </div>
                     </div>
-                    <div className={'col-span-12 md:col-span-6'}>
-                      <SelectInput
-                        label={formatMessage({id: 'Date Format'})}
-                        fieldName={'dateFormat'}
-                        placeholder={formatMessage({id: 'Select the Date Format'})}
-                        formik={formik}
-                        isStarRequired={true}
-                        options={dateFormatOptions}
-                        toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.LOCALE.DATE_FORMAT'})}
-                        margin='me-6'
-                        width={5}
-                      />
-                    </div>
-                    <div className={'col-span-12 md:col-span-6'}>
-                      <SelectInput
-                        label={formatMessage({id: 'Time Format'})}
-                        fieldName={'timeFormat'}
-                        placeholder={formatMessage({id: 'Select the Time Format'})}
-                        formik={formik}
-                        isStarRequired={true}
-                        toolTipText={formatMessage({id: 'GLOBAL.TOOLTIP.LOCALE.TIME_FORMAT'})}
-                        options={timeFormatOptions}
-                        margin='me-6'
-                        width={5}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className='d-flex justify-content-end button-margin'>
-                  <CustomButton
-                    isSubmitting={formik.isSubmitting}
-                    isValid={formik.isValid}
-                    buttonText={formatMessage({id: 'Save Changes'})}
-                    loading={loading}
-                    width={2}
-                    widthLoading={2}
-                    height={44}
-                  />
-                </div>
-              </Form>
-            )
-          }}
-        </Formik>
-      </div>
-    </>
+                  </Form>
+              )
+            }}
+          </Formik>
+        </div>
+      </>
   )
 }
