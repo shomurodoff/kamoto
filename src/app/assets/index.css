@@ -12,7 +12,7 @@ textarea {
   resize: block;
 }
 .form-control {
-  @apply bg-[#2E2F45] border-[#FFFFFF1A];
+  @apply bg-[#2E2F45] border-[#FFFFFF1A] focus:!border-[#474761];
 }
 .personality-swiper .swiper-button-prev,
 .personality-swiper .swiper-button-next {
@@ -89,7 +89,7 @@ textarea {
 }
 .rc-slider-mark-text,
 .rc-slider-mark-text-active {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 13px;
   font-weight: 400;
   line-height: 20px;
@@ -102,7 +102,9 @@ textarea {
   border: 1px solid transparent !important ;
   /*border-color: #474761 !important;*/
 }
-.css-3w2yfm-ValueContainer > div.css-1tw0dkx-multiValue > div.css-wsp0cs-MultiValueGeneric {
+.css-3w2yfm-ValueContainer
+  > div.css-1tw0dkx-multiValue
+  > div.css-wsp0cs-MultiValueGeneric {
   color: #ffffffcc !important ;
 }
 .css-wsp0cs-MultiValueGeneric {
@@ -124,16 +126,16 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   border: none;
-  background-color: #2E2F45 !important;
+  background-color: #2e2f45 !important;
   -webkit-text-fill-color: #fff;
   transition: background-color 5000s ease-in-out 0s;
 }
-[data-kt-app-layout='dark-sidebar'] .form-control,
-[data-kt-app-layout='dark-sidebar'] .form-select {
+[data-kt-app-layout="dark-sidebar"] .form-control,
+[data-kt-app-layout="dark-sidebar"] .form-select {
   width: 100% !important;
 }
-[data-kt-app-layout='dark-sidebar'] .form-select {
-background-color:#2E2F45 ;
+[data-kt-app-layout="dark-sidebar"] .form-select {
+  background-color: #2e2f45;
 }
 .uppy-Root,
 .uppy-DashboardContent-back,
@@ -141,11 +143,11 @@ background-color:#2E2F45 ;
   color: #fff !important;
 }
 .uppy-DashboardContent-bar,
-.uppy-StatusBar:not([aria-hidden='true']).is-waiting {
+.uppy-StatusBar:not([aria-hidden="true"]).is-waiting {
   border-color: #2e2f45 !important;
 }
 
-.uppy-StatusBar:not([aria-hidden='true']).is-waiting {
+.uppy-StatusBar:not([aria-hidden="true"]).is-waiting {
   background: #171825 !important;
 }
 .uppy-DashboardContent-bar,

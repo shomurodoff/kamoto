@@ -1,12 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {useState} from 'react'
-import {useIntl} from 'react-intl'
-import {BillingModal} from '../../onboarding/views/BillingModal'
-import {BasicButton} from '../../widgets/components/UI/BasicButton'
-import {plans} from '../../onboarding/core/_constants'
-import {getBillingAccess} from '../core/_requests'
-import {toast} from 'react-toastify'
-import {Modal} from 'react-bootstrap'
+import { useState } from "react";
+import { useIntl } from "react-intl";
+import { BillingModal } from "../../onboarding/views/BillingModal";
+import { BasicButton } from "../../widgets/components/UI/BasicButton";
+import { plans } from "../../onboarding/core/_constants";
+import { getBillingAccess } from "../core/_requests";
+import { toast } from "react-toastify";
+import { Modal } from "react-bootstrap";
+import SearchInput from "./SearchInput";
 
 export function Billing({
   key,
@@ -17,96 +18,114 @@ export function Billing({
   companyId,
   getBillingDetails,
 }: {
-  key: number
-  billingData: any
-  currencyBill: string
-  selected: string
-  currentState: string
-  companyId: number | undefined
-  getBillingDetails: () => Promise<void>
+  key: number;
+  billingData: any;
+  currencyBill: string;
+  selected: string;
+  currentState: string;
+  companyId: number | undefined;
+  getBillingDetails: () => Promise<void>;
 }) {
-  const {formatMessage} = useIntl()
-  const [modalShow, setModalShow] = useState(false)
-  const [accessLoading, setAccessLoading] = useState(false)
-  const [showModal, setShowModal] = useState(false)
-  const [urlData, setUrlData] = useState()
+  const { formatMessage } = useIntl();
+  const [modalShow, setModalShow] = useState(false);
+  const [accessLoading, setAccessLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [urlData, setUrlData] = useState();
 
   const onSubmitAccess = async () => {
     try {
-      setAccessLoading(true)
+      setAccessLoading(true);
       if (companyId) {
         const {
-          data: {data: value, success, errors},
-        } = await getBillingAccess(companyId)
+          data: { data: value, success, errors },
+        } = await getBillingAccess(companyId);
         if (success) {
-          setAccessLoading(false)
-          setUrlData(value)
-          setShowModal(true)
+          setAccessLoading(false);
+          setUrlData(value);
+          setShowModal(true);
         } else {
-          setAccessLoading(false)
+          setAccessLoading(false);
           errors.forEach((error: string) => {
-            toast.error(formatMessage({id: error}))
-          })
+            toast.error(formatMessage({ id: error }));
+          });
         }
       }
     } catch (err) {
-      setAccessLoading(false)
-      console.log(err)
+      setAccessLoading(false);
+      console.log(err);
     }
-  }
+  };
 
   return (
     <>
-      <div className={'grid grid-cols-12  bg-[#171825] rounded p-[24px] pb-[50px] gap-y-[16px]'}>
-        <div className={'col-span-12 md:col-span-6 text-[#FFFFFFCC]'}>
-          <h3 className={'text-[16px] leading-[22px] font-medium mb-[8px]'}> Billing</h3>
-          <div className={'bg-[#1E1E2D] shadow-[0px_2px_15px_0px_#0000001A] p-[16px]  rounded-md'}>
-            <div className={'flex py-[8px] border-b border-[#2E2F45]'}>
-              <div className={'flex w-1/2'}>Current Plan</div>
-              <div className={'flex w-1/2'}>Standard Monthly</div>
+      <SearchInput />
+      <div
+        className={
+          "grid grid-cols-12  bg-[#171825] rounded p-[24px] pb-[50px] gap-y-[16px]"
+        }
+      >
+        <div className={"col-span-12 md:col-span-6 text-[#FFFFFFCC]"}>
+          <h3 className={"text-[16px] leading-[22px] font-medium mb-[8px]"}>
+            {" "}
+            Billing
+          </h3>
+          <div
+            className={
+              "bg-[#1E1E2D] shadow-[0px_2px_15px_0px_#0000001A] p-[16px]  rounded-md"
+            }
+          >
+            <div className={"flex py-[8px] border-b border-[#2E2F45]"}>
+              <div className={"flex w-1/2"}>Current Plan</div>
+              <div className={"flex w-1/2"}>Standard Monthly</div>
             </div>
-            <div className={'flex py-[8px] border-b border-[#2E2F45]'}>
-              <div className={'flex w-1/2'}>Amount</div>
-              <div className={'flex w-1/2'}>US$299</div>
+            <div className={"flex py-[8px] border-b border-[#2E2F45]"}>
+              <div className={"flex w-1/2"}>Amount</div>
+              <div className={"flex w-1/2"}>US$299</div>
             </div>
-            <div className={'flex py-[8px] border-b border-[#2E2F45]'}>
-              <div className={'flex w-1/2'}>Next Billing Amount</div>
-              <div className={'flex w-1/2'}>US$199</div>
+            <div className={"flex py-[8px] border-b border-[#2E2F45]"}>
+              <div className={"flex w-1/2"}>Next Billing Amount</div>
+              <div className={"flex w-1/2"}>US$199</div>
             </div>
-            <div className={'flex py-[8px] border-b border-[#2E2F45]'}>
-              <div className={'flex w-1/2'}>Next Billing Date</div>
-              <div className={'flex w-1/2'}>23rd Jan 2021 (1 week from now)</div>
+            <div className={"flex py-[8px] border-b border-[#2E2F45]"}>
+              <div className={"flex w-1/2"}>Next Billing Date</div>
+              <div className={"flex w-1/2"}>
+                23rd Jan 2021 (1 week from now)
+              </div>
             </div>
           </div>
         </div>
-        <h6 className='col-span-12 text-[14px] leading-5 font-medium'>
+        <h6 className="col-span-12 text-[14px] leading-5 font-medium">
           {formatMessage({
-            id: 'You can manage your subscription, payment menthod, and download invoices from your billing portal.',
+            id: "You can manage your subscription, payment menthod, and download invoices from your billing portal.",
           })}
         </h6>
-        <div className={'col-span-12 flex flex-col md:flex-row gap-y-4 gap-x-[20px]'}>
+        <div
+          className={
+            "col-span-12 md:col-span-5 flex flex-col md:flex-row gap-y-4 gap-x-[20px]"
+          }
+        >
           <BasicButton
-            buttonText={formatMessage({id: 'Update Subscription'})}
-            height='44px'
-            border='1px solid #C2D24B'
-            color='#C2D24B'
-            customClass={'w-full md:w-[200px] bg-[#C2D24B]'}
-            textColor='#000000'
-            padding='12px 24px'
+            buttonText={formatMessage({ id: "Update Subscription" })}
+            height="44px"
+            border="1px solid #C2D24B"
+            color="#C2D24B"
+            customClass={"w-full md:min-w-[200px] bg-[#C2D24B]"}
+            textColor="#000000"
+            padding="12px 24px"
             onClick={() => {
-              setModalShow(true)
+              setModalShow(true);
             }}
           />
           <BasicButton
-            buttonText={formatMessage({id: 'Access billing portal'})}
-            height='44px'
-            customClass={'w-full md:w-[200px] bg-[#C2D24B]'}
-            border='1px solid #C2D24B'
-            color='#C2D24B'
-            textColor='#000000'
-            padding='12px 24px'
+            buttonText={formatMessage({ id: "Access billing portal" })}
+            height="44px"
+            customClass={"w-full md:min-w-[200px] bg-[#C2D24B]"}
+            border="1px solid #C2D24B"
+            color="#C2D24B"
+            textColor="#000000"
+            padding="12px 24px"
             onClick={() => {
-              onSubmitAccess()
+              onSubmitAccess();
             }}
             loading={accessLoading}
             disabled={accessLoading}
@@ -211,15 +230,20 @@ export function Billing({
         <Modal
           show={showModal}
           onHide={() => setShowModal(false)}
-          aria-labelledby='contained-modal-title-vcenter'
+          aria-labelledby="contained-modal-title-vcenter"
           centered
         >
           <Modal.Header closeButton></Modal.Header>
           <Modal.Body>
-            <iframe title='Manage Subscription' src={urlData} width='100%' height={600}></iframe>
+            <iframe
+              title="Manage Subscription"
+              src={urlData}
+              width="100%"
+              height={600}
+            ></iframe>
           </Modal.Body>
         </Modal>
       </>
     </>
-  )
+  );
 }

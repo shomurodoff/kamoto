@@ -8,7 +8,7 @@ const Index = () => {
     <div>
       <h4 className="mb-1 leading-7 text-[20px] font-semibold text-[#FFFFFFCC]">
         {" "}
-        {formatMessage({ id: "Dashboard" })}
+        {formatMessage({ id: "My AI Personality" })}
       </h4>
       <p className="flex items-center text-[12px] leading-[18px] font-normal text-[#FFFFFFA6]">
         <Link to="/" className={"text-[#C2D24B]"}>
@@ -17,7 +17,7 @@ const Index = () => {
         <span className="h-1px bullet mx-2"></span>
         <span className="text-muted font-size-12">
           {" "}
-          {formatMessage({ id: "Dashboard" })}
+          {formatMessage({ id: "My AI Personality" })}
         </span>
       </p>
     </div>
