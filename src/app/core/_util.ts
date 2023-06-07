@@ -1,8 +1,8 @@
 export const serialize = function (obj: any) {
-  let str = []
+  let str = [];
   for (let p in obj)
     if (obj.hasOwnProperty(p) && !!obj[p]) {
-      str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]))
+      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
     }
-  return str.join('&')
-}
+  return str.join("&");
+};

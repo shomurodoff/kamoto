@@ -1,6 +1,6 @@
 $black: #2c2c54;
 $size: 32px;
-@import '../../../../_metronic/assets//sass/layout/mixins.scss';
+@import "../../../../_metronic/assets//sass/layout/mixins.scss";
 
 .expand-icon {
   font-size: 20px !important;
@@ -49,7 +49,7 @@ $size: 32px;
 
 .timeline-line {
   display: block;
-  content: ' ';
+  content: " ";
   justify-content: center;
   position: absolute;
   z-index: 0;
@@ -105,7 +105,7 @@ $size: 32px;
 }
 
 .search-container {
-  input[type='search']:focus {
+  input[type="search"]:focus {
     outline: none;
   }
 }
@@ -343,7 +343,7 @@ $size: 32px;
   .is-invalid-local:focus {
     padding-right: 1rem;
   }
-  input[type='time']::-webkit-calendar-picker-indicator {
+  input[type="time"]::-webkit-calendar-picker-indicator {
     font-size: medium;
   }
 }

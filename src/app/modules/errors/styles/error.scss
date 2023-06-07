@@ -1,40 +1,39 @@
 .errorContainer {
-    background: #FFFFFF;
-    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
-
 .errorHeading {
-    font-weight: 600;
-    font-size: 32px;
-    line-height: 44px;
-    color: #383940;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 44px;
+  color: #383940;
 }
 
 .errorDetails {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    color: #585960;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #585960;
 }
 
-    .errorHeadingDark{
-        font-weight: 600 !important;
-        font-size: 32px !important;
-        line-height: 44px !important;
-        color: #FFFFFF;
-    }
+.errorHeadingDark {
+  font-weight: 600 !important;
+  font-size: 32px !important;
+  line-height: 44px !important;
+  color: #ffffff;
+}
 
-    .errorDetailsDark {
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 24px;
-        color: #565674;
-    }
+.errorDetailsDark {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #565674;
+}
 
-    .errorContainerDark {
-        background: #1E1E2D;
-        box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-    }
+.errorContainerDark {
+  background: #1e1e2d;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}

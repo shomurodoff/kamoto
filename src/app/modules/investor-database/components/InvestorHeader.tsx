@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const InvestorHeader = () => {
-  return (
-    <div>InvestorHeader</div>
-  )
-}
+  return <div>InvestorHeader</div>;
+};
 
-export default InvestorHeader
+export default InvestorHeader;

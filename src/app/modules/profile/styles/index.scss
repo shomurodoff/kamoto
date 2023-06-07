@@ -1,4 +1,4 @@
-@import '../../../../_metronic/assets//sass/layout/mixins.scss';
+@import "../../../../_metronic/assets//sass/layout/mixins.scss";
 
 //.settings-container {
 //  width: 100%;
@@ -99,15 +99,15 @@
     // background-color: white;
     &:not(.hideIt) {
       &::after {
-        content: '';
-        background-image: url('../../../../../public/media/icons/setting/side_arrow.svg');
+        content: "";
+        background-image: url("../../../../../public/media/icons/setting/side_arrow.svg");
         transform: rotate(90deg);
       }
     }
 
     &::after {
-      content: '';
-      background-image: url('../../../../../public/media/icons/setting/side_arrow.svg');
+      content: "";
+      background-image: url("../../../../../public/media/icons/setting/side_arrow.svg");
       width: 34px;
       height: 34px;
       background-size: auto;
@@ -152,7 +152,7 @@
   vertical-align: middle;
 }
 
-.title-notification{
+.title-notification {
   line-height: 20px;
   color: #383940;
 }

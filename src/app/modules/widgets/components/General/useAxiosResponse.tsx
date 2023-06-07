@@ -1,8 +1,8 @@
-import {useEffect} from 'react'
-import {useAuth} from '../../../auth'
+import { useEffect } from "react";
+import { useAuth } from "../../../auth";
 
 const useAxiosResponse = (axios: any) => {
-  const {showBillingModal, setShowBillingModal, logout} = useAuth()
+  const { showBillingModal, setShowBillingModal, logout } = useAuth();
 
   useEffect(() => {
     axios.interceptors.response.use(
@@ -10,26 +10,28 @@ const useAxiosResponse = (axios: any) => {
         if (response.data.errors) {
           if (
             response.data.errors.includes(
-              'Your current plan exceeded, kindly upgrade your billing plan to invite new team member'
+              "Your current plan exceeded, kindly upgrade your billing plan to invite new team member"
             )
           ) {
-            setShowBillingModal(!showBillingModal)
+            setShowBillingModal(!showBillingModal);
           }
 
-          if (response.data.errors.includes("jwt expired")
-            || response.data.errors.includes("jwt malformed")
-            || response.data.errors.includes("Forbidden")
-            || response.data.errors.includes("Unauthorized")) {
-            window.location.href = ('/')
-            logout()
+          if (
+            response.data.errors.includes("jwt expired") ||
+            response.data.errors.includes("jwt malformed") ||
+            response.data.errors.includes("Forbidden") ||
+            response.data.errors.includes("Unauthorized")
+          ) {
+            window.location.href = "/";
+            logout();
           }
         }
-        return response
+        return response;
       },
       (err: any) => Promise.reject(err.message)
-    )
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    );
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return null
-}
-export default useAxiosResponse
+  return null;
+};
+export default useAxiosResponse;

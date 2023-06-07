@@ -14,6 +14,9 @@ textarea {
 .form-control {
   @apply bg-[#2E2F45] border-[#FFFFFF1A] focus:!border-[#474761];
 }
+.css-2mvhk2-control:hover{
+  @apply !border-0
+}
 .personality-swiper .swiper-button-prev,
 .personality-swiper .swiper-button-next {
   @apply bg-[#2E2F45] rounded-full w-9 h-9 flex items-center shadow-[0px_4px_8px_0px_#00000040];

@@ -1,53 +1,60 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useEffect, useRef} from 'react'
-import ApexCharts, {ApexOptions} from 'apexcharts'
-import {useThemeMode} from '../../../../../_metronic/partials'
-import {getCSS, getCSSVariableValue} from '../../../../../_metronic/assets/ts/_utils'
+import React, { useEffect, useRef } from "react";
+import ApexCharts, { ApexOptions } from "apexcharts";
+import { useThemeMode } from "../../../../../_metronic/partials";
+import {
+  getCSS,
+  getCSSVariableValue,
+} from "../../../../../_metronic/assets/ts/_utils";
 
 type Props = {
-  className: string
-}
+  className: string;
+};
 
-const ChartCountries: React.FC<Props> = ({className}) => {
-  const chartRef = useRef<HTMLDivElement | null>(null)
-  const {mode} = useThemeMode()
+const ChartCountries: React.FC<Props> = ({ className }) => {
+  const chartRef = useRef<HTMLDivElement | null>(null);
+  const { mode } = useThemeMode();
   const refreshMode = () => {
     if (!chartRef.current) {
-      return
+      return;
     }
 
-    const height = parseInt(getCSS(chartRef.current, 'height'))
+    const height = parseInt(getCSS(chartRef.current, "height"));
 
-    const chart = new ApexCharts(chartRef.current, getChartOptions(height))
+    const chart = new ApexCharts(chartRef.current, getChartOptions(height));
     if (chart) {
-      chart.render()
+      chart.render();
     }
 
-    return chart
-  }
+    return chart;
+  };
 
   useEffect(() => {
-    const chart = refreshMode()
+    const chart = refreshMode();
 
     return () => {
       if (chart) {
-        chart.destroy()
+        chart.destroy();
       }
-    }
-  }, [chartRef, mode])
+    };
+  }, [chartRef, mode]);
 
   return (
-    <div ref={chartRef} id='kt_charts_widget_3_chart' style={{height: '', width: '100%'}}></div>
-  )
-}
+    <div
+      ref={chartRef}
+      id="kt_charts_widget_3_chart"
+      style={{ height: "", width: "100%" }}
+    ></div>
+  );
+};
 
-export {ChartCountries}
+export { ChartCountries };
 
 function getChartOptions(height: number): ApexOptions {
-  const labelColor = getCSSVariableValue('--kt-gray-500')
-  const borderColor = getCSSVariableValue('--kt-gray-200')
-  const baseColor = getCSSVariableValue('--kt-info')
-  const lightColor = getCSSVariableValue('--kt-info-light')
+  const labelColor = getCSSVariableValue("--kt-gray-500");
+  const borderColor = getCSSVariableValue("--kt-gray-200");
+  const baseColor = getCSSVariableValue("--kt-info");
+  const lightColor = getCSSVariableValue("--kt-info-light");
 
   return {
     series: [
@@ -57,25 +64,25 @@ function getChartOptions(height: number): ApexOptions {
     ],
 
     chart: {
-      type: 'bar',
+      type: "bar",
       height: 330,
       stacked: true,
-      toolbar: {show: false},
+      toolbar: { show: false },
     },
     plotOptions: {
       bar: {
         borderRadius: 0,
         horizontal: true,
         dataLabels: {
-          position: 'end',
+          position: "end",
           hideOverflowingLabels: true,
-          orientation: 'horizontal',
+          orientation: "horizontal",
           maxItems: 100,
         },
       },
     },
     fill: {
-      colors: ['#C2D24B'],
+      colors: ["#C2D24B"],
     },
     grid: {
       show: false,
@@ -83,22 +90,22 @@ function getChartOptions(height: number): ApexOptions {
     dataLabels: {
       enabled: true,
       style: {
-        fontSize: '12px',
-        colors: ['#fff'],
+        fontSize: "12px",
+        colors: ["#fff"],
       },
     },
     xaxis: {
       categories: [
-        'South Korea',
-        'Canada',
-        'United Kingdom',
-        'Netherlands',
-        'Italy',
-        'France',
-        'Japan',
-        'United States',
-        'China',
-        'Germany',
+        "South Korea",
+        "Canada",
+        "United Kingdom",
+        "Netherlands",
+        "Italy",
+        "France",
+        "Japan",
+        "United States",
+        "China",
+        "Germany",
       ],
       labels: {
         show: false,
@@ -111,5 +118,5 @@ function getChartOptions(height: number): ApexOptions {
         show: false,
       },
     },
-  }
+  };
 }

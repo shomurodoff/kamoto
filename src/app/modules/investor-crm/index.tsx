@@ -1,2 +1,1 @@
-
-export * from './InvestorCrmRoutes'
+export * from "./InvestorCrmRoutes";

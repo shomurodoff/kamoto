@@ -1,1 +1,1 @@
-export * from './DataRoomsRoutes'
+export * from "./DataRoomsRoutes";

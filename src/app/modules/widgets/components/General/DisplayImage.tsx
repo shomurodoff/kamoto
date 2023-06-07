@@ -1,6 +1,6 @@
-import React from 'react'
-import {toAbsoluteUrl} from '../../../../../_metronic/helpers'
-import {GET_FILE_URL} from '../../../onboarding/core/_requests'
+import React from "react";
+import { toAbsoluteUrl } from "../../../../../_metronic/helpers";
+import { GET_FILE_URL } from "../../../onboarding/core/_requests";
 
 export const DisplayImage = ({
   imgName,
@@ -10,12 +10,12 @@ export const DisplayImage = ({
   fit,
   className,
 }: {
-  imgName: string | undefined
-  height?: string | number
-  alt: string | undefined
-  width?: string | undefined | number
-  className?: string
-  fit?: 'fill' | 'cover' | 'contain'
+  imgName: string | undefined;
+  height?: string | number;
+  alt: string | undefined;
+  width?: string | undefined | number;
+  className?: string;
+  fit?: "fill" | "cover" | "contain";
 }) => {
   return (
     <>
@@ -25,12 +25,12 @@ export const DisplayImage = ({
           height={height}
           width={width}
           alt={alt}
-          style={{objectFit: fit}}
+          style={{ objectFit: fit }}
           className={className}
         />
       ) : (
         <img
-          src={toAbsoluteUrl('/media/avatars/300-1.jpg')}
+          src={toAbsoluteUrl("/media/avatars/300-1.jpg")}
           width={width}
           height={height}
           alt={alt}
@@ -38,5 +38,5 @@ export const DisplayImage = ({
         />
       )}
     </>
-  )
-}
+  );
+};

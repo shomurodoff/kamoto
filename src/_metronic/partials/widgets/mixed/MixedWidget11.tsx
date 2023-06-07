@@ -1,52 +1,61 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useEffect, useRef} from 'react'
-import ApexCharts, {ApexOptions} from 'apexcharts'
-import {getCSSVariableValue} from '../../../assets/ts/_utils'
-import {useThemeMode} from '../../layout/theme-mode/ThemeModeProvider'
+import React, { useEffect, useRef } from "react";
+import ApexCharts, { ApexOptions } from "apexcharts";
+import { getCSSVariableValue } from "../../../assets/ts/_utils";
+import { useThemeMode } from "../../layout/theme-mode/ThemeModeProvider";
 
 type Props = {
-  className: string
-  chartColor: string
-  chartHeight: string
-}
+  className: string;
+  chartColor: string;
+  chartHeight: string;
+};
 
-const MixedWidget11: React.FC<Props> = ({className, chartColor, chartHeight}) => {
-  const chartRef = useRef<HTMLDivElement | null>(null)
-  const {mode} = useThemeMode()
+const MixedWidget11: React.FC<Props> = ({
+  className,
+  chartColor,
+  chartHeight,
+}) => {
+  const chartRef = useRef<HTMLDivElement | null>(null);
+  const { mode } = useThemeMode();
   const refreshChart = () => {
     if (!chartRef.current) {
-      return
+      return;
     }
 
-    const chart = new ApexCharts(chartRef.current, chartOptions(chartColor, chartHeight))
+    const chart = new ApexCharts(
+      chartRef.current,
+      chartOptions(chartColor, chartHeight)
+    );
     if (chart) {
-      chart.render()
+      chart.render();
     }
 
-    return chart
-  }
+    return chart;
+  };
 
   useEffect(() => {
-    const chart = refreshChart()
+    const chart = refreshChart();
 
     return () => {
       if (chart) {
-        chart.destroy()
+        chart.destroy();
       }
-    }
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chartRef, mode])
+  }, [chartRef, mode]);
 
   return (
     <div className={`card ${className}`}>
       {/* begin::Body */}
-      <div className='card-body p-0 d-flex justify-content-between flex-column overflow-hidden'>
+      <div className="card-body p-0 d-flex justify-content-between flex-column overflow-hidden">
         {/* begin::Hidden */}
-        <div className='d-flex flex-stack flex-wrap flex-grow-1 px-9 pt-9 pb-3'>
-          <div className='me-2'>
-            <span className='fw-bold text-gray-800 d-block fs-3'>Sales</span>
+        <div className="d-flex flex-stack flex-wrap flex-grow-1 px-9 pt-9 pb-3">
+          <div className="me-2">
+            <span className="fw-bold text-gray-800 d-block fs-3">Sales</span>
 
-            <span className='text-gray-400 fw-semibold'>Oct 8 - Oct 26 2021</span>
+            <span className="text-gray-400 fw-semibold">
+              Oct 8 - Oct 26 2021
+            </span>
           </div>
 
           <div className={`fw-bold fs-3 text-${chartColor}`}>$15,300</div>
@@ -54,33 +63,33 @@ const MixedWidget11: React.FC<Props> = ({className, chartColor, chartHeight}) =>
         {/* end::Hidden */}
 
         {/* begin::Chart */}
-        <div ref={chartRef} className='mixed-widget-10-chart'></div>
+        <div ref={chartRef} className="mixed-widget-10-chart"></div>
         {/* end::Chart */}
       </div>
     </div>
-  )
-}
+  );
+};
 
 const chartOptions = (chartColor: string, chartHeight: string): ApexOptions => {
-  const labelColor = getCSSVariableValue('--kt-gray-500')
-  const borderColor = getCSSVariableValue('--kt-gray-200')
-  const secondaryColor = getCSSVariableValue('--kt-gray-300')
-  const baseColor = getCSSVariableValue('--kt-' + chartColor)
+  const labelColor = getCSSVariableValue("--kt-gray-500");
+  const borderColor = getCSSVariableValue("--kt-gray-200");
+  const secondaryColor = getCSSVariableValue("--kt-gray-300");
+  const baseColor = getCSSVariableValue("--kt-" + chartColor);
 
   return {
     series: [
       {
-        name: 'Net Profit',
+        name: "Net Profit",
         data: [50, 60, 70, 80, 60, 50, 70, 60],
       },
       {
-        name: 'Revenue',
+        name: "Revenue",
         data: [50, 60, 70, 80, 60, 50, 70, 60],
       },
     ],
     chart: {
-      fontFamily: 'inherit',
-      type: 'bar',
+      fontFamily: "inherit",
+      type: "bar",
       height: chartHeight,
       toolbar: {
         show: false,
@@ -89,7 +98,7 @@ const chartOptions = (chartColor: string, chartHeight: string): ApexOptions => {
     plotOptions: {
       bar: {
         horizontal: false,
-        columnWidth: '50%',
+        columnWidth: "50%",
         borderRadius: 5,
       },
     },
@@ -102,10 +111,10 @@ const chartOptions = (chartColor: string, chartHeight: string): ApexOptions => {
     stroke: {
       show: true,
       width: 2,
-      colors: ['transparent'],
+      colors: ["transparent"],
     },
     xaxis: {
-      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+      categories: ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"],
       axisBorder: {
         show: false,
       },
@@ -115,7 +124,7 @@ const chartOptions = (chartColor: string, chartHeight: string): ApexOptions => {
       labels: {
         style: {
           colors: labelColor,
-          fontSize: '12px',
+          fontSize: "12px",
         },
       },
     },
@@ -123,41 +132,41 @@ const chartOptions = (chartColor: string, chartHeight: string): ApexOptions => {
       labels: {
         style: {
           colors: labelColor,
-          fontSize: '12px',
+          fontSize: "12px",
         },
       },
     },
     fill: {
-      type: 'solid',
+      type: "solid",
     },
     states: {
       normal: {
         filter: {
-          type: 'none',
+          type: "none",
           value: 0,
         },
       },
       hover: {
         filter: {
-          type: 'none',
+          type: "none",
           value: 0,
         },
       },
       active: {
         allowMultipleDataPointsSelection: false,
         filter: {
-          type: 'none',
+          type: "none",
           value: 0,
         },
       },
     },
     tooltip: {
       style: {
-        fontSize: '12px',
+        fontSize: "12px",
       },
       y: {
         formatter: function (val) {
-          return '$' + val + ' revenue'
+          return "$" + val + " revenue";
         },
       },
     },
@@ -174,7 +183,7 @@ const chartOptions = (chartColor: string, chartHeight: string): ApexOptions => {
         },
       },
     },
-  }
-}
+  };
+};
 
-export {MixedWidget11}
+export { MixedWidget11 };

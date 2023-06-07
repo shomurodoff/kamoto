@@ -169,7 +169,7 @@ $screen-tab-max: 1024px;
   }
 }
 .search-container {
-  input[type='search']:focus {
+  input[type="search"]:focus {
     outline: none;
   }
 }
@@ -323,7 +323,7 @@ $screen-tab-max: 1024px;
     margin-top: -2px;
   }
   .rc-slider-handle::before {
-    content: '$' attr(aria-valuenow);
+    content: "$" attr(aria-valuenow);
     position: relative;
     bottom: 150%;
   }

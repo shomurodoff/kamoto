@@ -1,2 +1,2 @@
-import FullModal from './full-modal'
-export {FullModal}
+import FullModal from "./full-modal";
+export { FullModal };

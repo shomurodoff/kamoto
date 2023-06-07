@@ -1,67 +1,74 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useEffect, useRef} from 'react'
-import ApexCharts, {ApexOptions} from 'apexcharts'
-import {KTSVG} from '../../../helpers'
-import {Dropdown1} from '../../content/dropdown/Dropdown1'
-import {getCSS, getCSSVariableValue} from '../../../assets/ts/_utils'
-import {useThemeMode} from '../../layout/theme-mode/ThemeModeProvider'
+import React, { useEffect, useRef } from "react";
+import ApexCharts, { ApexOptions } from "apexcharts";
+import { KTSVG } from "../../../helpers";
+import { Dropdown1 } from "../../content/dropdown/Dropdown1";
+import { getCSS, getCSSVariableValue } from "../../../assets/ts/_utils";
+import { useThemeMode } from "../../layout/theme-mode/ThemeModeProvider";
 
 type Props = {
-  className: string
-}
+  className: string;
+};
 
-const ChartsWidget1: React.FC<Props> = ({className}) => {
-  const chartRef = useRef<HTMLDivElement | null>(null)
-  const {mode} = useThemeMode()
+const ChartsWidget1: React.FC<Props> = ({ className }) => {
+  const chartRef = useRef<HTMLDivElement | null>(null);
+  const { mode } = useThemeMode();
 
   useEffect(() => {
-    const chart = refreshChart()
+    const chart = refreshChart();
 
     return () => {
       if (chart) {
-        chart.destroy()
+        chart.destroy();
       }
-    }
-  }, [chartRef, mode])
+    };
+  }, [chartRef, mode]);
 
   const refreshChart = () => {
     if (!chartRef.current) {
-      return
+      return;
     }
 
-    const height = parseInt(getCSS(chartRef.current, 'height'))
+    const height = parseInt(getCSS(chartRef.current, "height"));
 
-    const chart = new ApexCharts(chartRef.current, getChartOptions(height))
+    const chart = new ApexCharts(chartRef.current, getChartOptions(height));
     if (chart) {
-      chart.render()
+      chart.render();
     }
 
-    return chart
-  }
+    return chart;
+  };
 
   return (
     <div className={`card ${className}`}>
       {/* begin::Header */}
-      <div className='card-header border-0 pt-5'>
+      <div className="card-header border-0 pt-5">
         {/* begin::Title */}
-        <h3 className='card-title align-items-start flex-column'>
-          <span className='card-label fw-bold fs-3 mb-1'>Recent Statistics</span>
+        <h3 className="card-title align-items-start flex-column">
+          <span className="card-label fw-bold fs-3 mb-1">
+            Recent Statistics
+          </span>
 
-          <span className='text-muted fw-semibold fs-7'>More than 400 new members</span>
+          <span className="text-muted fw-semibold fs-7">
+            More than 400 new members
+          </span>
         </h3>
         {/* end::Title */}
 
         {/* begin::Toolbar */}
-        <div className='card-toolbar'>
+        <div className="card-toolbar">
           {/* begin::Menu */}
           <button
-            type='button'
-            className='btn btn-sm btn-icon btn-color-primary btn-active-light-primary'
-            data-kt-menu-trigger='click'
-            data-kt-menu-placement='bottom-end'
-            data-kt-menu-flip='top-end'
+            type="button"
+            className="btn btn-sm btn-icon btn-color-primary btn-active-light-primary"
+            data-kt-menu-trigger="click"
+            data-kt-menu-placement="bottom-end"
+            data-kt-menu-flip="top-end"
           >
-            <KTSVG path='/media/icons/duotune/general/gen024.svg' className='svg-icon-2' />
+            <KTSVG
+              path="/media/icons/duotune/general/gen024.svg"
+              className="svg-icon-2"
+            />
           </button>
           <Dropdown1 />
           {/* end::Menu */}
@@ -71,38 +78,42 @@ const ChartsWidget1: React.FC<Props> = ({className}) => {
       {/* end::Header */}
 
       {/* begin::Body */}
-      <div className='card-body'>
+      <div className="card-body">
         {/* begin::Chart */}
-        <div ref={chartRef} id='kt_charts_widget_1_chart' style={{height: '350px'}} />
+        <div
+          ref={chartRef}
+          id="kt_charts_widget_1_chart"
+          style={{ height: "350px" }}
+        />
         {/* end::Chart */}
       </div>
       {/* end::Body */}
     </div>
-  )
-}
+  );
+};
 
-export {ChartsWidget1}
+export { ChartsWidget1 };
 
 function getChartOptions(height: number): ApexOptions {
-  const labelColor = getCSSVariableValue('--kt-gray-500')
-  const borderColor = getCSSVariableValue('--kt-gray-200')
-  const baseColor = getCSSVariableValue('--kt-primary')
-  const secondaryColor = getCSSVariableValue('--kt-gray-300')
+  const labelColor = getCSSVariableValue("--kt-gray-500");
+  const borderColor = getCSSVariableValue("--kt-gray-200");
+  const baseColor = getCSSVariableValue("--kt-primary");
+  const secondaryColor = getCSSVariableValue("--kt-gray-300");
 
   return {
     series: [
       {
-        name: 'Net Profit',
+        name: "Net Profit",
         data: [44, 55, 57, 56, 61, 58],
       },
       {
-        name: 'Revenue',
+        name: "Revenue",
         data: [76, 85, 101, 98, 87, 105],
       },
     ],
     chart: {
-      fontFamily: 'inherit',
-      type: 'bar',
+      fontFamily: "inherit",
+      type: "bar",
       height: height,
       toolbar: {
         show: false,
@@ -111,7 +122,7 @@ function getChartOptions(height: number): ApexOptions {
     plotOptions: {
       bar: {
         horizontal: false,
-        columnWidth: '30%',
+        columnWidth: "30%",
         borderRadius: 5,
       },
     },
@@ -124,10 +135,10 @@ function getChartOptions(height: number): ApexOptions {
     stroke: {
       show: true,
       width: 2,
-      colors: ['transparent'],
+      colors: ["transparent"],
     },
     xaxis: {
-      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+      categories: ["Feb", "Mar", "Apr", "May", "Jun", "Jul"],
       axisBorder: {
         show: false,
       },
@@ -137,7 +148,7 @@ function getChartOptions(height: number): ApexOptions {
       labels: {
         style: {
           colors: labelColor,
-          fontSize: '12px',
+          fontSize: "12px",
         },
       },
     },
@@ -145,7 +156,7 @@ function getChartOptions(height: number): ApexOptions {
       labels: {
         style: {
           colors: labelColor,
-          fontSize: '12px',
+          fontSize: "12px",
         },
       },
     },
@@ -155,31 +166,31 @@ function getChartOptions(height: number): ApexOptions {
     states: {
       normal: {
         filter: {
-          type: 'none',
+          type: "none",
           value: 0,
         },
       },
       hover: {
         filter: {
-          type: 'none',
+          type: "none",
           value: 0,
         },
       },
       active: {
         allowMultipleDataPointsSelection: false,
         filter: {
-          type: 'none',
+          type: "none",
           value: 0,
         },
       },
     },
     tooltip: {
       style: {
-        fontSize: '12px',
+        fontSize: "12px",
       },
       y: {
         formatter: function (val) {
-          return '$' + val + ' thousands'
+          return "$" + val + " thousands";
         },
       },
     },
@@ -193,5 +204,5 @@ function getChartOptions(height: number): ApexOptions {
         },
       },
     },
-  }
+  };
 }

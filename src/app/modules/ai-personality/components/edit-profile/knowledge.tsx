@@ -5,7 +5,7 @@ import { Form, Formik } from "formik";
 import TextArea from "../../../widgets/components/Input/TextArea";
 import { InfoCard } from "../../../widgets/components/UI/InfoCard";
 
-const Basic: React.FC<any> = ({ setOpenEdit }) => {
+const Knowledga: React.FC<any> = ({ setOpenEdit }) => {
   const { formatMessage } = useIntl();
 
   return (
@@ -29,18 +29,6 @@ const Basic: React.FC<any> = ({ setOpenEdit }) => {
                 fieldName={"motivations"}
                 placeholder={formatMessage({
                   id: "What motivates your personality",
-                })}
-                formik={formik}
-                toolTipText={"text"}
-                className={"!min-h-[107px]"}
-              />
-              <TextArea
-                label={formatMessage({
-                  id: "Difficulties, insecurities of the characters",
-                })}
-                fieldName={"description"}
-                placeholder={formatMessage({
-                  id: "What kind of challenges your personality is facing in his world, this makes the personality more human",
                 })}
                 formik={formik}
                 toolTipText={"text"}
@@ -74,17 +62,17 @@ const Basic: React.FC<any> = ({ setOpenEdit }) => {
         </div>
         <InfoCard
           title={formatMessage({
-            id: "Understanding Basic Description of AI Personality",
+            id: "Understanding Knowledge & Story of AI Personality",
           })}
           desc={formatMessage({
             id:
-              'In KamotoAI, the "Basic Description" category allows you to create virtual AI personalities that embody unique personalities and traits. You have the power to describe your AI persona in a comprehensive paragraph, capturing its essence and individuality. \n' +
+              'In KamotoAI, the "Knowledge & Story" section allows you to delve into the depths of your virtual AI persona\'s background and expertise. You have the power to shape its backstory, revealing its origins and unique experiences. Personal knowledge adds depth and authenticity to your AI personality, equipping it with specific knowledge in various subjects. \n' +
               "<br/>" +
               "<br/>" +
-              "Dive into its motivations, understanding what drives and inspires this AI personality. By highlighting its difficulties and insecurities, you make the personality more human, relatable, and authentic. \n" +
+              "By infusing your AI persona with rich knowledge and story, you create a compelling and well-rounded character. \n" +
               "<br/>" +
               "<br/>" +
-              "With KamotoAI, you can bring your virtual AI persona to life, shaping it into a dynamic and engaging character that resonates with users. Unleash your creativity and craft AI personalities that leave a lasting impression.",
+              "Whether it's a complex history or specialized expertise, KamotoAI enables you to craft AI personalities that are knowledgeable and intriguing. With KamotoAI, you can unlock the full potential of your virtual AI persona, ensuring it leaves a lasting impression on users.",
           })}
           slug={"#"}
         />
@@ -93,4 +81,4 @@ const Basic: React.FC<any> = ({ setOpenEdit }) => {
   );
 };
 
-export default Basic;
+export default Knowledga;

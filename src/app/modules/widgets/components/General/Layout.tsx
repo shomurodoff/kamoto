@@ -1,30 +1,30 @@
-import {useEffect} from 'react'
-import {Link, Outlet, useLocation} from 'react-router-dom'
-import {toAbsoluteUrl} from '../../../../../_metronic/helpers/AssetHelpers'
-import {useIntl} from 'react-intl'
-import AuthBg from '../../../../assets/images/auth/auth-background.png'
+import { useEffect } from "react";
+import { Link, Outlet, useLocation } from "react-router-dom";
+import { toAbsoluteUrl } from "../../../../../_metronic/helpers/AssetHelpers";
+import { useIntl } from "react-intl";
+import AuthBg from "../../../../assets/images/auth/auth-background.png";
 export const Layout = () => {
-  const {formatMessage} = useIntl()
-  const {pathname} = useLocation()
+  const { formatMessage } = useIntl();
+  const { pathname } = useLocation();
   const pathArray = [
-    '/terms-of-use',
-    '/privacy-policy',
-    '/onboarding/',
-    '/onboarding/company-details',
-    '/onboarding/initialize-round',
-    '/onboarding/team-members',
-  ]
+    "/terms-of-use",
+    "/privacy-policy",
+    "/onboarding/",
+    "/onboarding/company-details",
+    "/onboarding/initialize-round",
+    "/onboarding/team-members",
+  ];
   useEffect(() => {
-    const root = document.getElementById('root')
+    const root = document.getElementById("root");
     if (root) {
-      root.style.height = '100%'
+      root.style.height = "100%";
     }
     return () => {
       if (root) {
-        root.style.height = 'auto'
+        root.style.height = "auto";
       }
-    }
-  }, [])
+    };
+  }, []);
 
   return (
     // <div className={pathArray.includes(pathname) ? `founder-crate-background` : 'founder-crate-bg'}>
@@ -62,9 +62,9 @@ export const Layout = () => {
       style={{
         backgroundImage: `url(${AuthBg})`,
       }}
-      className={'bg-cover bg-center bg-no-repeat h-full'}
+      className={"bg-cover bg-center bg-no-repeat h-full"}
     >
       <Outlet />
     </div>
-  )
-}
+  );
+};

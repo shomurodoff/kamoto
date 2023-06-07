@@ -7,38 +7,38 @@ import {
   useRef,
   Dispatch,
   SetStateAction,
-} from 'react'
-import {LayoutSplashScreen} from '../../../../_metronic/layout/core'
-import {AuthModel, UserModel} from './_models'
-import * as authHelper from './AuthHelpers'
-import {getUserByToken} from './_requests'
-import {WithChildren} from '../../../../_metronic/helpers'
+} from "react";
+import { LayoutSplashScreen } from "../../../../_metronic/layout/core";
+import { AuthModel, UserModel } from "./_models";
+import * as authHelper from "./AuthHelpers";
+import { getUserByToken } from "./_requests";
+import { WithChildren } from "../../../../_metronic/helpers";
 
 type AuthContextProps = {
-  auth: AuthModel | undefined
-  saveAuth: (auth: AuthModel | undefined) => void
-  currentUser: Partial<UserModel> | undefined
-  setCurrentUser: Dispatch<SetStateAction<Partial<UserModel> | undefined>>
-  logout: () => void
-  userToken: string | undefined
-  setUserToken: Dispatch<SetStateAction<string | undefined>>
-  companyId: number | undefined
-  storeCompanyId: Dispatch<SetStateAction<number | undefined>>
-  investorId: number | undefined
-  storeInvestorId: Dispatch<SetStateAction<number | undefined>>
-  newCompany: boolean | undefined
-  setNewCompany: Dispatch<SetStateAction<boolean | undefined>>
-  showBillingModal: boolean
-  setShowBillingModal: Dispatch<SetStateAction<boolean>>
-  currentState: string
-  setCurrentState: Dispatch<SetStateAction<string>>
-  selected: string
-  setSelected: Dispatch<SetStateAction<string>>
-  currencyBill: string
-  setCurrencyBill: Dispatch<SetStateAction<string>>
-  billingData: any
-  setBillingData: Dispatch<SetStateAction<any>>
-}
+  auth: AuthModel | undefined;
+  saveAuth: (auth: AuthModel | undefined) => void;
+  currentUser: Partial<UserModel> | undefined;
+  setCurrentUser: Dispatch<SetStateAction<Partial<UserModel> | undefined>>;
+  logout: () => void;
+  userToken: string | undefined;
+  setUserToken: Dispatch<SetStateAction<string | undefined>>;
+  companyId: number | undefined;
+  storeCompanyId: Dispatch<SetStateAction<number | undefined>>;
+  investorId: number | undefined;
+  storeInvestorId: Dispatch<SetStateAction<number | undefined>>;
+  newCompany: boolean | undefined;
+  setNewCompany: Dispatch<SetStateAction<boolean | undefined>>;
+  showBillingModal: boolean;
+  setShowBillingModal: Dispatch<SetStateAction<boolean>>;
+  currentState: string;
+  setCurrentState: Dispatch<SetStateAction<string>>;
+  selected: string;
+  setSelected: Dispatch<SetStateAction<string>>;
+  currencyBill: string;
+  setCurrencyBill: Dispatch<SetStateAction<string>>;
+  billingData: any;
+  setBillingData: Dispatch<SetStateAction<any>>;
+};
 
 const initAuthContextPropsState = {
   auth: authHelper.getAuth(),
@@ -57,56 +57,58 @@ const initAuthContextPropsState = {
   setNewCompany: () => {},
   showBillingModal: false,
   setShowBillingModal: () => {},
-  currentState: 'Monthly',
+  currentState: "Monthly",
   setCurrentState: () => {},
-  selected: 'Basic',
+  selected: "Basic",
   setSelected: () => {},
-  currencyBill: 'USD',
+  currencyBill: "USD",
   setCurrencyBill: () => {},
   billingData: undefined,
   setBillingData: () => {},
-}
+};
 
-const AuthContext = createContext<AuthContextProps>(initAuthContextPropsState)
+const AuthContext = createContext<AuthContextProps>(initAuthContextPropsState);
 
 const useAuth = () => {
-  return useContext(AuthContext)
-}
+  return useContext(AuthContext);
+};
 
-const AuthProvider: FC<WithChildren> = ({children}) => {
-  const [auth, setAuth] = useState<AuthModel | undefined>(authHelper.getAuth())
-  const [currentUser, setCurrentUser] = useState<Partial<UserModel> | undefined>()
-  const [userToken, setUserToken] = useState<string | undefined>()
-  const [companyId, storeCompanyId] = useState<number | undefined>()
-  const [investorId, storeInvestorId] = useState<number | undefined>()
-  const [newCompany, setNewCompany] = useState<boolean | undefined>()
-  const [showBillingModal, setShowBillingModal] = useState<boolean>(false)
-  const [currentState, setCurrentState] = useState<string>('Monthly')
-  const [selected, setSelected] = useState('Basic')
-  const [currencyBill, setCurrencyBill] = useState('USD')
-  const [billingData, setBillingData] = useState<any>()
+const AuthProvider: FC<WithChildren> = ({ children }) => {
+  const [auth, setAuth] = useState<AuthModel | undefined>(authHelper.getAuth());
+  const [currentUser, setCurrentUser] = useState<
+    Partial<UserModel> | undefined
+  >();
+  const [userToken, setUserToken] = useState<string | undefined>();
+  const [companyId, storeCompanyId] = useState<number | undefined>();
+  const [investorId, storeInvestorId] = useState<number | undefined>();
+  const [newCompany, setNewCompany] = useState<boolean | undefined>();
+  const [showBillingModal, setShowBillingModal] = useState<boolean>(false);
+  const [currentState, setCurrentState] = useState<string>("Monthly");
+  const [selected, setSelected] = useState("Basic");
+  const [currencyBill, setCurrencyBill] = useState("USD");
+  const [billingData, setBillingData] = useState<any>();
 
   const saveAuth = async (auth: AuthModel | undefined) => {
-    setAuth(auth)
+    setAuth(auth);
     if (auth) {
-      authHelper.setAuth(auth)
+      authHelper.setAuth(auth);
 
-      const {data} = await getUserByToken(auth.token)
+      const { data } = await getUserByToken(auth.token);
       if (data) {
-        setCurrentUser(data.data)
+        setCurrentUser(data.data);
       }
     } else {
-      authHelper.removeAuth()
+      authHelper.removeAuth();
     }
-  }
+  };
 
   const logout = async () => {
-    await saveAuth(undefined)
-    setCurrentUser(undefined)
-    setUserToken(undefined)
-    storeCompanyId(undefined)
-    localStorage.removeItem('companyId')
-  }
+    await saveAuth(undefined);
+    setCurrentUser(undefined);
+    setUserToken(undefined);
+    storeCompanyId(undefined);
+    localStorage.removeItem("companyId");
+  };
 
   return (
     <AuthContext.Provider
@@ -138,44 +140,44 @@ const AuthProvider: FC<WithChildren> = ({children}) => {
     >
       {children}
     </AuthContext.Provider>
-  )
-}
+  );
+};
 
-const AuthInit: FC<WithChildren> = ({children}) => {
-  const {auth, logout, setCurrentUser} = useAuth()
-  const didRequest = useRef(false)
-  const [showSplashScreen, setShowSplashScreen] = useState(true)
+const AuthInit: FC<WithChildren> = ({ children }) => {
+  const { auth, logout, setCurrentUser } = useAuth();
+  const didRequest = useRef(false);
+  const [showSplashScreen, setShowSplashScreen] = useState(true);
   // We should request user by authToken (IN OUR EXAMPLE IT'S API_TOKEN) before rendering the application
   useEffect(() => {
     const requestUser = async (apiToken: string) => {
       try {
         if (!didRequest.current) {
-          const {data} = await getUserByToken(apiToken)
+          const { data } = await getUserByToken(apiToken);
           if (data) {
-            setCurrentUser(data.data)
+            setCurrentUser(data.data);
           }
         }
       } catch (error) {
-        console.error(error)
+        console.error(error);
         if (!didRequest.current) {
-          logout()
+          logout();
         }
       } finally {
-        setShowSplashScreen(false)
+        setShowSplashScreen(false);
       }
 
-      return () => (didRequest.current = true)
-    }
+      return () => (didRequest.current = true);
+    };
     if (auth && auth.token) {
-      requestUser(auth.token)
+      requestUser(auth.token);
     } else {
-      logout()
-      setShowSplashScreen(false)
+      logout();
+      setShowSplashScreen(false);
     }
     // eslint-disable-next-line
-  }, [])
+  }, []);
 
-  return showSplashScreen ? <LayoutSplashScreen /> : <>{children}</>
-}
+  return showSplashScreen ? <LayoutSplashScreen /> : <>{children}</>;
+};
 
-export {AuthProvider, AuthInit, useAuth}
+export { AuthProvider, AuthInit, useAuth };

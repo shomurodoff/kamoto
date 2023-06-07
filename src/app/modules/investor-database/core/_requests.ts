@@ -1,27 +1,27 @@
-import axios from 'axios'
-import {serialize} from '../../../core/_util'
-const API_URL = process.env.REACT_APP_BASE_API_URL
+import axios from "axios";
+import { serialize } from "../../../core/_util";
+const API_URL = process.env.REACT_APP_BASE_API_URL;
 
-const CREATE_INVESTOR = `${API_URL}/investor`
-const CREATE_INVESTOR_USER = `${API_URL}/investor-users`
-const GET_ALL_INVESTOR = `${API_URL}/investor`
-const GET_SINGLE_INVESTOR = `${API_URL}/investor`
-const GET_SINGLE_INVESTOR_USER = `${API_URL}/investor-user`
-export const GET_FILE_URL = `${API_URL}/file`
-const CREATE_INVESTOR_INVESTMENT = `${API_URL}/investment`
-const UPDATE_INVESTOR = `${API_URL}/investor`
-const GET_ALL_INVESTOR_USER = `${API_URL}/investor-user/investor`
-export const GET_INDUSTRY = `${API_URL}/industry`
-const GET_ACTIVE_ROUND = `${API_URL}/round/active`
-const ADD_TO_CRM = `${API_URL}/investor/crm`
-const ADD_TO_FAVORITE = `${API_URL}/investor-user/favorites`
-const ADD_INVESTOR_TO_FAVORITE = `${API_URL}/investor-column`
-const GET_ALL_INVESTMENTS = `${API_URL}/investments/investor`
-const CREATE_ERROR_REPORT = `${API_URL}/errorReport`
-const GET_ALL_STAGE_FOCUS = `${API_URL}/stageFocus`
-const GET_ALL_INVESTOR_GEOGRAPHY = `${API_URL}/investorGeography`
-const GET_INVESTOR_LOCATION = `${API_URL}/investorLocation`
-const GET_FOCUS_AREA = `${API_URL}/focusArea`
+const CREATE_INVESTOR = `${API_URL}/investor`;
+const CREATE_INVESTOR_USER = `${API_URL}/investor-users`;
+const GET_ALL_INVESTOR = `${API_URL}/investor`;
+const GET_SINGLE_INVESTOR = `${API_URL}/investor`;
+const GET_SINGLE_INVESTOR_USER = `${API_URL}/investor-user`;
+export const GET_FILE_URL = `${API_URL}/file`;
+const CREATE_INVESTOR_INVESTMENT = `${API_URL}/investment`;
+const UPDATE_INVESTOR = `${API_URL}/investor`;
+const GET_ALL_INVESTOR_USER = `${API_URL}/investor-user/investor`;
+export const GET_INDUSTRY = `${API_URL}/industry`;
+const GET_ACTIVE_ROUND = `${API_URL}/round/active`;
+const ADD_TO_CRM = `${API_URL}/investor/crm`;
+const ADD_TO_FAVORITE = `${API_URL}/investor-user/favorites`;
+const ADD_INVESTOR_TO_FAVORITE = `${API_URL}/investor-column`;
+const GET_ALL_INVESTMENTS = `${API_URL}/investments/investor`;
+const CREATE_ERROR_REPORT = `${API_URL}/errorReport`;
+const GET_ALL_STAGE_FOCUS = `${API_URL}/stageFocus`;
+const GET_ALL_INVESTOR_GEOGRAPHY = `${API_URL}/investorGeography`;
+const GET_INVESTOR_LOCATION = `${API_URL}/investorLocation`;
+const GET_FOCUS_AREA = `${API_URL}/focusArea`;
 
 export const addInvestor = (values: any) => {
   return axios.post(
@@ -43,21 +43,24 @@ export const addInvestor = (values: any) => {
     },
     {
       validateStatus(status) {
-        return true
+        return true;
       },
     }
-  )
-}
+  );
+};
 
 export const updateInvestor = (investorId: number, data: any) => {
   return axios.put(`${UPDATE_INVESTOR}/${investorId}`, data, {
     validateStatus(status) {
-      return true
+      return true;
     },
-  })
-}
+  });
+};
 
-export const addInvestorUser = (values: any, investorId: string | undefined) => {
+export const addInvestorUser = (
+  values: any,
+  investorId: string | undefined
+) => {
   return axios.post(
     CREATE_INVESTOR_USER,
     {
@@ -70,13 +73,16 @@ export const addInvestorUser = (values: any, investorId: string | undefined) => 
     },
     {
       validateStatus(status) {
-        return true
+        return true;
       },
     }
-  )
-}
+  );
+};
 
-export const addInvestorInvestments = (values: any, investorId: number | undefined) => {
+export const addInvestorInvestments = (
+  values: any,
+  investorId: number | undefined
+) => {
   return axios.post(
     CREATE_INVESTOR_INVESTMENT,
     {
@@ -91,11 +97,11 @@ export const addInvestorInvestments = (values: any, investorId: number | undefin
     },
     {
       validateStatus(status) {
-        return true
+        return true;
       },
     }
-  )
-}
+  );
+};
 
 export const getAllInvestor = (
   type: string,
@@ -114,30 +120,35 @@ export const getAllInvestor = (
     subType: subType,
     page: page,
     size: size,
-  }
+  };
 
-  return axios.get(`${GET_ALL_INVESTOR}/company/${companyId}?type=${type}&${serialize(object)}`, {
-    validateStatus(status) {
-      return true
-    },
-  })
-}
+  return axios.get(
+    `${GET_ALL_INVESTOR}/company/${companyId}?type=${type}&${serialize(
+      object
+    )}`,
+    {
+      validateStatus(status) {
+        return true;
+      },
+    }
+  );
+};
 
 export const getSingleInvestor = (investorId: number) => {
   return axios.get(`${GET_SINGLE_INVESTOR}/${investorId}`, {
     validateStatus(status) {
-      return true
+      return true;
     },
-  })
-}
+  });
+};
 
 export const getSingleInvestorUser = (userId: number) => {
   return axios.get(`${GET_SINGLE_INVESTOR_USER}/${userId}`, {
     validateStatus(status) {
-      return true
+      return true;
     },
-  })
-}
+  });
+};
 
 export const AllInvestorUser = (
   investorId: number,
@@ -148,42 +159,42 @@ export const AllInvestorUser = (
   if (name) {
     return axios.get(`${GET_ALL_INVESTOR_USER}/${investorId}?name=${name}`, {
       validateStatus(status) {
-        return true
+        return true;
       },
-    })
+    });
   } else {
     return axios.get(
       `${GET_ALL_INVESTOR_USER}/${investorId}?sort_order=${sortBy}&sort_by=${sortOrder}`,
       {
         validateStatus(status) {
-          return true
+          return true;
         },
       }
-    )
+    );
   }
-}
+};
 
 export const getIndustry = () => {
   return axios.get(GET_INDUSTRY, {
     validateStatus(status) {
-      return true
+      return true;
     },
-  })
-}
+  });
+};
 
 export const getActiveRound = (companyId: number) => {
   return axios.get(`${GET_ACTIVE_ROUND}/${companyId}`, {
     validateStatus(status) {
-      return true
+      return true;
     },
-  })
-}
+  });
+};
 
 export const getAddToCRMData = (data: {
-  roundId: Number | undefined
-  investorId: Number | undefined
-  isFavourite: boolean
-  columnId?: Number | undefined
+  roundId: Number | undefined;
+  investorId: Number | undefined;
+  isFavourite: boolean;
+  columnId?: Number | undefined;
 }) => {
   if (data.columnId === undefined) {
     return axios.post(
@@ -195,44 +206,44 @@ export const getAddToCRMData = (data: {
       },
       {
         validateStatus(status) {
-          return true
+          return true;
         },
       }
-    )
+    );
   } else {
     return axios.post(ADD_TO_CRM, data, {
       validateStatus(status) {
-        return true
+        return true;
       },
-    })
+    });
   }
-}
+};
 
 export const AddToFavorite = (data: {
-  columnId?: number | undefined
-  isFavourite: boolean
-  investorUserId: number
-  roundId: number | undefined
+  columnId?: number | undefined;
+  isFavourite: boolean;
+  investorUserId: number;
+  roundId: number | undefined;
 }) => {
   return axios.post(ADD_TO_FAVORITE, data, {
     validateStatus(status) {
-      return true
+      return true;
     },
-  })
-}
+  });
+};
 
 export const AddInvestorToFavorite = (data: {
-  investorId: number
-  columnId: number | undefined
-  isFavourite: boolean
-  roundId: number | undefined
+  investorId: number;
+  columnId: number | undefined;
+  isFavourite: boolean;
+  roundId: number | undefined;
 }) => {
   if (data.columnId) {
     return axios.put(ADD_INVESTOR_TO_FAVORITE, data, {
       validateStatus(status) {
-        return true
+        return true;
       },
-    })
+    });
   } else {
     return axios.put(
       ADD_INVESTOR_TO_FAVORITE,
@@ -243,51 +254,57 @@ export const AddInvestorToFavorite = (data: {
       },
       {
         validateStatus(status) {
-          return true
+          return true;
         },
       }
-    )
+    );
   }
-}
+};
 
-export const getAllInvestments = (investorId: number, sortOrder: string, sortBy: string) => {
-  return axios.get(`${GET_ALL_INVESTMENTS}/${investorId}?sort_order=${sortOrder}&sort_by=${sortBy}`)
-}
+export const getAllInvestments = (
+  investorId: number,
+  sortOrder: string,
+  sortBy: string
+) => {
+  return axios.get(
+    `${GET_ALL_INVESTMENTS}/${investorId}?sort_order=${sortOrder}&sort_by=${sortBy}`
+  );
+};
 
 //create Investor
 
 export const createInvestor = (data: any) => {
   return axios.post(CREATE_INVESTOR, data, {
     validateStatus(status) {
-      return true
+      return true;
     },
-  })
-}
+  });
+};
 
 export const createErrorReportAPI = (data: {
-  reason: string
-  investorId?: number
-  InvestorUserId?: number
+  reason: string;
+  investorId?: number;
+  InvestorUserId?: number;
 }) => {
   return axios.post(CREATE_ERROR_REPORT, data, {
     validateStatus(status) {
-      return true
+      return true;
     },
-  })
-}
+  });
+};
 
 export const getStageFocus = () => {
-  return axios.get(`${GET_ALL_STAGE_FOCUS}`)
-}
+  return axios.get(`${GET_ALL_STAGE_FOCUS}`);
+};
 
 export const getInvestorGeography = () => {
-  return axios.get(`${GET_ALL_INVESTOR_GEOGRAPHY}`)
-}
+  return axios.get(`${GET_ALL_INVESTOR_GEOGRAPHY}`);
+};
 
 export const getInvestorLocation = () => {
-  return axios.get(`${GET_INVESTOR_LOCATION}`)
-}
+  return axios.get(`${GET_INVESTOR_LOCATION}`);
+};
 
 export const getFocusArea = () => {
-  return axios.get(`${GET_FOCUS_AREA}`)
-}
+  return axios.get(`${GET_FOCUS_AREA}`);
+};

@@ -1,5 +1,5 @@
-import {useIntl} from 'react-intl'
-import clsx from 'clsx'
+import { useIntl } from "react-intl";
+import clsx from "clsx";
 
 export const BasicButton = ({
   buttonText,
@@ -18,28 +18,28 @@ export const BasicButton = ({
   customClass,
   investorCard,
 }: {
-  buttonText?: string
-  height?: string
-  loading?: boolean
-  inverted?: boolean
-  onClick?: () => void
-  disabled?: boolean
-  color?: string
-  border?: string
-  textColor?: string
-  minWidth?: number
-  padding?: string
-  width?: string
-  id?: string
-  customClass?: string
-  investorCard?: boolean
+  buttonText?: string;
+  height?: string;
+  loading?: boolean;
+  inverted?: boolean;
+  onClick?: () => void;
+  disabled?: boolean;
+  color?: string;
+  border?: string;
+  textColor?: string;
+  minWidth?: number;
+  padding?: string;
+  width?: string;
+  id?: string;
+  customClass?: string;
+  investorCard?: boolean;
 }) => {
-  const {formatMessage} = useIntl()
+  const { formatMessage } = useIntl();
   return (
     <button
-      id={id ? id : ''}
-      type='button'
-      className={clsx('rounded', loading ? 'opacity-50' : '', customClass)}
+      id={id ? id : ""}
+      type="button"
+      className={clsx("rounded", loading ? "opacity-50" : "", customClass)}
       style={{
         backgroundColor: color,
         border,
@@ -51,7 +51,7 @@ export const BasicButton = ({
     >
       {!loading && (
         <span
-          className='text-[14px] font-normal leading-5'
+          className="text-[14px] font-normal leading-5"
           style={{
             color: textColor,
           }}
@@ -66,10 +66,10 @@ export const BasicButton = ({
             color: textColor,
           }}
         >
-          {formatMessage({id: 'Please wait...'})}
-          <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
+          {formatMessage({ id: "Please wait..." })}
+          <span className="spinner-border spinner-border-sm align-middle ms-2"></span>
         </span>
       )}
     </button>
-  )
-}
+  );
+};

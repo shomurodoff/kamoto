@@ -1,17 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {Route, Routes} from 'react-router-dom'
+import { Route, Routes } from "react-router-dom";
 // import {Error500} from './components/Error500'
-import {Error404} from './components/Error404'
-import {ErrorsLayout} from './ErrorsLayout'
+import { Error404 } from "./components/Error404";
+import { ErrorsLayout } from "./ErrorsLayout";
 
 const ErrorsPage = () => (
   <Routes>
     <Route element={<ErrorsLayout />}>
-      <Route path='*' element={<Error404 />} />
+      <Route path="*" element={<Error404 />} />
       {/* <Route path='500' element={<Error500 />} /> */}
       <Route index element={<Error404 />} />
     </Route>
-  </Routes> 
-)
+  </Routes>
+);
 
-export {ErrorsPage}
+export { ErrorsPage };

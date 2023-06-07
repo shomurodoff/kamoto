@@ -1,25 +1,25 @@
-import React from 'react'
-import {Routes, Route} from 'react-router-dom'
-import DataRoomsOverview from './view/DataRoomsOverview'
-import './styles/DataRooms.scss'
-import DataRoomsSpaces from './view/DataRoomsSpaces'
-import DataRoomsFiles from './view/DataRoomsFiles'
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import DataRoomsOverview from "./view/DataRoomsOverview";
+import "./styles/DataRooms.scss";
+import DataRoomsSpaces from "./view/DataRoomsSpaces";
+import DataRoomsFiles from "./view/DataRoomsFiles";
 
 const DataRoomsRoutes = () => {
   return (
     <div>
       <Routes>
         <Route
-          path='overview'
+          path="overview"
           element={
             <>
-              {' '}
-              <DataRoomsOverview />{' '}
+              {" "}
+              <DataRoomsOverview />{" "}
             </>
           }
         />
         <Route
-          path='spaces'
+          path="spaces"
           element={
             <>
               <DataRoomsSpaces />
@@ -27,7 +27,7 @@ const DataRoomsRoutes = () => {
           }
         />
         <Route
-          path='files'
+          path="files"
           element={
             <>
               <DataRoomsFiles />
@@ -36,7 +36,7 @@ const DataRoomsRoutes = () => {
         />
       </Routes>
     </div>
-  )
-}
+  );
+};
 
-export default DataRoomsRoutes
+export default DataRoomsRoutes;

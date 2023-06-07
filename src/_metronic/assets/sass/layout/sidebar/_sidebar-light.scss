@@ -2,7 +2,7 @@
 // Light Sidebar(used by Light Sidebar layout only)
 //
 
-[data-kt-app-layout='light-sidebar'] {
+[data-kt-app-layout="light-sidebar"] {
   .info-card {
     .card {
       color: black;
@@ -23,13 +23,13 @@
     }
   }
   .logo-container-big {
-    background-image: url('../../../../../../public/media/auth/founderCrateLogo.svg');
+    background-image: url("../../../../../../public/media/auth/founderCrateLogo.svg");
     background-size: contain;
     background-repeat: no-repeat;
   }
 
   .logo-container-small {
-    background-image: url('../../../../../../public/media/auth/founderCrateOnlyLogo.svg');
+    background-image: url("../../../../../../public/media/auth/founderCrateOnlyLogo.svg");
     background-size: contain;
     background-repeat: no-repeat;
   }
@@ -143,7 +143,7 @@
   }
 }
 
-[data-kt-app-layout='light-sidebar'][data-kt-app-header-fixed='true'] {
+[data-kt-app-layout="light-sidebar"][data-kt-app-header-fixed="true"] {
   .app-sidebar {
     .app-sidebar-logo {
       border-bottom: 1px dashed var(--kt-app-sidebar-light-separator-color);

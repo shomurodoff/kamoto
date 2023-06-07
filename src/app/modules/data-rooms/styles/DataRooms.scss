@@ -306,7 +306,7 @@
   .spaces-toolbar-wrapper {
     margin-top: 6px;
     border-bottom: 1px solid #dbdcde;
-    @media (max-width:767px) {
+    @media (max-width: 767px) {
       margin-top: 0px;
     }
     .all-data-rooms-head {
@@ -329,9 +329,9 @@
       flex-direction: row;
       align-items: center;
       flex-wrap: wrap;
-      @media (max-width:767px) {
-       padding-bottom: 0px;
-       justify-content: end;
+      @media (max-width: 767px) {
+        padding-bottom: 0px;
+        justify-content: end;
       }
       .list-grid-toggle {
         display: flex;
@@ -367,7 +367,7 @@
         margin: 0 8px;
         height: 36px;
         cursor: pointer;
-        @media (max-width:767px) {
+        @media (max-width: 767px) {
           padding: 8px;
         }
         span {
@@ -402,7 +402,7 @@
     .DataRoom-Card-Wrapper {
       box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
       border-radius: 4px;
-     
+
       .DataRoom-Card-head {
         padding: 12px 12px 8px 16px;
         h5 {
@@ -431,7 +431,7 @@
           transition: background 0.2s;
         }
         .toggle__fill::after {
-          content: '';
+          content: "";
           position: absolute;
           top: 4px;
           left: 4px;
@@ -668,7 +668,7 @@
                 transition: background 0.2s;
               }
               .toggle__fill::after {
-                content: '';
+                content: "";
                 position: absolute;
                 top: 4px;
                 left: 4px;

@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function DataRoomsFiles() {
-  return (
-    <div>DataRoomsFiles</div>
-  )
+  return <div>DataRoomsFiles</div>;
 }
 
-export default DataRoomsFiles
+export default DataRoomsFiles;

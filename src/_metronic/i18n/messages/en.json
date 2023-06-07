@@ -858,11 +858,11 @@
   "Investments updated successfully": "Investments updated successfully",
   "Funding Requirement": "Funding Requirement",
   "LinkedIn Url is required": "LinkedIn Url is required",
-  "Twitter URL updated successfully":"Twitter URL updated successfully",
-  "Contact Email ID":"Contact Email ID",
-  "Investor Type is required":"Investor Type is required",
-  "Enter Investment":"Enter Investment",
-  "Enter values":"Enter values",
-  "Enter max range":"Enter max range",
-  "Enter min range":"Enter min range"
+  "Twitter URL updated successfully": "Twitter URL updated successfully",
+  "Contact Email ID": "Contact Email ID",
+  "Investor Type is required": "Investor Type is required",
+  "Enter Investment": "Enter Investment",
+  "Enter values": "Enter values",
+  "Enter max range": "Enter max range",
+  "Enter min range": "Enter min range"
 }
