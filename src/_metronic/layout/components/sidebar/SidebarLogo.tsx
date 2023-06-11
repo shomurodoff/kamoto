@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 const SidebarLogo = () => {
   const { formatMessage } = useIntl();
   const navigate = useNavigate();
-  const { currentUser, storeCompanyId, setNewCompany, companyId } = useAuth();
+  const { currentUser, storePersonalityId, setNewPersonality, personalityId } = useAuth();
   const [companyData, setCompanyData] = useState<any[]>();
   const { config } = useLayout();
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -32,26 +32,26 @@ const SidebarLogo = () => {
   const appSidebarDefaultMinimizeDefault =
     config.app?.sidebar?.default?.minimize?.desktop?.default;
   useEffect(() => {
-    setCompanyData(currentUser?.company);
-    if (companyId) {
-      const findCompany = currentUser?.company.find(
-        (company: { companyId: number }) => company.companyId === companyId
+    setCompanyData(currentUser?.personality);
+    if (personalityId) {
+      const findCompany = currentUser?.personality.find(
+        (company: { personalityId: string }) => company.personalityId === personalityId
       );
       if (findCompany) {
         setSelectedCompany(findCompany);
       } else {
-        setSelectedCompany(currentUser?.company[0]);
+        setSelectedCompany(currentUser?.personality[0]);
       }
     }
-    if (selectCompany === null && !companyId) {
-      setSelectedCompany(currentUser?.company[0]);
+    if (selectCompany === null && !personalityId) {
+      setSelectedCompany(currentUser?.personality[0]);
     }
-  }, [currentUser, selectCompany, companyId]); // eslint-disable-line
+  }, [currentUser, selectCompany, personalityId]); // eslint-disable-line
 
   const onCompanySelect = (item: any) => {
     setSelectedCompany(item);
-    storeCompanyId(item.companyId);
-    localStorage.setItem("companyId", item.companyId);
+    storePersonalityId(item.personalityId);
+    localStorage.setItem("personalityId", item.personalityId);
     window.location.reload();
   };
 
@@ -118,12 +118,12 @@ const SidebarLogo = () => {
                 companyData.map((item) => (
                   <div
                     className="  py-2 border-bottom border-bottom-1"
-                    key={item.companyId}
+                    key={item.personalityId}
                   >
                     <button
                       className={`btn ${
                         selectCompany &&
-                        selectCompany.companyId === item.companyId &&
+                        selectCompany.personalityId === item.personalityId &&
                         "btn-light"
                       }  col-12 d-flex w-100 align-items-center`}
                       data-bs-toggle="collapse"
@@ -146,7 +146,7 @@ const SidebarLogo = () => {
                         {item.name}
                       </p>
                       {selectCompany &&
-                        selectCompany.companyId === item.companyId && (
+                        selectCompany.personalityId === item.personalityId && (
                           <i
                             className="align-self-center col-2 fa fa-check text-clr477 text-primary  "
                             aria-hidden="true"
@@ -164,7 +164,7 @@ const SidebarLogo = () => {
                   textColor="#FFFFFF"
                   padding="12px 21px"
                   onClick={() => {
-                    setNewCompany(false);
+                    setNewPersonality(false);
                     navigate("/onboarding/");
                   }}
                 />

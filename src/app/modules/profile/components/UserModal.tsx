@@ -42,9 +42,9 @@ const UserModal = ({
   getPendingUsers?: any;
   getUserApiSpinner?: boolean;
 }) => {
-  const { formatMessage } = useIntl();
-  const [loading, setLoading] = useState(false);
-  const { companyId } = useAuth();
+    const {formatMessage} = useIntl()
+    const [loading, setLoading] = useState(false)
+    const {personalityId} = useAuth()
 
   const userSchema = Yup.object().shape({
     firstname: Yup.string()
@@ -76,7 +76,7 @@ const UserModal = ({
       setLoading(true);
       if (!flag) {
         const payload = {
-          companyId: companyId?.toString(),
+          companyId: personalityId?.toString(),
           Users: [
             {
               firstName: values.firstname,
@@ -103,7 +103,7 @@ const UserModal = ({
         }
       } else {
         const payload = {
-          companyId: companyId,
+          companyId: personalityId,
           firstName: values.firstname,
           lastName: values.lastname,
           email: values.email,

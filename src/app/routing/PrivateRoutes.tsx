@@ -19,31 +19,35 @@ import { AiPersonalityPage } from "../modules/ai-personality/AiPersonalityPage";
 import SupportPage from "../modules/support";
 import Sitemap from "../modules/sitemap";
 import ChatCreditsPage from "../modules/chat-credits";
+import MarketplaceRouting from "../modules/marketplace/MarketplaceRouting";
+import MarketplacePublicLayout from "../../_metronic/layout/marketplace-public-layout";
+import MarketPlacePublicRoute from "../modules/marketplace-public/MarketPlacePublicRoute";
 
 const InvestorDBRoutes = lazy(
   () => import("../modules//investor-database/InvestorDBRoutes")
 );
 
 const PrivateRoutes = () => {
-  const { currentUser, storeCompanyId, companyId, newCompany } = useAuth();
+  const { currentUser, storePersonalityId, personalityId, newPersonality } =
+    useAuth();
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if (!companyId) {
-      storeCompanyId(
-        !!localStorage.getItem("companyId")
-          ? parseInt(localStorage.getItem("companyId")!)
-          : currentUser?.company[0]?.companyId
+    if (!personalityId) {
+      storePersonalityId(
+        !!localStorage.getItem("personalityId")
+          ? parseInt(localStorage.getItem("personalityId")!)
+          : currentUser?.personality[0]?.personalityId
       );
     }
     if (currentUser) {
       setReady(true);
     }
-  }, [currentUser, companyId]); // eslint-disable-line
+  }, [currentUser, personalityId]); // eslint-disable-line
   return ready ? (
     <Routes>
       {/* Redirect to Dashboard after success login/registartion */}
-      {newCompany ?? companyId ? (
+      {newPersonality ?? personalityId ? (
         <>
           <Route element={<MasterLayout />}>
             <Route index element={<Navigate to="/dashboard" />} />
@@ -58,7 +62,14 @@ const PrivateRoutes = () => {
                 </SuspensedView>
               }
             />
-
+            <Route
+              path="marketplace/*"
+              element={
+                <SuspensedView>
+                  <MarketplaceRouting />
+                </SuspensedView>
+              }
+            />
             <Route
               path="data-rooms/*"
               element={
@@ -94,6 +105,10 @@ const PrivateRoutes = () => {
             <Route path="/sitemap/*" element={<Sitemap />} />
             <Route path="*" element={<ErrorsPage />} />
           </Route>
+          <Route
+            path={"/marketplace-public/*"}
+            element={<MarketPlacePublicRoute />}
+          />
         </>
       ) : (
         <>
@@ -103,7 +118,6 @@ const PrivateRoutes = () => {
           <Route path="*" element={<ErrorsPage />} />
         </>
       )}
-
       {/* Pages */}
     </Routes>
   ) : null;

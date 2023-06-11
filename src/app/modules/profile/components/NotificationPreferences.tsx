@@ -1,12 +1,12 @@
 import { useIntl } from "react-intl";
 import "../styles/index.scss";
 import { ToolTipUI } from "../../widgets/components/UI/ToolTipUI";
-import { EmailPreferencesInput } from "../core/_constants";
+import { EmailPreferencesInput, EmailPreferencesOutput } from "../core/_constants";
 import {
   EmailPreferencesInputType,
   EmailPreferencesOutputType,
 } from "../core/_models";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useState, useEffect, memo } from "react";
 import { createEmailPreferences, getEmailPreferences } from "../core/_requests";
 import { useAuth } from "../../auth";
 import { toast } from "react-toastify";
@@ -14,48 +14,90 @@ import { Spinner } from "../../widgets/components/General/Spinner";
 import { BasicButton } from "../../widgets/components/UI/BasicButton";
 import SearchInput from "./SearchInput";
 
-export const NotificationPreferences = ({
-  key,
-  getPreferences,
-  getPreferencesApiLoading,
-  setGetPreferences,
-}: {
-  key: number;
-  getPreferences: any;
-  getPreferencesApiLoading: boolean;
-  setGetPreferences: Dispatch<SetStateAction<EmailPreferencesOutputType[]>>;
-}) => {
+const NotificationPreferencesComponent = (
+) => {
   const [loading, setLoading] = useState(false);
-  const { companyId } = useAuth();
+  const [getPreferencesApiLoading, setGetPreferencesApiLoading] = useState(false);
+  const [getPreferences, setGetPreferences] = useState(EmailPreferencesOutput);
+
+  const { personalityId } = useAuth();
 
   const handleToogle = (id: number, checked: boolean) => {
-    getPreferences.map((preference: EmailPreferencesOutputType) => {
-      if (preference.id === id) {
-        return (preference.value = checked);
+    let newGetPreferences:Array<EmailPreferencesOutputType> = getPreferences.map((preference: EmailPreferencesOutputType) => {
+      if (preference.id == id) {
+       return {...preference, value: checked}
+      } else {
+        return preference
       }
-      return null;
     });
+    setGetPreferences(newGetPreferences)
   };
+
+  useEffect(() => {
+    const getApiEmailPreferences = async () => {
+      try {
+          setGetPreferencesApiLoading(true);
+          const {
+            data: {
+              data: { value },
+              success,
+              errors,
+            },
+          } = await getEmailPreferences();
+          if (success) {
+            setGetPreferencesApiLoading(false);
+            let newGetPreferences = getPreferences.map((item)=>{
+              if(value[item.title]!==null){
+                return {...item, value: value[item.title]}
+              }else {
+                return item
+              }
+            })
+            setGetPreferences(newGetPreferences);
+          } else {
+            setGetPreferencesApiLoading(false);
+            errors.forEach((error: string) => {
+              toast.error(formatMessage({ id: error }));
+            });
+          }
+      } catch (err) {
+        setGetPreferencesApiLoading(false);
+        console.log(err);
+      }
+    };
+    getApiEmailPreferences();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
 
   const handleSumbit = async () => {
     try {
       setLoading(true);
-      if (companyId) {
+      if (personalityId) {
+        let obj:{[key: string]: boolean;} = {}
+        getPreferences.forEach((item)=>{
+          obj[item.title] = item.value
+        })
         const {
           data: { success, errors },
         } = await createEmailPreferences(
-          JSON.stringify(getPreferences),
-          companyId
+          JSON.stringify(obj),
         );
         if (success) {
           const {
             data: {
-              data: { preference },
+              data: { value },
               success,
             },
-          } = await getEmailPreferences(companyId);
+          } = await getEmailPreferences();
           if (success) {
-            setGetPreferences(JSON.parse(preference));
+            let newGetPreferences = getPreferences.map((item)=>{
+              if(value[item.title]!==null){
+                return {...item, value: value[item.title]}
+              }else {
+                return item
+              }
+            })
+            setGetPreferences(newGetPreferences);
           }
           setLoading(false);
           toast.success(
@@ -112,7 +154,7 @@ export const NotificationPreferences = ({
                     type="checkbox"
                     id={id.toString()}
                     name="model.app.sidebar.default.minimize.desktop.hoverable"
-                    defaultChecked={
+                    checked={
                       getPreferences && getPreferences[index]?.value
                     }
                     onChange={(e) => {
@@ -165,3 +207,5 @@ export const NotificationPreferences = ({
     </>
   );
 };
+
+export const NotificationPreferences = memo(NotificationPreferencesComponent)

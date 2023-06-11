@@ -12,6 +12,8 @@ import Identity from "./identity";
 import Dialog from "./dialog";
 import Personality from "./personality";
 import Knowledge from "./knowledge";
+import ConversationStyle from "./conversation-style";
+import NegativeLearning from "./negative-learning";
 const Index: React.FC<any> = ({ setOpenEdit }) => {
   const [active, setActive] = useState(1);
 
@@ -87,6 +89,8 @@ const Index: React.FC<any> = ({ setOpenEdit }) => {
           <Voice setOpenEdit={setOpenEdit} />,
           <Avatar setOpenEdit={setOpenEdit} />,
           <Knowledge setOpenEdit={setOpenEdit} />,
+          <ConversationStyle setOpenEdit={setOpenEdit}/>,
+          <NegativeLearning setOpenEdit={setOpenEdit}/>
         ],
         (item, index) => {
           return index === active;

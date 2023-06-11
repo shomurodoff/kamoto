@@ -21,7 +21,7 @@ export const DisplayImage = ({
     <>
       {imgName ? (
         <img
-          src={`${GET_FILE_URL}/${imgName}`}
+          src={`${imgName}`}
           height={height}
           width={width}
           alt={alt}

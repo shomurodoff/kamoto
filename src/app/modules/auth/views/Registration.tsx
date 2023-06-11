@@ -15,12 +15,12 @@ import { getLocation } from "../../onboarding/core/_requests";
 import { Toaster } from "../../widgets/components/General/Toaster";
 
 export function Registration() {
-  const { formatMessage } = useIntl();
-  const [loading, setLoading] = useState(false);
-  const { saveAuth, setUserToken, setNewCompany } = useAuth();
-  const [errorsArray, setErrorsArray] = useState<string[]>();
-  const [isInvited, setIsInvited] = useState<boolean>(false);
-  const navigate = useNavigate();
+  const {formatMessage} = useIntl()
+  const [loading, setLoading] = useState(false)
+  const {saveAuth, setUserToken, setNewPersonality} = useAuth()
+  const [errorsArray, setErrorsArray] = useState<string[]>()
+  const [isInvited, setIsInvited] = useState<boolean>(false)
+  const navigate = useNavigate()
 
   const initialValues = {
     firstname: "",
@@ -31,17 +31,17 @@ export function Registration() {
   };
 
   const registrationSchema = Yup.object().shape({
-    firstname: Yup.string()
-      .min(3, formatMessage({ id: "Minimum 3 characters" }))
-      .max(50, formatMessage({ id: "Maximum 50 characters" }))
-      .required(formatMessage({ id: "First name is required" })),
+    // firstname: Yup.string()
+    //   .min(3, formatMessage({ id: "Minimum 3 characters" }))
+    //   .max(50, formatMessage({ id: "Maximum 50 characters" }))
+    //   .required(formatMessage({ id: "First name is required" })),
     email: Yup.string()
       .email(formatMessage({ id: "Invalid email format" }))
       .max(50, formatMessage({ id: "Maximum 50 characters" }))
       .required(formatMessage({ id: "Email is required" })),
-    lastname: Yup.string()
-      .max(50, formatMessage({ id: "Maximum 50 characters" }))
-      .required(formatMessage({ id: "Last name is required" })),
+    // lastname: Yup.string()
+    //   .max(50, formatMessage({ id: "Maximum 50 characters" }))
+    //   .required(formatMessage({ id: "Last name is required" })),
     password: Yup.string()
       .min(6, formatMessage({ id: "Minimum 6 characters" }))
       .max(50, formatMessage({ id: "Maximum 50 characters" }))
@@ -123,11 +123,11 @@ export function Registration() {
       );
 
       if (success) {
-        navigate("/");
-        await saveAuth(token);
-        setUserToken(data.token);
-        setNewCompany(false);
-        navigate("/onboarding/");
+        navigate('/')
+        await saveAuth(token)
+        setUserToken(data.token)
+        setNewPersonality(false)
+        navigate('/onboarding/')
       } else {
         setErrorsArray(errors);
         await saveAuth(undefined);
@@ -283,7 +283,7 @@ export function Registration() {
                 <CustomToast status={error} />
               ))}
 
-              <div className="md:flex gap-[16px]">
+              {/* <div className="md:flex gap-[16px]">
                 <div className={"w-full md:w-1/2"}>
                   <TextInput
                     fieldType={"text"}
@@ -316,7 +316,7 @@ export function Registration() {
                     isStarRequired={true}
                   />
                 </div>
-              </div>
+              </div> */}
 
               {/* begin::Form group */}
               <TextInput
@@ -353,8 +353,8 @@ export function Registration() {
                 formik={formik}
                 linkText1={formatMessage({ id: "Terms of use" })}
                 linkText2={formatMessage({ id: "Privacy Policy" })}
-                slug1={"/terms-of-use"}
-                slug2={"/privacy-policy"}
+                slug1={process.env.REACT_APP_TERMS_POLICY_LINK}
+                slug2={process.env.REACT_APP_TERMS_POLICY_LINK}
                 customText={formatMessage({ id: "I Agree" })}
                 placeholder=""
                 fieldType={"checkbox"}

@@ -27,23 +27,23 @@ import { getAllInvestor } from "../../investor-database/core/_requests";
 import { BasicButton } from "../../widgets/components/UI/BasicButton";
 import { Spinner } from "../../widgets/components/General/Spinner";
 export const InvestorDetailsScreen = () => {
-  const { formatMessage } = useIntl();
-  const { companyId } = useAuth();
-  const [activeRound, setActiveRound] = useState<any>();
-  const [allRounds, setAllRounds] = useState<any>();
-  const [getAllColumns, setGetAllColumns] = useState<any>([]);
-  const [modalShow, setModalShow] = useState(false);
-  const [selectedRoundId, setSelectedRoundId] = useState<any>();
-  const [show, setShow] = useState(false);
-  const [activityModalShow, setActivityModalShow] = useState(false);
-  const [columnDetails, setColumnDetails] = useState<any>();
-  const [search, setSearch] = useState<string | undefined>();
-  const [addInvestorModalShow, setAddInvestorModalShow] = useState(false);
-  const [allInvestors, setAllInvestors] = useState<any>();
-  const [loading, setLoading] = useState(true);
-  const [addModal, setAddModal] = useState(false);
-  const [showDeleteModal, setDeleteShowModal] = useState(false);
-  const [deleteLoading, setDeleteLoading] = useState(false);
+  const {formatMessage} = useIntl()
+  const {personalityId} = useAuth()
+  const [activeRound, setActiveRound] = useState<any>()
+  const [allRounds, setAllRounds] = useState<any>()
+  const [getAllColumns, setGetAllColumns] = useState<any>([])
+  const [modalShow, setModalShow] = useState(false)
+  const [selectedRoundId, setSelectedRoundId] = useState<any>()
+  const [show, setShow] = useState(false)
+  const [activityModalShow, setActivityModalShow] = useState(false)
+  const [columnDetails, setColumnDetails] = useState<any>()
+  const [search, setSearch] = useState<string | undefined>()
+  const [addInvestorModalShow, setAddInvestorModalShow] = useState(false)
+  const [allInvestors, setAllInvestors] = useState<any>()
+  const [loading, setLoading] = useState(true)
+  const [addModal, setAddModal] = useState(false)
+  const [showDeleteModal, setDeleteShowModal] = useState(false)
+  const [deleteLoading, setDeleteLoading] = useState(false)
 
   const [investorCrmFilter, setInvestorCrmFilter] = useState<boolean>(false);
   const [sort_by_investor, set_sort_by_investor] = useState<string | undefined>(
@@ -55,10 +55,10 @@ export const InvestorDetailsScreen = () => {
   const [isEditRound, setIsEditRound] = useState(false);
   const getActiveRoundFromApi = async () => {
     try {
-      if (companyId) {
+      if (personalityId) {
         const {
-          data: { success, data: apiActiveRound, errors },
-        } = await getActiveRound(companyId);
+          data: {success, data: apiActiveRound, errors},
+        } = await getActiveRound(personalityId)
         if (success) {
           setActiveRound(apiActiveRound);
           setSelectedRoundId(activeRound?.roundId);
@@ -80,10 +80,10 @@ export const InvestorDetailsScreen = () => {
   useEffect(() => {
     const getRoundsFromApi = async () => {
       try {
-        if (companyId) {
+        if (personalityId) {
           const {
-            data: { success, data: apiRounds },
-          } = await getAllRounds(companyId);
+            data: {success, data: apiRounds},
+          } = await getAllRounds(personalityId)
           if (success) {
             setAllRounds(apiRounds);
           }
@@ -93,9 +93,9 @@ export const InvestorDetailsScreen = () => {
       }
     };
 
-    getRoundsFromApi();
-    getActiveRoundFromApi();
-  }, [companyId, activeRound?.roundId]); // eslint-disable-line react-hooks/exhaustive-deps
+    getRoundsFromApi()
+    getActiveRoundFromApi()
+  }, [personalityId, activeRound?.roundId]) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (allRounds && activeRound) {
@@ -142,16 +142,16 @@ export const InvestorDetailsScreen = () => {
             success,
             data: { data: allApiInvestors },
           },
-        } = await getAllInvestor("", "", "", "", companyId);
+        } = await getAllInvestor('', '', '', '', personalityId)
         if (success) {
           setAllInvestors(allApiInvestors);
         }
       } catch (error) {
         console.log(error);
       }
-    };
-    getInvestors();
-  }, [companyId]);
+    }
+    getInvestors()
+  }, [personalityId])
 
   useEffect(() => {
     setSelectedRoundId(
@@ -218,10 +218,10 @@ export const InvestorDetailsScreen = () => {
 
   const handleOnChangeRound = async (round: number) => {
     try {
-      if (companyId && round) {
+      if (personalityId && round) {
         const {
-          data: { success },
-        } = await updateActiveRoundInCompany({ companyId, activeRound: round });
+          data: {success},
+        } = await updateActiveRoundInCompany({personalityId, activeRound: round})
 
         if (success) {
           getActiveRoundFromApi();

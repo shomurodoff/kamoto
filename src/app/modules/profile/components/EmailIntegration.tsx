@@ -40,7 +40,7 @@ export const EmailIntegration = ({
   emailSignature,
 }: {
   key: number;
-  companyId?: number;
+  companyId?: string;
   getMailInformation: () => Promise<void>;
   postmarkRadio?: any;
   sendgridRadio?: any;

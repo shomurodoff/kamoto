@@ -43,32 +43,33 @@ export interface UserSocialNetworksModel {
 }
 
 export interface UserModel {
-  id: number;
-  userId: number;
-  username: string;
-  password: string | undefined;
-  email: string;
-  first_name: string;
-  firstName: string;
-  lastName: string;
-  last_name: string;
-  profileImg?: string;
-  fullname?: string;
-  occupation?: string;
-  companyName?: string;
-  phone?: string;
-  roles?: Array<number>;
-  pic?: string;
-  language?: "en" | "de" | "es" | "fr" | "ja" | "zh" | "ru";
-  timeZone?: string;
-  website?: "https://keenthemes.com";
-  emailSettings?: UserEmailSettingsModel;
-  auth?: AuthModel;
-  communication?: UserCommunicationModel;
-  address?: UserAddressModel;
-  socialNetworks?: UserSocialNetworksModel;
-  company: any;
-  companyId?: number;
+  id: number
+  userId: number
+  username: string
+  password: string | undefined
+  email: string
+  first_name: string
+  firstName: string
+  lastName: string
+  last_name: string
+  profileImg?: string
+  fullname?: string
+  occupation?: string
+  companyName?: string
+  phone?: string
+  roles?: Array<number>
+  pic?: string
+  language?: 'en' | 'de' | 'es' | 'fr' | 'ja' | 'zh' | 'ru'
+  timeZone?: string
+  website?: 'https://keenthemes.com'
+  emailSettings?: UserEmailSettingsModel
+  auth?: AuthModel
+  communication?: UserCommunicationModel
+  address?: UserAddressModel
+  socialNetworks?: UserSocialNetworksModel
+  personality: any
+  personalityId?: string
+  verifiedAt?: string
 }
 
 export type FormikProps = {

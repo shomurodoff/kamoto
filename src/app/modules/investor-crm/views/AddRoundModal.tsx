@@ -38,18 +38,18 @@ export const AddRoundModal = ({
   setAllRounds: any;
   isEditRound: boolean;
 }) => {
-  const { companyId } = useAuth();
-  const { formatMessage } = useIntl();
-  const { AddRoundSchema } = useInitializeRoundSchema();
-  const [loading, setLoading] = useState(false);
-  const [currencyOptions, setCurrencyOptions] = useState<any>();
-  const [selectedCurrency, setSelectedCurrency] = useState("USD");
-  const [formValues, setFormValues] = useState<any>(null);
+  const {personalityId} = useAuth()
+  const {formatMessage} = useIntl()
+  const {AddRoundSchema} = useInitializeRoundSchema()
+  const [loading, setLoading] = useState(false)
+  const [currencyOptions, setCurrencyOptions] = useState<any>()
+  const [selectedCurrency, setSelectedCurrency] = useState('USD')
+  const [formValues, setFormValues] = useState<any>(null)
   const onSubmit = async (values: any) => {
     try {
-      setLoading(true);
-      if (!companyId) {
-        throw formatMessage({ id: "Company ID is required." });
+      setLoading(true)
+      if (!personalityId) {
+        throw formatMessage({id: 'Company ID is required.'})
       }
 
       const {
@@ -60,8 +60,8 @@ export const AddRoundModal = ({
         values.amountTargeted,
         values.amountAchieved,
         values.currency,
-        companyId as number
-      );
+        personalityId
+      )
 
       if (success) {
         setLoading(false);
@@ -83,10 +83,10 @@ export const AddRoundModal = ({
 
   const getRoundsFromApi = async () => {
     try {
-      if (companyId) {
+      if (personalityId) {
         const {
-          data: { success, data: apiRounds },
-        } = await getAllRounds(companyId);
+          data: {success, data: apiRounds},
+        } = await getAllRounds(personalityId)
         if (success) {
           setAllRounds(apiRounds);
         }
@@ -98,10 +98,10 @@ export const AddRoundModal = ({
 
   const getActiveRoundFromApi = async () => {
     try {
-      if (companyId) {
+      if (personalityId) {
         const {
-          data: { success, data: apiActiveRound },
-        } = await getActiveRound(companyId);
+          data: {success, data: apiActiveRound},
+        } = await getActiveRound(personalityId)
         if (success) {
           setLoading(false);
 
@@ -154,9 +154,9 @@ export const AddRoundModal = ({
 
   const onUpdateRound = async (values: any) => {
     try {
-      setLoading(true);
-      if (!companyId) {
-        throw formatMessage({ id: "Company ID is required." });
+      setLoading(true)
+      if (!personalityId) {
+        throw formatMessage({id: 'Company ID is required.'})
       }
 
       const {
@@ -167,7 +167,7 @@ export const AddRoundModal = ({
         values.amountTargeted,
         values.amountAchieved,
         values.currency,
-        companyId as number,
+        personalityId,
         activeRound.roundId as number
       );
 

@@ -52,6 +52,39 @@ const SidebarMenuMain: React.FC = () => {
           hasBullet={true}
         />
       </SidebarMenuItemWithSub> */}
+      <SidebarMenuItemWithSub
+        to="/marketplace"
+        title="Marketplace"
+        icon="/media/icons/sidebar/MarketplaceIcon.svg"
+        activeIcon="/media/icons/sidebar/MarketplaceIconActive.svg"
+        fontIcon="bi-person"
+      >
+        <SidebarMenuItem
+          to="/marketplace/overview"
+          title="Overview"
+          hasBullet={true}
+        />
+        <SidebarMenuItem
+          to="/marketplace/listing-monetization"
+          title="Listing & Monetization"
+          hasBullet={true}
+        />
+        <SidebarMenuItem
+          to="/marketplace/earning-reports"
+          title="Earning & Reports"
+          hasBullet={true}
+        />
+        <SidebarMenuItem
+          to="/marketplace/feedback-ratings"
+          title="Feedback & Ratings"
+          hasBullet={true}
+        />
+        <SidebarMenuItem
+          to="/marketplace/marketplace-settings"
+          title="Marketplace Settings"
+          hasBullet={true}
+        />
+      </SidebarMenuItemWithSub>
       <SidebarMenuItem
         to="/settings"
         icon="/media/icons/sidebar/SettingIcon.svg"

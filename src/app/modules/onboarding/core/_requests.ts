@@ -4,16 +4,16 @@ const API_URL = process.env.REACT_APP_BASE_API_URL;
 const IPSTACK_URL = `${process.env.REACT_APP_IPSTACK_LINK}?access_key=${process.env.REACT_APP_IPSTACK_ACCESS_KEY}&format=1`;
 const COUNTRY_URL = `${API_URL}/country`;
 
-export const INVITE_USER = `${API_URL}/auth/invite`;
-export const ACCEPT_INVITATION = `${API_URL}/auth/accept-invite`;
-export const CREATE_COMPANY = `${API_URL}/company`;
-export const CREATE_ROUND = `${API_URL}/round`;
-export const CURRENCIES = `${API_URL}/currency`;
-export const STATE = ``;
-export const GET_USER_BY_ACCESSTOKEN_URL = `${API_URL}/auth/verify-token`;
-export const GET_FILE_URL = `${API_URL}/file`;
-export const GET_USER_TOKEN = `${API_URL}/user/token`;
-export const UPDATE_ROUND = `${API_URL}/round`;
+export const INVITE_USER = `${API_URL}/auth/invite`
+export const ACCEPT_INVITATION = `${API_URL}/auth/accept-invite`
+export const CREATE_PERSONALITY = `${API_URL}/personality`
+export const CREATE_ROUND = `${API_URL}/round`
+export const CURRENCIES = `${API_URL}/currency`
+export const STATE = ``
+export const GET_USER_BY_ACCESSTOKEN_URL = `${API_URL}/auth/verify-token`
+export const GET_FILE_URL = `${API_URL}/file`
+export const GET_USER_TOKEN = `${API_URL}/user/token`
+export const UPDATE_ROUND = `${API_URL}/round`
 
 // export const REQUEST_PASSWORD_URL = `${API_URL}/forgot_password`
 
@@ -43,16 +43,18 @@ export function acceptInvitation(inviteToken: string, password: string) {
 }
 
 //create company
-export function createCompany(
+export function createPersonality(
   companyName: string,
   industry: string,
   country: string,
   state: string,
   logoId: number,
-  chargebeePlanId: string
+  chargebeePlanId: string,
+  description: string,
+  personalityType: string
 ) {
   return axios.post(
-    CREATE_COMPANY,
+    CREATE_PERSONALITY,
     {
       name: companyName,
       industry: industry,
@@ -60,6 +62,8 @@ export function createCompany(
       stateId: Number(state),
       logoId,
       chargebeePlanId,
+      description: description,
+      personalityType: personalityType
     },
     {
       validateStatus(status) {
@@ -76,7 +80,7 @@ export function createRound(
   amountTargeted: number,
   amountAchieved: number,
   currency: string,
-  companyId: number
+  companyId: string
 ) {
   const currencyId = parseInt(currency);
 
@@ -106,11 +110,11 @@ export function currencies() {
 export function state(countryId: string) {
   return axios.get(`${API_URL}/state/${countryId}`);
 }
-export function getUserByToken(token: string) {
-  return axios.post<UserModel>(GET_USER_BY_ACCESSTOKEN_URL, {
-    token: token,
-  });
-}
+// export function getUserByToken(token: string) {
+//   return axios.post<UserModel>(GET_USER_BY_ACCESSTOKEN_URL, {
+//     token: token,
+//   });
+// }
 //getLocation
 export const getLocation = () => {
   return axios.get(IPSTACK_URL);
@@ -131,7 +135,7 @@ export const updateRound = (
   amountTargeted: number,
   amountAchieved: number,
   currency: string,
-  companyId: number,
+  companyId: string,
   roundId: number
 ) => {
   const currencyId = parseInt(currency);

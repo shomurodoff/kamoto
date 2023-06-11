@@ -47,17 +47,17 @@ export const EditActivityModal = ({
   investorId: number;
   getActivity: () => void;
 }) => {
-  const { companyId, currentUser } = useAuth();
-  const { formatMessage } = useIntl();
-  const [loading, setLoading] = useState(false);
-  const [allInvestors, setAllInvestors] = useState<any>();
-  const [allUsers, setAllUsers] = useState<any>();
-  const [allDay, setAllDay] = useState(false);
-  const [hide, setHide] = useState(false);
-  const [activityType, setActivityType] = useState<string>();
-  const [modelStatus, setModelStatus] = useState<boolean>(false);
-  const [documentName, setDocumentName] = useState<string>();
-  const [formValues, setFormValues] = useState<any>();
+  const {personalityId, currentUser} = useAuth()
+  const {formatMessage} = useIntl()
+  const [loading, setLoading] = useState(false)
+  const [allInvestors, setAllInvestors] = useState<any>()
+  const [allUsers, setAllUsers] = useState<any>()
+  const [allDay, setAllDay] = useState(false)
+  const [hide, setHide] = useState(false)
+  const [activityType, setActivityType] = useState<string>()
+  const [modelStatus, setModelStatus] = useState<boolean>(false)
+  const [documentName, setDocumentName] = useState<string>()
+  const [formValues, setFormValues] = useState<any>()
 
   const intializeActiveSchema = Yup.object().shape({
     title: Yup.string().required(formatMessage({ id: "Title is required" })),
@@ -135,7 +135,7 @@ export const EditActivityModal = ({
             success,
             data: { data: allApiInvestors },
           },
-        } = await getAllInvestor("", "", "", "", companyId);
+        } = await getAllInvestor('', '', '', '', personalityId)
         if (success) {
           let investors: any = [];
           investors = allApiInvestors.map((investor: any) => {
@@ -152,18 +152,18 @@ export const EditActivityModal = ({
       } catch (error) {
         console.log(error);
       }
-    };
-    if (companyId) {
-      getInvestors();
     }
-  }, [companyId]);
+    if (personalityId) {
+      getInvestors()
+    }
+  }, [personalityId])
 
   useEffect(() => {
     const getAllUser = async () => {
-      if (companyId) {
+      if (personalityId) {
         const {
-          data: { data: values, success },
-        } = await getAllUsers(companyId);
+          data: {data: values, success},
+        } = await getAllUsers(personalityId)
         if (success) {
           let users: any = [];
           users = values.map((user: any) => {
@@ -178,9 +178,9 @@ export const EditActivityModal = ({
           }
         }
       }
-    };
-    getAllUser();
-  }, [companyId]);
+    }
+    getAllUser()
+  }, [personalityId])
 
   useEffect(() => {
     if (activityData) {

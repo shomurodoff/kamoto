@@ -15,7 +15,7 @@ import {
   teamSizeOptions,
 } from "../core/_constants";
 import TextArea from "../../widgets/components/Input/TextArea";
-import { updateCompanyProfile } from "../core/_requests";
+import { updatePersonalityInfo } from "../core/_requests";
 import { socialMediaData } from "../core/_constants";
 import { FileUpload } from "../../widgets/components/FileUpload";
 import { useAuth } from "../../auth";
@@ -25,7 +25,7 @@ import { toast } from "react-toastify";
 
 import { verifyToken } from "../../auth/core/_requests";
 import { Spinner } from "../../widgets/components/General/Spinner";
-import { companyData } from "../../../../app/modules/profile/core/_requests";
+import { getPersonalityInfo } from "../../../../app/modules/profile/core/_requests";
 
 export function Company({
   key,
@@ -44,10 +44,10 @@ export function Company({
   countryOptions: any;
   stateOptions: any;
 }) {
-  const [loading, setLoading] = useState(false);
-  const [modelStatus, setModelStatus] = useState<boolean>(false);
-  const { companyId, currentUser, setCurrentUser } = useAuth();
-  const { formatMessage } = useIntl();
+  const [loading, setLoading] = useState(false)
+  const [modelStatus, setModelStatus] = useState<boolean>(false)
+  const {personalityId, currentUser, setCurrentUser} = useAuth()
+  const {formatMessage} = useIntl()
 
   const companySchema = Yup.object().shape({
     companyName: Yup.string()
@@ -125,18 +125,18 @@ export function Company({
       twitter: values.socialMedia.twitter,
       linkedin: values.socialMedia.linkedin,
       instagram: values.socialMedia.instagram,
-      companyId: companyId,
-    };
+      personalityId: personalityId,
+    }
     try {
       setLoading(true);
       const {
         data: { success, errors, data },
-      } = await updateCompanyProfile(updateCompanyData);
+      } = await updatePersonalityInfo(updateCompanyData);
       if (success) {
-        if (companyId) {
+        if (personalityId) {
           const {
-            data: { success, data },
-          } = await companyData(companyId);
+            data: {success, data},
+          } = await getPersonalityInfo(personalityId)
           if (success) {
             setCompanyImgName(data.companylogo);
             companyInitialValues.companyName = data.name;

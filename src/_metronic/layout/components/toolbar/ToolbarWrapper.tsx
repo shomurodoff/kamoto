@@ -28,8 +28,7 @@ import {
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../../app/modules/auth";
 import {
-  companyData,
-  getEmailPreferences,
+  getPersonalityInfo,
   getLocale,
   getReferralData,
   getTotalReferralEarning,
@@ -59,7 +58,7 @@ const ToolbarWrapper = () => {
   const {
     currentUser,
     setCurrentUser,
-    companyId,
+    personalityId,
     currentState,
     setCurrentState,
     selected,
@@ -74,12 +73,11 @@ const ToolbarWrapper = () => {
   const [companyImgName, setCompanyImgName] = useState<string>();
   const [getCompanyApiLoading, setGetCompanyApiLoading] = useState(false);
   const [getLocaleApiLoading, setGetLocaleApiLoading] = useState(false);
-  const [getPreferencesApiLoading, setGetPreferencesApiLoading] =
-    useState(false);
+
   const [countryId, setCountryId] = useState<string | undefined>();
   const [countryOptions, setcountryOptions] = useState<any[]>([]);
+  const [phoneCodes, setPhoneCodes] = useState<any[]>([]);
   const [stateOptions, setstateOptions] = useState<any[]>([]);
-  const [getPreferences, setGetPreferences] = useState(EmailPreferencesOutput);
   const { storeSearchValue, setInvestorDbFilter } = useInvestorDatabase();
   const [bccEmail, setBccEmail] = useState("");
   const [emailSignature, setEmailSignature] = useState("");
@@ -97,7 +95,7 @@ const ToolbarWrapper = () => {
   const [foundercrateRadio, setFoundercrate] = useState(false);
   const [customsmtpRadio, setCustomSmtpRadio] = useState(false);
 
-  const { getBillingDetailsAPI } = useGetBillingData(companyId!);
+  const { getBillingDetailsAPI } = useGetBillingData(personalityId!);
 
   // api calling starts
 
@@ -117,10 +115,10 @@ const ToolbarWrapper = () => {
     const getBillingDetails = async () => {
       setBillingData(await getBillingDetailsAPI());
     };
-    if (companyId) {
+    if (personalityId) {
       getBillingDetails();
     }
-  }, [companyId]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [personalityId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   //Referral API Calls
   const getReferral = async () => {
@@ -167,11 +165,11 @@ const ToolbarWrapper = () => {
   useEffect(() => {
     const getProfileInfo = async () => {
       try {
-        if (companyId) {
+        if (personalityId) {
           setApiLoading(true);
           const {
             data: { success, data, errors },
-          } = await profileData(companyId);
+          } = await profileData(personalityId);
           if (success) {
             setApiLoading(false);
             setImgName(data.profileImage);
@@ -180,14 +178,16 @@ const ToolbarWrapper = () => {
               firstName: data.firstName,
               profileImg: data.profileImage,
             });
-            const communicationData = JSON.parse(data.communication);
+            const communicationData = data.communication;
             userInitialValues.firstName = data.firstName;
             userInitialValues.lastName = data.lastName;
             userInitialValues.email = data.email;
             userInitialValues.contact = data.contact!;
             userInitialValues.country = data.countryId!;
             userInitialValues.designation = data.designation;
-            userInitialValues.profileImageId = data.profileImageId!;
+            userInitialValues.photo = data.photo!;
+            userInitialValues.banner = data.banner!;
+            userInitialValues.website = data.website!;
             userInitialValues.communication.email =
               communicationData?.email || false;
             userInitialValues.communication.phone =
@@ -205,16 +205,16 @@ const ToolbarWrapper = () => {
       }
     };
     getProfileInfo();
-  }, [companyId]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [personalityId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const getCompanyData = async () => {
       try {
         setGetCompanyApiLoading(true);
-        if (companyId) {
+        if (personalityId) {
           const {
             data: { success, data, errors },
-          } = await companyData(companyId);
+          } = await getPersonalityInfo(personalityId);
           if (success) {
             setGetCompanyApiLoading(false);
             setCompanyImgName(data.companylogo);
@@ -248,7 +248,7 @@ const ToolbarWrapper = () => {
       }
     };
     getCompanyData();
-  }, [companyId]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [personalityId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const fetchCountry = async () => {
@@ -263,6 +263,14 @@ const ToolbarWrapper = () => {
         };
       });
       setcountryOptions([...countriesData]);
+      const phoneCodes = countries.map((country: CountryModel) => {
+        return {
+          id: country.countryId,
+          name: '+'+country.phone_code,
+          value: country.countryId,
+        };
+      });
+      setPhoneCodes(phoneCodes);
     };
     fetchCountry();
   }, []);
@@ -296,7 +304,7 @@ const ToolbarWrapper = () => {
   useEffect(() => {
     const getCompanyMeta = async () => {
       try {
-        if (companyId) {
+        if (personalityId) {
           setGetLocaleApiLoading(true);
           const {
             data: { success, data, errors },
@@ -320,46 +328,17 @@ const ToolbarWrapper = () => {
       }
     };
     getCompanyMeta();
-  }, [companyId]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [personalityId]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => {
-    const getApiEmailPreferences = async () => {
-      try {
-        if (companyId) {
-          setGetPreferencesApiLoading(true);
-          const {
-            data: {
-              data: { preference },
-              success,
-              errors,
-            },
-          } = await getEmailPreferences(companyId);
-          if (success) {
-            setGetPreferencesApiLoading(false);
-            setGetPreferences(JSON.parse(preference));
-          } else {
-            setGetPreferencesApiLoading(false);
-            errors.forEach((error: string) => {
-              toast.error(formatMessage({ id: error }));
-            });
-          }
-        }
-      } catch (err) {
-        setGetPreferencesApiLoading(false);
-        console.log(err);
-      }
-    };
-    getApiEmailPreferences();
-  }, [companyId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   //for bcctracking
   useEffect(() => {
     const getBcctrackingData = async () => {
       try {
-        if (companyId) {
+        if (personalityId) {
           const {
             data: { success, data, errors },
-          } = await getBccTrackingData(companyId);
+          } = await getBccTrackingData(personalityId);
           if (success) {
             setBccEmail(data.email);
           } else {
@@ -373,14 +352,14 @@ const ToolbarWrapper = () => {
       }
     };
     getBcctrackingData();
-  }, [companyId]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [personalityId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Email Integration API
   const getMailInformation = async () => {
     try {
       const {
         data: { success, data, errors },
-      } = await getMailInfo(companyId);
+      } = await getMailInfo(personalityId);
       if (success) {
         senderInitialValues.fromName = data.fromName;
         senderInitialValues.fromEmail = data.fromAddress;
@@ -434,10 +413,10 @@ const ToolbarWrapper = () => {
 
   const getPendingUserList = async () => {
     try {
-      if (companyId) {
+      if (personalityId) {
         const {
           data: { success, data, errors },
-        } = await getPendingUsers(companyId);
+        } = await getPendingUsers(personalityId);
         if (success) {
           setPendingUsersList(data);
         } else {
@@ -453,10 +432,10 @@ const ToolbarWrapper = () => {
 
   const getUsersList = async () => {
     try {
-      if (companyId) {
+      if (personalityId) {
         const {
           data: { success, data, errors },
-        } = await getUserList(companyId);
+        } = await getUserList(personalityId);
         if (success) {
           setUserList(data);
         } else {
@@ -472,17 +451,17 @@ const ToolbarWrapper = () => {
 
   useEffect(() => {
     getUsersList();
-  }, [companyId]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [personalityId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (companyId) {
+    if (personalityId) {
       getMailInformation();
     }
-  }, [companyId]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [personalityId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (companyId) getPendingUserList();
-  }, [companyId]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (personalityId) getPendingUserList();
+  }, [personalityId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // api calling ends
 
@@ -538,9 +517,10 @@ const ToolbarWrapper = () => {
                   <User
                     key={key}
                     getApiLoading={getApiLoading}
-                    setImgName={setImgName}
-                    imgName={imgName}
+                    // setImgName={setImgName}
+                    // imgName={imgName}
                     countryOptions={countryOptions}
+                    phoneCodes={phoneCodes}
                   />
                 </div>
               </Tab>
@@ -576,7 +556,7 @@ const ToolbarWrapper = () => {
                     currencyBill={currencyBill}
                     selected={selected}
                     currentState={currentState}
-                    companyId={companyId}
+                    companyId={personalityId}
                   />
                 </div>
               </Tab>
@@ -619,12 +599,7 @@ const ToolbarWrapper = () => {
                 className="mr-3 mt-2"
               >
                 <div className="mt-4">
-                  <NotificationPreferences
-                    key={key}
-                    getPreferences={getPreferences}
-                    setGetPreferences={setGetPreferences}
-                    getPreferencesApiLoading={getPreferencesApiLoading}
-                  />
+                  <NotificationPreferences/>
                 </div>
               </Tab>
             </Tabs>

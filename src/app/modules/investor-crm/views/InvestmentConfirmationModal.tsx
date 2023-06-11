@@ -55,10 +55,10 @@ export const InvestmentConfirmationModal = ({
   partialStatus?: any;
   getActiveRoundFromApi?: () => void;
 }) => {
-  const { formatMessage } = useIntl();
-  const [loading, setLoading] = useState(false);
-  const { companyId } = useAuth();
-  const [formValues, setFormValues] = useState<any>(null);
+  const {formatMessage} = useIntl()
+  const [loading, setLoading] = useState(false)
+  const {personalityId} = useAuth()
+  const [formValues, setFormValues] = useState<any>(null)
   const intializeInvestmentConfirmationSchema = Yup.object().shape({
     roundId: Yup.string(),
     amount: Yup.number()
@@ -122,9 +122,9 @@ export const InvestmentConfirmationModal = ({
 
   const onSubmit = async (values: any) => {
     try {
-      setLoading(true);
-      if (!companyId) {
-        throw formatMessage({ id: "Company ID is required." });
+      setLoading(true)
+      if (!personalityId) {
+        throw formatMessage({id: 'Company ID is required.'})
       }
       values.roundId = +roundId;
       values.currencyId = currency;

@@ -12,19 +12,16 @@ import { useAuth } from "../../auth";
 import { Spinner } from "../../widgets/components/General/Spinner";
 
 const ProspectiveInvestor = () => {
-  const [prospectiveInvestor, setProspectiveInvestor] = useState<
-    InvestorModel[]
-  >([]);
-  const { searchValue, sort_by_investorDb, sort_order_investorDb } =
-    useInvestorDatabase();
-  const [selectedOption, setSelectedOption] = useState(2);
-  const [roundId, setRoundId] = useState<number>();
-  const { companyId } = useAuth();
-  const { formatMessage } = useIntl();
-  const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const [totalCount, setTotalCount] = useState<number>(0);
-  const [totalPages, setTotalPages] = useState<number>(0);
+  const [prospectiveInvestor, setProspectiveInvestor] = useState<InvestorModel[]>([])
+  const {searchValue, sort_by_investorDb, sort_order_investorDb} = useInvestorDatabase()
+  const [selectedOption, setSelectedOption] = useState(2)
+  const [roundId, setRoundId] = useState<number>()
+  const {personalityId} = useAuth()
+  const {formatMessage} = useIntl()
+  const [loading, setLoading] = useState(true)
+  const [page, setPage] = useState(1)
+  const [totalCount, setTotalCount] = useState<number>(0)
+  const [totalPages, setTotalPages] = useState<number>(0)
   const sidebarOptions: any[] = [
     {
       id: 1,
@@ -52,8 +49,8 @@ const ProspectiveInvestor = () => {
             searchValue,
             sort_by_investorDb,
             sort_order_investorDb,
-            companyId,
-            "recommended",
+            personalityId,
+            'recommended',
             page,
             12
           );
@@ -78,8 +75,8 @@ const ProspectiveInvestor = () => {
             searchValue,
             sort_by_investorDb,
             sort_order_investorDb,
-            companyId,
-            "all",
+            personalityId,
+            'all',
             page,
             12
           );
@@ -110,8 +107,8 @@ const ProspectiveInvestor = () => {
   const activeRound = async () => {
     try {
       const {
-        data: { data, success, errors },
-      } = await getActiveRound(Number(companyId));
+        data: {data, success, errors},
+      } = await getActiveRound(personalityId)
       if (success) {
         setRoundId(data?.roundId);
       } else {
@@ -124,8 +121,8 @@ const ProspectiveInvestor = () => {
     }
   };
   useEffect(() => {
-    activeRound();
-  }, [companyId]); // eslint-disable-line react-hooks/exhaustive-deps
+    activeRound()
+  }, [personalityId]) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     setTotalPages(Math.ceil(totalCount / 12));

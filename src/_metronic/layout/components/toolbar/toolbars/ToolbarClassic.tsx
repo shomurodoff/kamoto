@@ -6,7 +6,7 @@ import { getProfileCompletionAPI } from "../../../../../app/modules/profile/core
 import { CreateInvestorModal } from "../../../../../app/modules/investor-database/components/CreateInvestorModal";
 
 const ToolbarClassic = () => {
-  const { companyId } = useAuth();
+  const { personalityId } = useAuth();
   const location = useLocation();
   const { formatMessage } = useIntl();
   const navigate = useNavigate();
@@ -16,10 +16,10 @@ const ToolbarClassic = () => {
   useEffect(() => {
     const getProfileCompletionData = async () => {
       try {
-        if (companyId) {
+        if (personalityId) {
           const {
             data: { data: values, success },
-          } = await getProfileCompletionAPI(companyId);
+          } = await getProfileCompletionAPI(personalityId);
           if (success) {
             setStatus(values);
           }
@@ -29,7 +29,7 @@ const ToolbarClassic = () => {
       }
     };
     getProfileCompletionData();
-  }, [companyId]);
+  }, [personalityId]);
 
   return (
     <>

@@ -1,5 +1,6 @@
 import { DashboardModal } from "@uppy/react";
 import { Uppy } from "@uppy/core";
+import Transloadit from "@uppy/transloadit";
 import XHRUpload from "@uppy/xhr-upload";
 import ImageEditor from "@uppy/image-editor";
 
@@ -9,6 +10,9 @@ import "@uppy/image-editor/dist/style.css";
 import "@uppy/image-editor/dist/style.css";
 import { AuthModel, getAuth } from "../../auth";
 import { useEffect, useMemo } from "react";
+import { getUploadSign } from "../../auth/core/_requests";
+import { toast } from "react-toastify";
+import { useIntl } from "react-intl";
 export const FileUpload = ({
   fileSize,
   maxFileNumber,
@@ -17,6 +21,7 @@ export const FileUpload = ({
   modalStatus,
   handleClose,
   handleSuccess,
+  resourceType
 }: {
   fileSize: number;
   maxFileNumber: number;
@@ -25,11 +30,42 @@ export const FileUpload = ({
   modalStatus: boolean;
   handleClose: () => void;
   handleSuccess: (id: number, name: string) => void;
+  resourceType?: string;
 }) => {
   const { token } = (getAuth() as AuthModel) || {};
   if (!token) {
     getAuth();
   }
+  const { formatMessage } = useIntl();
+  const getAssemblyOptions = (): Promise<any> => {
+    return new Promise((resolve, reject) => {
+      getUploadSign(resourceType).then((resp) => {
+        let transloaditObject = resp.data.data
+        resolve({
+          params: {
+            auth: { key: transloaditObject.transloaditKey, expires: transloaditObject.expires },
+            steps: {
+              ':original': {
+                robot: '/upload/handle'
+              },
+              image_optimized: {
+                use: ':original',
+                robot: '/image/optimize',
+                priority: 'compression-ratio'
+              },
+              exported: transloaditObject.s3PublicBucketObj,
+            },
+          },
+          signature: transloaditObject.publicUploadSignature
+        })
+      }).catch((err) => {
+        toast.error(formatMessage({id : 'Server error while uploading. Please try again later.'}))
+        uppy.cancelAll()
+        handleClose()
+      })
+    })
+  }
+
   const uppy = useMemo(() => {
     return new Uppy({
       autoProceed: false,
@@ -72,27 +108,25 @@ export const FileUpload = ({
         },
       })
 
-      .use(XHRUpload, {
-        endpoint: `${process.env.REACT_APP_BASE_API_URL}/file`,
-        fieldName: "file",
-        formData: true,
-        bundle: false,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      .use(Transloadit, {
+        getAssemblyOptions,
+        waitForEncoding: true
       })
-      .on("upload-success", (file, response) => {
-        const { data, success } = response.body;
-        if (success) {
+      .on('transloadit:complete', (assembly) => {
+          console.log(assembly.results[':original'][0].ssl_url)
           handleClose();
-          handleSuccess(data.fileId, data.name);
-        }
+          handleSuccess(5,assembly.results[':original'][0].ssl_url)
+          //   setPhotoUrl(assembly.results[':original'][0].ssl_url)
       })
-      .on("upload-error", (file, error, response) => {
-        const httpBody = response?.body;
-        console.log(httpBody);
-      });
+      .on('error', (err) => {
+        console.log(err)
+        toast.error(formatMessage({id : 'Server error while uploading. Please try again later.'}))
+        uppy.cancelAll()
+    })
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  
+
   useEffect(() => {
     return () => uppy.close({ reason: "unmount" });
   }, [uppy]);

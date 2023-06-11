@@ -108,7 +108,7 @@ export const getAllInvestor = (
   searchValue: string | undefined,
   sort_by_investorDb: string | undefined,
   sort_order_investorDb: string | undefined,
-  companyId: number | undefined,
+  personalityId: string | undefined,
   subType?: string | undefined,
   page?: number,
   size?: number
@@ -123,7 +123,7 @@ export const getAllInvestor = (
   };
 
   return axios.get(
-    `${GET_ALL_INVESTOR}/company/${companyId}?type=${type}&${serialize(
+    `${GET_ALL_INVESTOR}/company/${personalityId}?type=${type}&${serialize(
       object
     )}`,
     {
@@ -182,8 +182,8 @@ export const getIndustry = () => {
   });
 };
 
-export const getActiveRound = (companyId: number) => {
-  return axios.get(`${GET_ACTIVE_ROUND}/${companyId}`, {
+export const getActiveRound = (personalityId: string | undefined) => {
+  return axios.get(`${GET_ACTIVE_ROUND}/${personalityId}`, {
     validateStatus(status) {
       return true;
     },

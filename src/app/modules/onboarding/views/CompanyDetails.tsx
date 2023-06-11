@@ -8,7 +8,7 @@ import { InfoCard } from "../../widgets/components/UI/InfoCard";
 import { SelectInput } from "../../widgets/components/Input/SelectInput";
 import { CustomButton } from "../../widgets/components/UI/CustomButton";
 import { useNavigate } from "react-router-dom";
-import { createCompany, getLocation } from "../core/_requests";
+import { createPersonality, getLocation } from "../core/_requests";
 import { FileUpload } from "../../widgets/components/FileUpload";
 
 import { useAuth } from "../../auth";
@@ -44,13 +44,13 @@ export const CompanyDetails = () => {
   const [price, setPrice] = useState("0");
   const navigate = useNavigate();
 
-  const { storeCompanyId, setCurrentUser } = useAuth();
+  const { storePersonalityId, setCurrentUser,onboardingData, setOnboardingData } = useAuth();
 
-  const companyDetailsSchema = Yup.object().shape({
-    companyName: Yup.string()
+  const personalityValidationSchema = Yup.object().shape({
+    personalityName: Yup.string()
       .min(3, formatMessage({ id: "Minimum 3 characters" }))
       .max(50, formatMessage({ id: "Maximum 50 characters" }))
-      .required(formatMessage({ id: "Company name is required" })),
+      .required(formatMessage({ id: "Personality name is required" })),
     industry: Yup.string().required(
       formatMessage({ id: "Industry is required" })
     ),
@@ -103,48 +103,54 @@ export const CompanyDetails = () => {
       };
       getCurrencyCode();
     }
+    // check if onboardingData is not null and step is 2
+    if(onboardingData && onboardingData.step === 2){
+      navigate("/onboarding/initialize-round")
+    }
   }, []);
 
   const onSubmit = async (values: any) => {
     setLoading(true);
-
+    const chargebeePlanId = `${selected}-${currencyBill}-${currentState}`;
+    setOnboardingData({...values,chargebeePlanId: chargebeePlanId,step: 2})
+    // save details in localstorage and apply api call on next page
+    
     navigate("/onboarding/initialize-round");
+    // try {
+    //   const chargebeePlanId = `${selected}-${currencyBill}-${currentState}`;
 
-    try {
-      const chargebeePlanId = `${selected}-${currencyBill}-${currentState}`;
+    //   const {
+    //     data: { data, success, errors },
+    //   } = await createPersonality(
+    //     values.personalityName,
+    //     values.industry,
+    //     values.country,
+    //     values.state,
+    //     values.logoId,
+    //     chargebeePlanId
+    //   );
 
-      const {
-        data: { data, success, errors },
-      } = await createCompany(
-        values.companyName,
-        values.industry,
-        values.country,
-        values.state,
-        values.logoId,
-        chargebeePlanId
-      );
+    //   if (success) {
+    //     navigate("/onboarding/initialize-round");
+    //     setLoading(false);
 
-      if (success) {
-        navigate("/onboarding/initialize-round");
-        setLoading(false);
-
-        const {
-          data: { success, data: value },
-        } = await verifyToken(data.token);
-        if (success) {
-          setCurrentUser({ ...value });
-          storeCompanyId(data.companyId);
-        }
-      } else {
-        errors.forEach((error: string) => {
-          toast.error(formatMessage({ id: error }));
-        });
-        setLoading(false);
-      }
-    } catch (error) {
-      setLoading(false);
-      console.error(error);
-    }
+    //     const {
+    //       data: { success, data: value },
+    //     } = await verifyToken(data.token);
+    //     if (success) {
+    //       setCurrentUser({ ...value });
+    //       storePersonalityId(data.personalityId);
+    //     }
+    //   } else {
+    //     errors.forEach((error: string) => {
+    //       toast.error(formatMessage({ id: error }));
+    //     });
+    //     setLoading(false);
+    //   }
+    // } catch (error) {
+    //   setLoading(false);
+    //   console.error(error);
+    // }
   };
 
   const handleOpen = () => {
@@ -153,13 +159,12 @@ export const CompanyDetails = () => {
   const handleClose = () => {
     setModelStatus(false);
   };
-
   return (
     <>
       <Toaster />
       <Formik
-        // validationSchema={companyDetailsSchema}
-        initialValues={initialValues}
+        validationSchema={personalityValidationSchema}
+        initialValues={onboardingData || initialValues}
         enableReinitialize={true}
         onSubmit={onSubmit}
         validateOnMount
@@ -181,7 +186,7 @@ export const CompanyDetails = () => {
                   <TextInput
                     fieldType={"text"}
                     label={formatMessage({ id: "AI Personality name*" })}
-                    fieldName={"personalName"}
+                    fieldName={"personalityName"}
                     placeholder={formatMessage({ id: "Shahrukh Khan" })}
                     formik={formik}
                     margin="me-4"
@@ -195,17 +200,17 @@ export const CompanyDetails = () => {
                     className={`flex justify-center md:justify-start`}
                     onClick={handleOpen}
                   >
-                    <DisplayImage
+                    {/* <DisplayImage
                       imgName={imgName}
                       className={"w-[125px] h-[125px] rounded shadow"}
                       fit="contain"
                       alt="profile"
-                    />
+                    /> */}
                     {/*<div className='pencil-container'>*/}
                     {/*  <img src={toAbsoluteUrl('/media/icons/duotune/general/pencil.svg')} alt='' />*/}
                     {/*</div>*/}
                   </div>
-                  <FileUpload
+                  {/* <FileUpload
                     fileSize={2097152}
                     maxFileNumber={1}
                     allowType={["image/*", ".jpg", ".jpeg", ".png"]}
@@ -222,7 +227,7 @@ export const CompanyDetails = () => {
                       {formatMessage({ id: "Max size 2mb, supported" })}{" "}
                     </span>
                     {formatMessage({ id: "format jpg, png" })}
-                  </div>
+                  </div> */}
                 </div>
                 <div className="bg-[#1A1B25] rounded p-[16px] mt-[24px] md:mt-[30px]  flex flex-col  xl:flex-row items-start gap-y-[8px] xl:items-center justify-between">
                   <div className="w-full xl:w-auto items-center justify-between md:justify-start mb-2">

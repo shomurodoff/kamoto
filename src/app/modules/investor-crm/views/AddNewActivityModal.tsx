@@ -18,11 +18,11 @@ export const AddNewActivityModal = ({
   investorId?: number;
   getActivity?: () => void;
 }) => {
-  const { formatMessage } = useIntl();
-  const [key, setKey] = useState(1);
-  const [allInvestors, setAllInvestors] = useState<any>();
-  const [allUsers, setAllUsers] = useState<any>();
-  const { companyId } = useAuth();
+  const {formatMessage} = useIntl()
+  const [key, setKey] = useState(1)
+  const [allInvestors, setAllInvestors] = useState<any>()
+  const [allUsers, setAllUsers] = useState<any>()
+  const {personalityId} = useAuth()
 
   useEffect(() => {
     const getInvestors = async () => {
@@ -32,7 +32,7 @@ export const AddNewActivityModal = ({
             success,
             data: { data: allApiInvestors },
           },
-        } = await getAllInvestor("", "", "", "", companyId);
+        } = await getAllInvestor('', '', '', '', personalityId)
         if (success) {
           let investors: any = [];
           investors = allApiInvestors?.map((investor: any) => {
@@ -49,16 +49,16 @@ export const AddNewActivityModal = ({
       } catch (error) {
         console.log(error);
       }
-    };
-    getInvestors();
-  }, [companyId]);
+    }
+    getInvestors()
+  }, [personalityId])
 
   useEffect(() => {
     const getAllUser = async () => {
-      if (companyId) {
+      if (personalityId) {
         const {
-          data: { data: values, success },
-        } = await getAllUsers(companyId);
+          data: {data: values, success},
+        } = await getAllUsers(personalityId)
         if (success) {
           let users: any = [];
           users = values.map((user: any) => {
@@ -73,9 +73,9 @@ export const AddNewActivityModal = ({
           }
         }
       }
-    };
-    getAllUser();
-  }, [companyId]);
+    }
+    getAllUser()
+  }, [personalityId])
   return (
     <Modal
       size="xl"
@@ -103,8 +103,8 @@ export const AddNewActivityModal = ({
                 setModalShow={setModalShow}
                 allInvestors={allInvestors}
                 allUsers={allUsers}
-                type="email"
-                companyId={companyId!}
+                type='email'
+                companyId={personalityId!}
                 investorId={investorId}
                 getActivity={getActivity}
               />
@@ -114,8 +114,8 @@ export const AddNewActivityModal = ({
                 setModalShow={setModalShow}
                 allInvestors={allInvestors}
                 allUsers={allUsers}
-                type="call"
-                companyId={companyId!}
+                type='call'
+                companyId={personalityId!}
                 investorId={investorId}
                 getActivity={getActivity}
               />
@@ -125,8 +125,8 @@ export const AddNewActivityModal = ({
                 setModalShow={setModalShow}
                 allInvestors={allInvestors}
                 allUsers={allUsers}
-                type="meeting"
-                companyId={companyId!}
+                type='meeting'
+                companyId={personalityId!}
                 investorId={investorId}
                 getActivity={getActivity}
               />
@@ -136,8 +136,8 @@ export const AddNewActivityModal = ({
                 setModalShow={setModalShow}
                 allInvestors={allInvestors}
                 allUsers={allUsers}
-                type="tasks"
-                companyId={companyId!}
+                type='tasks'
+                companyId={personalityId!}
                 investorId={investorId}
                 getActivity={getActivity}
               />
@@ -147,8 +147,8 @@ export const AddNewActivityModal = ({
                 setModalShow={setModalShow}
                 allInvestors={allInvestors}
                 allUsers={allUsers}
-                type="notes"
-                companyId={companyId!}
+                type='notes'
+                companyId={personalityId!}
                 investorId={investorId}
                 getActivity={getActivity}
               />
@@ -158,8 +158,8 @@ export const AddNewActivityModal = ({
                 setModalShow={setModalShow}
                 allInvestors={allInvestors}
                 allUsers={allUsers}
-                type="documents"
-                companyId={companyId!}
+                type='documents'
+                companyId={personalityId!}
                 investorId={investorId}
                 getActivity={getActivity}
               />

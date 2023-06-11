@@ -18,7 +18,7 @@ const HeaderNotificationsMenu = ({
   setBlinker: any;
 }) => {
   const { formatMessage } = useIntl();
-  const { companyId } = useAuth();
+  const { personalityId } = useAuth();
   const [alerts, setAlert] = useState<any>();
   const [logs, setLog] = useState<any>();
   const [updates, setUpdate] = useState<any>();
@@ -29,7 +29,7 @@ const HeaderNotificationsMenu = ({
     try {
       const {
         data: { data, success, errors },
-      } = await getNotifications(companyId);
+      } = await getNotifications(personalityId);
       if (success) {
         if (data.length > 0) {
           if (!notificationId) {
@@ -72,7 +72,7 @@ const HeaderNotificationsMenu = ({
     try {
       const {
         data: { data, success, errors },
-      } = await getAllNotifications(companyId);
+      } = await getAllNotifications(personalityId);
       if (success) {
         setLength(data.length);
         setAlert(
@@ -100,10 +100,10 @@ const HeaderNotificationsMenu = ({
     }
   };
   useEffect(() => {
-    if (companyId) {
+    if (personalityId) {
       notifications();
     }
-  }, [companyId]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [personalityId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const showDate = (date: any) => {
     const days =

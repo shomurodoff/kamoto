@@ -24,22 +24,18 @@ export const InvestorNavBar = ({
   investor: InvestorModel;
   getInvestor: () => void;
 }) => {
-  const { formatMessage } = useIntl();
-  const { companyId } = useAuth();
-  const [selectedSideBar, setSelectedSideBar] = useState(1);
-  const [activityModalShow, setActivityModalShow] = useState(false);
-  const [key, setKey] = useState(1);
-  const [allActivities, setAllActivities] = useState<[activityModel]>();
-  const [activitySearch, setActivitySearch] = useState<string>("");
-  const [modalShow, setModalShow] = useState(false);
-  const [isActivityFilter, setIsActivityFilter] = useState<boolean>(false);
-  const [sort_by_activity, set_sort_by_activity] = useState<string | undefined>(
-    undefined
-  );
-  const [sort_order_activty, set_sort_order_activty] = useState<
-    string | undefined
-  >(undefined);
-  const [allInvestorUser, setAllInvestorUser] = useState<any>([]);
+  const {formatMessage} = useIntl()
+  const {personalityId} = useAuth()
+  const [selectedSideBar, setSelectedSideBar] = useState(1)
+  const [activityModalShow, setActivityModalShow] = useState(false)
+  const [key, setKey] = useState(1)
+  const [allActivities, setAllActivities] = useState<[activityModel]>()
+  const [activitySearch, setActivitySearch] = useState<string>('')
+  const [modalShow, setModalShow] = useState(false)
+  const [isActivityFilter, setIsActivityFilter] = useState<boolean>(false)
+  const [sort_by_activity, set_sort_by_activity] = useState<string | undefined>(undefined)
+  const [sort_order_activty, set_sort_order_activty] = useState<string | undefined>(undefined)
+  const [allInvestorUser, setAllInvestorUser] = useState<any>([])
 
   const onhandleChange = (event: any) => {
     setActivitySearch(event.target.value);
@@ -56,11 +52,11 @@ export const InvestorNavBar = ({
     if (selectedSideBar === 3) {
       type = "past";
     }
-    if (companyId && investor?.investorId) {
+    if (personalityId && investor?.investorId) {
       const {
         data: { data: values, success },
       } = await getAllActivities(
-        companyId,
+        personalityId,
         investor?.investorId,
         type,
         activitySearch,
@@ -77,7 +73,7 @@ export const InvestorNavBar = ({
   useEffect(() => {
     getActivity(); // eslint-disable-next-line
   }, [
-    companyId,
+    personalityId,
     investor?.investorId,
     selectedSideBar,
     activitySearch,

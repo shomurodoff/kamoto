@@ -15,20 +15,20 @@ const Knowledga: React.FC<any> = ({ setOpenEdit }) => {
           return (
             <Form className={"col-span-12 md:col-span-7 order-0"}>
               <TextArea
-                label={formatMessage({ id: "Description" })}
+                label={formatMessage({ id: "Back story" })}
                 fieldName={"description"}
                 placeholder={formatMessage({
-                  id: "Write a paragraph describing who your personality is",
+                  id: "Define a back story of the Personality",
                 })}
                 formik={formik}
                 toolTipText={"text"}
                 className={"!min-h-[210px]"}
               />
               <TextArea
-                label={formatMessage({ id: "Motivations" })}
-                fieldName={"motivations"}
+                label={formatMessage({ id: "Personal Knowledge" })}
+                fieldName={"personal_knowledge"}
                 placeholder={formatMessage({
-                  id: "What motivates your personality",
+                  id: "Write a paragraph of personal knowledge",
                 })}
                 formik={formik}
                 toolTipText={"text"}

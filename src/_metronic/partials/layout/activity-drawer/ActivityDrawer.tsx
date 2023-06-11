@@ -8,16 +8,16 @@ import { useIntl } from "react-intl";
 
 export const ActivityDrawer: FC = () => {
   const { formatMessage } = useIntl();
-  const { companyId } = useAuth();
+  const { personalityId } = useAuth();
   const [allActivities, setAllActivities] = useState<[activityModel]>();
 
   const getActivity = async () => {
     let type: string = "all";
-    if (companyId) {
+    if (personalityId) {
       const {
         data: { data: values, success },
       } = await getAllActivities(
-        companyId,
+        personalityId,
         -1,
         type,
         "",
@@ -34,7 +34,7 @@ export const ActivityDrawer: FC = () => {
 
   useEffect(() => {
     getActivity(); // eslint-disable-next-line
-  }, [companyId]);
+  }, [personalityId]);
 
   return (
     <div

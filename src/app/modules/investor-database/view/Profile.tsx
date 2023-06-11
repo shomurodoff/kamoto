@@ -17,17 +17,17 @@ import { useLocation, useParams } from "react-router-dom";
 import { useInvestorDatabase } from "../core/InvestorContext";
 import { useAuth } from "../../auth";
 const Profile = () => {
-  const [imgName, setImgName] = useState<string | undefined>();
-  const [, setModelStatus] = useState<boolean>(false);
-  const { formatMessage } = useIntl();
-  const [investorUser, setInvestorUser] = useState<InvestorUser>();
-  const [industry, setIndustry] = useState<any>([]);
-  const [roundId, setRoundId] = useState<number>();
-  const [, setColumnId] = useState<number>();
-  const { companyId } = useAuth();
-  const { setinvestorUser } = useInvestorDatabase();
-  const { id } = useParams();
-  const { state: investorId } = useLocation();
+  const [imgName, setImgName] = useState<string | undefined>()
+  const [, setModelStatus] = useState<boolean>(false)
+  const {formatMessage} = useIntl()
+  const [investorUser, setInvestorUser] = useState<InvestorUser>()
+  const [industry, setIndustry] = useState<any>([])
+  const [roundId, setRoundId] = useState<number>()
+  const [, setColumnId] = useState<number>()
+  const {personalityId} = useAuth()
+  const {setinvestorUser} = useInvestorDatabase()
+  const {id} = useParams()
+  const {state: investorId} = useLocation()
   const handleOpen = () => {
     setModelStatus(true);
   };
@@ -79,8 +79,8 @@ const Profile = () => {
   const activeRound = async () => {
     try {
       const {
-        data: { data, success, errors },
-      } = await getActiveRound(Number(companyId));
+        data: {data, success, errors},
+      } = await getActiveRound(personalityId)
       if (success) {
         setRoundId(data?.roundId);
       } else {
@@ -93,8 +93,8 @@ const Profile = () => {
     }
   };
   useEffect(() => {
-    activeRound();
-  }, [companyId]); // eslint-disable-line react-hooks/exhaustive-deps
+    activeRound()
+  }, [personalityId]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // const addToFavorite = async () => {
   //   try {

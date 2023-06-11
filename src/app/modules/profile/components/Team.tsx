@@ -37,7 +37,7 @@ export const Team = ({
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setDeleteShowModal] = useState(false);
   const [addModal, setAddModal] = useState(false);
-  const { companyId } = useAuth();
+  const { personalityId } = useAuth();
   const [userId, setUserId] = useState<any>();
   const [editUserModal, setEditUserModal] = useState(false);
   const [showUserId, setShowUserId] = useState<any>();
@@ -56,7 +56,7 @@ export const Team = ({
     try {
       const {
         data: { success, errors },
-      } = await updateTransferOwnership(companyId, userId);
+      } = await updateTransferOwnership(personalityId, userId);
 
       if (success) {
         toast.success(formatMessage({ id: "Transfer Ownership updated" }));
@@ -75,7 +75,7 @@ export const Team = ({
       setDeleteLoading(true);
       const {
         data: { success, errors },
-      } = await deleteUser(companyId, showUserId);
+      } = await deleteUser(personalityId, showUserId);
       if (success) {
         toast.success(formatMessage({ id: "User Deleted" }));
         getUserList();
@@ -119,7 +119,7 @@ export const Team = ({
       setUserApiSpinner(true);
       const {
         data: { success, data, errors },
-      } = await getUser(companyId, showUserId);
+      } = await getUser(personalityId, showUserId);
       if (success) {
         setUserDetails(data);
         setUserApiSpinner(false);

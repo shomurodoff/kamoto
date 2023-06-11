@@ -5,7 +5,7 @@ import TextInput from "../../widgets/components/Input/TextInput";
 import { CustomButton } from "../../widgets/components/UI/CustomButton";
 import { InfoCard } from "../../widgets/components/UI/InfoCard";
 import { useIntl } from "react-intl";
-import { createRound } from "../core/_requests";
+import { createPersonality, createRound } from "../core/_requests";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth";
 import { roundTypeOptions } from "../core/_constants";
@@ -15,49 +15,60 @@ import { useInitializeRoundSchema } from "../../../hooks/useInitializeRoundSchem
 import { roundInitialValues } from "../../../core/_constants";
 import { useCurrency } from "../../../hooks/useCurrency";
 import TextArea from "../../widgets/components/Input/TextArea";
+import { verifyToken } from "../../auth/core/_requests";
 
 export const InitializeRound = () => {
   const [loading, setLoading] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState("USD");
   const { formatMessage } = useIntl();
   const navigate = useNavigate();
-  const { companyId } = useAuth();
+  const {  storePersonalityId, setCurrentUser,personalityId, onboardingData,setOnboardingData } = useAuth();
   const { intializeRoundSchema } = useInitializeRoundSchema();
   const { currencyOptions } = useCurrency();
 
   const onSubmit = async (values: any) => {
-    navigate("/onboarding/team-members");
-    // try {
-    //   setLoading(true)
-    //   if (!companyId) {
-    //     setLoading(false)
-    //     throw formatMessage({id: 'Company ID is required.'})
-    //   }
-    //
-    //   const {
-    //     data: {success, errors},
-    //   } = await createRound(
-    //     values.roundName,
-    //     values.roundType,
-    //     values.amountTargeted,
-    //     values.amountAchieved,
-    //     values.currency,
-    //     companyId
-    //   )
-    //
-    //   if (success) {
-    //     setLoading(false)
-    //     navigate('/onboarding/team-members')
-    //   } else {
-    //     errors.forEach((error: string) => {
-    //       toast.error(formatMessage({id: error}))
-    //     })
-    //     setLoading(false)
-    //   }
-    // } catch (error) {
-    //   setLoading(false)
-    //   console.error(error)
-    // }
+    let onboarding = {...onboardingData, ...values}
+    setOnboardingData(onboarding)
+
+    // navigate("/onboarding/team-members");
+    try {
+      // const chargebeePlanId = `${selected}-${currencyBill}-${currentState}`;
+
+      const {
+        data: { data, success, errors },
+      } = await createPersonality(
+        values.personalityName,
+        values.industry,
+        values.country,
+        values.state,
+        values.logoId,
+        onboarding.chagebeePlanId,
+        onboarding.description,
+        onboarding.personalityType
+      );
+      if (success) {
+        setLoading(false);
+        const {
+          data: { success, data: value },
+        } = await verifyToken(data.token);
+        if (success) {
+          setOnboardingData(null)
+          setCurrentUser({ ...value });
+          storePersonalityId(data.personalityId);
+          setTimeout(() => {
+            navigate("/dashboard");
+          });
+        }
+      } else {
+        errors.forEach((error: string) => {
+          toast.error(formatMessage({ id: error }));
+        });
+        setLoading(false);
+      }
+    } catch (error) {
+      setLoading(false);
+      console.error(error);
+    }
   };
 
   return (
@@ -65,7 +76,7 @@ export const InitializeRound = () => {
       <Toaster />
       <Formik
         // validationSchema={intializeRoundSchema}
-        initialValues={roundInitialValues}
+        initialValues={onboardingData}
         onSubmit={onSubmit}
       >
         {(formik) => {
@@ -100,7 +111,7 @@ export const InitializeRound = () => {
                 <TextInput
                   fieldType={"text"}
                   label={formatMessage({ id: "Personality’s Name" })}
-                  fieldName={"roundName"}
+                  fieldName={"personalityName"}
                   placeholder={formatMessage({
                     id: "Enter Personality’s Name",
                   })}
@@ -111,7 +122,7 @@ export const InitializeRound = () => {
                 />
                 <SelectInput
                   label={formatMessage({ id: "Personality Type" })}
-                  fieldName={"roundType"}
+                  fieldName={"personalityType"}
                   placeholder={formatMessage({ id: "Select Personality Type" })}
                   formik={formik}
                   toolTipText={formatMessage({
@@ -120,8 +131,16 @@ export const InitializeRound = () => {
                   margin={"me-md-14"}
                   options={[
                     {
-                      name: "Fictional character",
-                      value: "Fictional character",
+                      name: "Actor",
+                      value: "actor",
+                    },
+                    {
+                      name: "Gamer",
+                      value: "gamer",
+                    },
+                    {
+                      name: "Comedian",
+                      value: "comedian",
                     },
                   ]}
                 />

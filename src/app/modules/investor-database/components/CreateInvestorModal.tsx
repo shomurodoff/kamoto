@@ -18,20 +18,20 @@ import { useAuth } from "../../auth";
 import { useNavigate } from "react-router-dom";
 
 const initialValues = {
-  name: "",
-  contact_name: "",
-  email: "",
-};
-export const CreateInvestorModal = ({ showModal, setShowModal }: any) => {
-  const { formatMessage } = useIntl();
-  const [investorsType, setInvestorsType] = useState<any>([]);
-  const [loading, setLoading] = useState(false);
-  const [addCRMToggle, setAddCRMToggle] = useState(false);
-  const [fundTypeError, setFundTypeError] = useState(false);
-  const { companyId } = useAuth();
-  const [roundId, setRoundId] = useState<number>();
-  const [status, setStatus] = useState(false);
-  const navigate = useNavigate();
+  name: '',
+  contact_name: '',
+  email: '',
+}
+export const CreateInvestorModal = ({showModal, setShowModal}: any) => {
+  const {formatMessage} = useIntl()
+  const [investorsType, setInvestorsType] = useState<any>([])
+  const [loading, setLoading] = useState(false)
+  const [addCRMToggle, setAddCRMToggle] = useState(false)
+  const [fundTypeError, setFundTypeError] = useState(false)
+  const {personalityId} = useAuth()
+  const [roundId, setRoundId] = useState<number>()
+  const [status, setStatus] = useState(false)
+  const navigate = useNavigate()
 
   const userSchema = Yup.object().shape({
     name: Yup.string()
@@ -54,8 +54,8 @@ export const CreateInvestorModal = ({ showModal, setShowModal }: any) => {
     const activeRound = async () => {
       try {
         const {
-          data: { data, success, errors },
-        } = await getActiveRound(Number(companyId));
+          data: {data, success, errors},
+        } = await getActiveRound(personalityId)
         if (success) {
           setRoundId(data?.roundId);
         } else {
@@ -68,8 +68,8 @@ export const CreateInvestorModal = ({ showModal, setShowModal }: any) => {
       }
     };
 
-    activeRound();
-  }, [companyId]); // eslint-disable-line react-hooks/exhaustive-deps
+    activeRound()
+  }, [personalityId]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const onSubmit = async (values: any) => {
     setLoading(true);

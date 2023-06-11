@@ -25,7 +25,7 @@ const Voice: React.FC<any> = ({ setOpenEdit }) => {
                     "text-[16px] leading-6 font-medium text-[#FFFFFFCC] mb-[16px]"
                   }
                 >
-                  Voice Style
+                    Select Stock Voice
                 </h4>
                 <div
                   className={
@@ -35,13 +35,17 @@ const Voice: React.FC<any> = ({ setOpenEdit }) => {
                   <div className={"flex-grow w-full md:w-auto "}>
                     <Select
                       toltipText={"Commonly used filler words"}
-                      label={"Commonly used filler words"}
+                      label={"Select Voice from this list"}
                       isClearable={false}
                       options={[
                         { value: "chocolate", label: "Chocolate" },
                         { value: "strawberry", label: "Strawberry" },
                         { value: "vanilla", label: "Vanilla" },
                       ]}
+                      defaultValue={{
+                          value:"charles",
+                          label:"Charles Weathers (Male)"
+                      }}
                     />
                   </div>
                   <div
@@ -149,50 +153,6 @@ const Voice: React.FC<any> = ({ setOpenEdit }) => {
                   </div>
                 </div>
               </div>
-              <div className={"mb-[24px]"}>
-                <Select
-                  toltipText={"Commonly used filler words"}
-                  label={"Commonly used filler words"}
-                  className={"without-arrow"}
-                  isMulti={true}
-                  isClearable={false}
-                  options={[
-                    { value: "chocolate", label: "Chocolate" },
-                    { value: "strawberry", label: "Strawberry" },
-                    { value: "vanilla", label: "Vanilla" },
-                  ]}
-                />
-              </div>
-              <TextArea
-                label={formatMessage({
-                  id: "Standard reply when this AI Personality doesn’t know a specific answer",
-                })}
-                fieldName={"description"}
-                placeholder={formatMessage({
-                  id: "Write a paragraph describing who your personality is",
-                })}
-                defaultValue={
-                  "Well, I must admit, I don't have all the answers. While I've traversed the world of cinema extensively, I'm still learning in other areas. Let's keep our conversations entertaining and enlightening, exploring what we both love - the magic of cinema."
-                }
-                formik={formik}
-                toolTipText={"text"}
-                className={"!min-h-[140px]"}
-              />
-              <TextArea
-                label={formatMessage({
-                  id: "Standard reply when there is a server error",
-                })}
-                fieldName={"description"}
-                placeholder={formatMessage({
-                  id: "Standard reply when there is a server error",
-                })}
-                defaultValue={
-                  "Ah, it seems we've hit a snag in our conversation due to internet issues or a server glitch. Don't worry, these things happen. Just like in my films, a little drama adds suspense. We'll reconnect soon!"
-                }
-                formik={formik}
-                toolTipText={"text"}
-                className={"!min-h-[140px]"}
-              />
             </Form>
           );
         }}
@@ -220,13 +180,15 @@ const Voice: React.FC<any> = ({ setOpenEdit }) => {
           </button>
         </div>
         <InfoCard
-          title={formatMessage({ id: "What is an AI Personality?" })}
+          title={formatMessage({ id: "Understanding Voice of AI Personality" })}
           desc={formatMessage({
-            id:
-              "KamotoAI empowers AI personality owners and managers to create engaging social media-like posts. These posts serve as broadcasted messages from the AI personality, similar to tweets or Facebook posts. They are visible on the AI Personality's Public page within the Marketplace. \n" +
-              "\n" +
-              "The purpose of these posts is to increase user engagement, fostering connections and interactions between the AI personality and KamotoAI's user base. By creating compelling content, AI personality owners can effectively grow their audience, enhance user engagement, and ultimately boost their revenue potential within the platform.",
-          })}
+            id:"In KamotoAI, AI Personality owners can customize their personality's voice style and audio to enhance the user experience. \n" +
+                "<br/>" +
+                "<br/>" +
+                "Paid users can select a voice, adjust pitch and talking speed to match their desired criteria. During chat, users have control over the AI Personality's audio, with the ability to toggle it on or off. They can also reply using their own voice by enabling the microphone option. These features provide a unique and interactive chat experience. \n" +
+                "<br/>" +
+                "<br/>" +
+                "Voice customization adds a personal touch to interactions, allowing users to fully immerse themselves in conversations with their AI Personality. For detailed instructions, please refer to our documentation or contact our support team." })}
           slug={"#"}
         />
       </div>

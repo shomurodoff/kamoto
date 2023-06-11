@@ -30,12 +30,12 @@ export const OnboardingLayout = () => {
         <div className="flex flex-wrap justify-center md:justify-between mt-[12px] text-[#FFFFFFA6] text-[13px] leading-5">
           <p className={"w-full md:w-auto text-center"}>2023© KamotoAI.</p>
           <div className={"flex justify-between gap-[25px]"}>
-            <Link to="/terms-of-use">
+            <a href={process.env.REACT_APP_TERMS_POLICY_LINK} target="_blank" rel="noreferrer">
               {formatMessage({ id: "Terms of use" })}
-            </Link>
-            <Link to="/privacy-policy">
+            </a>
+            <a href={process.env.REACT_APP_TERMS_POLICY_LINK} target="_blank" rel="noreferrer">
               {formatMessage({ id: "Privacy Policy" })}
-            </Link>
+            </a>
           </div>
         </div>
       </div>

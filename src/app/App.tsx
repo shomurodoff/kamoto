@@ -17,13 +17,13 @@ const App = () => {
   const {
     showBillingModal,
     setShowBillingModal,
-    companyId,
+    personalityId,
     currentState,
     selected,
     currencyBill,
   } = useAuth();
   const [status, setStatus] = useState(true);
-  const { getBillingDetailsAPI } = useGetBillingData(companyId!);
+  const { getBillingDetailsAPI } = useGetBillingData(personalityId!);
 
   const I18N_CONFIG_KEY = process.env.REACT_APP_I18N_CONFIG_KEY || "i18nConfig";
   const Locale = async () => {
@@ -147,8 +147,8 @@ const App = () => {
   useAxiosResponse(axios);
 
   useEffect(() => {
-    Locale();
-  }, [companyId]); // eslint-disable-line react-hooks/exhaustive-deps
+    Locale()
+  }, [personalityId]) // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <Suspense fallback={<LayoutSplashScreen />}>
       <GoogleOAuthProvider
@@ -168,7 +168,7 @@ const App = () => {
                   currentState={currentState}
                   plans={plans}
                   upgrade={true}
-                  companyId={companyId}
+                  companyId={personalityId}
                   getBillingDetails={getBillingDetailsAPI}
                 />
               </InvestorDatabaseProvider>

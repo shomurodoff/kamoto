@@ -281,7 +281,7 @@ const Welcome: React.FC<any> = ({ setOpenEdit }) => {
       >
         <div
           className={
-            "flex justify-end gap-[10px] md:order-1  mt-[160px] md:mt-auto"
+            "flex justify-end gap-[10px] md:order-1 md:mt-auto"
           }
         >
           <button

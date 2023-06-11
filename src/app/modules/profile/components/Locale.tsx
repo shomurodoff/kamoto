@@ -8,6 +8,7 @@ import {
   localeInitialValues,
   localeOptions,
   timeFormatOptions,
+  timeStampOptions,
   timeZoneOptions,
 } from "../core/_constants";
 import { CustomButton } from "../../widgets/components/UI/CustomButton";
@@ -46,22 +47,27 @@ export const Locale = ({ key, getLocaleApiLoading }: any) => {
         createLocale(
           "dateFormat",
           values.dateFormat,
-          currentUser?.company[0].companyId
+          currentUser?.personality[0].personalityId
         ),
         createLocale(
           "locale",
           values.locale,
-          currentUser?.company[0].companyId
+          currentUser?.personality[0].personalityId
         ),
         createLocale(
           "timeFormat",
           values.timeFormat,
-          currentUser?.company[0].companyId
+          currentUser?.personality[0].personalityId
         ),
         createLocale(
           "timezone",
           values.timezone,
-          currentUser?.company[0].companyId
+          currentUser?.personality[0].personalityId
+        ),
+        createLocale(
+          "timestampFormat",
+          values.timestampFormat,
+          currentUser?.personality[0].personalityId
         ),
       ];
 
@@ -284,7 +290,7 @@ export const Locale = ({ key, getLocaleApiLoading }: any) => {
                     <div className={"col-span-12 md:col-span-6"}>
                       <SelectInput
                         label={formatMessage({ id: "Timestamp Format" })}
-                        fieldName={"timeStampFormat"}
+                        fieldName={"timestampFormat"}
                         placeholder={formatMessage({
                           id: "Select the Timestamp Format",
                         })}
@@ -292,7 +298,7 @@ export const Locale = ({ key, getLocaleApiLoading }: any) => {
                         toolTipText={formatMessage({
                           id: "GLOBAL.TOOLTIP.LOCALE.TIME_FORMAT",
                         })}
-                        options={timeFormatOptions}
+                        options={timeStampOptions}
                       />
                     </div>
                   </div>

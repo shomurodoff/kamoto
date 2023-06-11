@@ -20,16 +20,16 @@ export const getColumnList = (id: number) => {
   });
 };
 
-export const getActiveRound = (companyId: number) => {
-  return axios.get(`${API_URL}/round/active/${companyId}`, {
+export const getActiveRound = (personalityId: string) => {
+  return axios.get(`${API_URL}/round/active/${personalityId}`, {
     validateStatus(status) {
       return true;
     },
   });
 };
 
-export const getAllRounds = (companyId: number) => {
-  return axios.get(`${API_URL}/round/list/${companyId}`, {
+export const getAllRounds = (personalityId: string) => {
+  return axios.get(`${API_URL}/round/list/${personalityId}`, {
     validateStatus(status) {
       return true;
     },
@@ -145,9 +145,9 @@ export const deleteColumn = (columnId: number) => {
   });
 };
 
-export const getInvestorApi = (companyId: number, type?: string) => {
+export const getInvestorApi = (personalityId: string, type?: string) => {
   return axios.get(
-    `${API_URL}/company/investor/${companyId}?type=${type ? type : ""}`,
+    `${API_URL}/company/investor/${personalityId}?type=${type ? type : ""}`,
     {
       validateStatus(status) {
         return true;
@@ -197,7 +197,7 @@ export const createActivity = (values: any) => {
 };
 
 export const getAllActivities = (
-  companyId: number,
+  companyId: string,
   investorId: number,
   type: string,
   activitySearch: string,
@@ -254,8 +254,8 @@ export const exportAllInvestors = (values: any) => {
   });
 };
 
-export const getAllUsers = (companyId: number) => {
-  return axios.get(`${API_URL}/user/${companyId}`, {
+export const getAllUsers = (personalityId: string) => {
+  return axios.get(`${API_URL}/user/${personalityId}`, {
     validateStatus(status) {
       return true;
     },

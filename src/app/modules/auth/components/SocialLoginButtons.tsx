@@ -13,7 +13,7 @@ const SocialLoginButtons = ({
   localStorageReferral?: string;
 }) => {
   const navigate = useNavigate();
-  const { saveAuth, setUserToken, setNewCompany } = useAuth();
+  const { saveAuth, setUserToken, setNewPersonality } = useAuth();
   const { formatMessage } = useIntl();
   const [loading, setLoading] = useState(false);
   const [loading1, setLoading1] = useState(false);
@@ -39,7 +39,7 @@ const SocialLoginButtons = ({
         await saveAuth(googleData);
         setUserToken(googleData.token);
         if (!googleData.companyPresent) {
-          setNewCompany(false);
+          setNewPersonality(false)
         }
         navigate("/");
       } else {
@@ -70,7 +70,7 @@ const SocialLoginButtons = ({
         await saveAuth(linkedinData);
         setUserToken(linkedinData.token);
         if (!linkedinData.companyPresent) {
-          setNewCompany(false);
+          setNewPersonality(false);
         }
         navigate("/");
       } else {

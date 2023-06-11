@@ -32,7 +32,7 @@ export const TeamMembers = () => {
   const [inviteLoading, setInviteLoading] = useState(false);
 
   const navigate = useNavigate();
-  const { setNewCompany, companyId } = useAuth();
+  const { setNewPersonality, personalityId } = useAuth();
   const teamMembersSchema = Yup.object().shape({
     teamMembers: Yup.array()
       .of(
@@ -58,38 +58,38 @@ export const TeamMembers = () => {
   });
   const onSkip = async () => {
     setSkipLoading(true);
-    setNewCompany(undefined);
+    setNewPersonality(undefined);
     setSkipLoading(false);
     navigate("/dashboard");
   };
 
   const onSubmit = async (values: any) => {
-    setNewCompany(undefined);
+    setNewPersonality(undefined);
     setInviteLoading(false);
     navigate("/dashboard");
     // try {
     //   setInviteLoading(true)
-    //   if (!companyId) {
+    //   if (!personalityId) {
     //     setInviteLoading(false)
     //     throw new Error(formatMessage({id: 'Company ID is required.'}))
     //   }
     //   const {
     //     data: {success, errors},
-    //   } = await inviteUser(companyId.toString(), values.teamMembers)
+    //   } = await inviteUser(personalityId.toString(), values.teamMembers)
     //   if (success) {
-    //     setNewCompany(undefined)
+    //     setNewPersonality(undefined)
     //     setInviteLoading(false)
     //     navigate('/dashboard')
     //   } else {
     //     setInviteLoading(false)
-    //     setNewCompany(undefined)
+    //     setNewPersonality(undefined)
     //     errors.forEach((error: string) => {
     //       toast.error(formatMessage({id: error}))
     //     })
     //   }
     // } catch (error) {
     //   setInviteLoading(false)
-    //   setNewCompany(undefined)
+    //   setNewPersonality(undefined)
     //   console.error(error)
     // }
   };

@@ -55,7 +55,7 @@ export const IndividualInvestorDetails = () => {
   const [allInvestorUser, setAllInvestorUser] = useState<any>([]);
   const [roundId, setRoundId] = useState<number>();
   const [, setColumnId] = useState<number>();
-  const { companyId } = useAuth();
+  const { personalityId } = useAuth();
   const [, setColumnsLength] = useState();
   const { getDateValue } = useDateFormat();
   const { id } = useParams();
@@ -145,8 +145,8 @@ export const IndividualInvestorDetails = () => {
     const activeRound = async () => {
       try {
         const {
-          data: { data, success, errors },
-        } = await getActiveRound(Number(companyId));
+          data: {data, success, errors},
+        } = await getActiveRound(personalityId)
         if (success) {
           setRoundId(data?.roundId);
         } else {
@@ -159,8 +159,8 @@ export const IndividualInvestorDetails = () => {
       }
     };
 
-    activeRound();
-  }, [companyId]); // eslint-disable-line react-hooks/exhaustive-deps
+    activeRound()
+  }, [personalityId]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const addToCRM = async () => {
     try {

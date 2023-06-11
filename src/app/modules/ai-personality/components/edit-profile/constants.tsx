@@ -1,11 +1,9 @@
-import Basic from "./basic";
 
 export const personalities = [
   {
     name: "basic",
     title: "Basic Characterization",
     text: "Core characteristic can be defined here",
-    component: <Basic />,
   },
   {
     name: "welcome",
@@ -43,5 +41,15 @@ export const personalities = [
     name: "knowledge",
     title: "Knowledge",
     text: "You can add additional knowledge",
+  },
+  {
+    name: "conversation",
+    title: "Conversation style",
+    text: "Control how the user replies in chats",
+  },
+  {
+    name: "learnings",
+    title: "Negative Learnings",
+    text: "Restrict topics which you don’t want to talk about",
   },
 ];
