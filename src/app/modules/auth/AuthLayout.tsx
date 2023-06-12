@@ -3,13 +3,10 @@ import { Link, Outlet } from "react-router-dom";
 import AuthBg from "../../assets/images/auth/auth-background.png";
 import LogoImg from "../../assets/images/auth/logo.svg";
 import { useIntl } from "react-intl";
-import { Toaster } from "../widgets/components/General/Toaster";
 
 export const AuthLayout = () => {
   const { formatMessage } = useIntl();
   return (
-    <>
-    <Toaster/>
     <div
       className={"h-screen relative auth-bg"}
       style={{
@@ -47,6 +44,5 @@ export const AuthLayout = () => {
         </div>
       </div>
     </div>
-    </>
   );
 };

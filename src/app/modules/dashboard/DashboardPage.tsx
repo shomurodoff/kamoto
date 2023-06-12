@@ -12,7 +12,11 @@ const DashboardPage = () => {
   return (
     <div className="h-[100vh] overflow-scroll px-5 py-3">
       <Breadcrumb />
-      <div className={"grid grid-cols-12 gap-4 my-[16px] md:my-[24px]"}>
+      <div
+        className={
+          "grid grid-cols-12  md:gap-x-[18px] gap-y-[14px]  my-[16px] md:my-[24px]"
+        }
+      >
         <div
           className={
             "col-span-12 md:col-span-3 bg-[#171825] shadow-[0px_1px_4px_0px_#0000001A] rounded"

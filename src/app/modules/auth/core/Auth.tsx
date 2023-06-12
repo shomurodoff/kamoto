@@ -22,8 +22,8 @@ type AuthContextProps = {
   logout: () => void
   userToken: string | undefined
   setUserToken: Dispatch<SetStateAction<string | undefined>>
-  personalityId: string | undefined
-  storePersonalityId: Dispatch<SetStateAction<string | undefined>>
+  personalityId: number | undefined
+  storePersonalityId: Dispatch<SetStateAction<number | undefined>>
   investorId: number | undefined
   storeInvestorId: Dispatch<SetStateAction<number | undefined>>
   newPersonality: boolean | undefined
@@ -81,7 +81,7 @@ const AuthProvider: FC<WithChildren> = ({ children }) => {
   const [auth, setAuth] = useState<AuthModel | undefined>(authHelper.getAuth())
   const [currentUser, setCurrentUser] = useState<Partial<UserModel> | undefined>()
   const [userToken, setUserToken] = useState<string | undefined>()
-  const [personalityId, storePersonalityId] = useState<string | undefined>()
+  const [personalityId, storePersonalityId] = useState<number | undefined>()
   const [investorId, storeInvestorId] = useState<number | undefined>()
   const [newPersonality, setNewPersonality] = useState<boolean | undefined>()
   const [showBillingModal, setShowBillingModal] = useState<boolean>(false)

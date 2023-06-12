@@ -157,56 +157,56 @@ export const EmailPreferencesInput = [
 ];
 
 export const EmailPreferencesOutput = [
-    {
-        "id": 1,
-        "title": "edit_ai_personality",
-        "value": false
-    },
-    {
-        "id": 2,
-        "title": "train_ai_personality_by_chat",
-        "value": false
-    },
-    {
-        "id": 3,
-        "title": "train_ai_personality_by_public_link",
-        "value": false
-    },
-    {
-        "id": 4,
-        "title": "train_ai_personality_by_private_data",
-        "value": false
-    },
-    {
-        "id": 5,
-        "title": "monetization_details_updated",
-        "value": false
-    },
-    {
-        "id": 6,
-        "title": "listing_status_changed",
-        "value": false
-    },
-    {
-        "id": 7,
-        "title": "ai_personality_followed",
-        "value": false
-    },
-    {
-        "id": 8,
-        "title": "ai_personality_paid_access_subscribed",
-        "value": false
-    },
-    {
-        "id": 9,
-        "title": "paid_session_complete",
-        "value": false
-    },
-    {
-        "id": 10,
-        "title": "settlement_executed",
-        "value": false
-    }
+  {
+    id: 1,
+    title: "Successful payments",
+    value: false,
+  },
+  {
+    id: 2,
+    title: "New Investor update",
+    value: false,
+  },
+  {
+    id: 3,
+    title: "Fee collection",
+    value: false,
+  },
+  {
+    id: 4,
+    title: "Customer payment Dispute",
+    value: false,
+  },
+  {
+    id: 5,
+    title: "Refund alerts",
+    value: false,
+  },
+  {
+    id: 6,
+    title: "Invoice payment",
+    value: false,
+  },
+  {
+    id: 7,
+    title: "Billing Updates",
+    value: false,
+  },
+  {
+    id: 8,
+    title: "New team members",
+    value: false,
+  },
+  {
+    id: 9,
+    title: "Completed Investments",
+    value: false,
+  },
+  {
+    id: 10,
+    title: "Newsletters",
+    value: false,
+  },
 ];
 
 export const localeOptions = [
@@ -1032,9 +1032,7 @@ export const userInitialValues = {
     email: false,
     phone: false,
   },
-  photo: "",
-  banner: "",
-  website: "",
+  profileImageId: "",
 };
 
 export const companyInitialValues = {

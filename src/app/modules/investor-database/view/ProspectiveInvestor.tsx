@@ -108,7 +108,7 @@ const ProspectiveInvestor = () => {
     try {
       const {
         data: {data, success, errors},
-      } = await getActiveRound(personalityId)
+      } = await getActiveRound(Number(personalityId))
       if (success) {
         setRoundId(data?.roundId);
       } else {

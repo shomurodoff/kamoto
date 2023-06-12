@@ -2,7 +2,11 @@ import React from "react";
 import Container from "../../containers/overview";
 
 const Index = () => {
-  return <Container />;
+  return (
+    <div>
+      <Container />
+    </div>
+  );
 };
 
 export default Index;

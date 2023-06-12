@@ -15,7 +15,7 @@ import {
   teamSizeOptions,
 } from "../core/_constants";
 import TextArea from "../../widgets/components/Input/TextArea";
-import { updatePersonalityInfo } from "../core/_requests";
+import { updateCompanyProfile } from "../core/_requests";
 import { socialMediaData } from "../core/_constants";
 import { FileUpload } from "../../widgets/components/FileUpload";
 import { useAuth } from "../../auth";
@@ -25,7 +25,7 @@ import { toast } from "react-toastify";
 
 import { verifyToken } from "../../auth/core/_requests";
 import { Spinner } from "../../widgets/components/General/Spinner";
-import { getPersonalityInfo } from "../../../../app/modules/profile/core/_requests";
+import { companyData } from "../../../../app/modules/profile/core/_requests";
 
 export function Company({
   key,
@@ -131,12 +131,12 @@ export function Company({
       setLoading(true);
       const {
         data: { success, errors, data },
-      } = await updatePersonalityInfo(updateCompanyData);
+      } = await updateCompanyProfile(updateCompanyData);
       if (success) {
         if (personalityId) {
           const {
             data: {success, data},
-          } = await getPersonalityInfo(personalityId)
+          } = await companyData(personalityId)
           if (success) {
             setCompanyImgName(data.companylogo);
             companyInitialValues.companyName = data.name;

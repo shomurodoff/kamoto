@@ -28,7 +28,8 @@ import {
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../../app/modules/auth";
 import {
-  getPersonalityInfo,
+  companyData,
+  getEmailPreferences,
   getLocale,
   getReferralData,
   getTotalReferralEarning,
@@ -73,11 +74,13 @@ const ToolbarWrapper = () => {
   const [companyImgName, setCompanyImgName] = useState<string>();
   const [getCompanyApiLoading, setGetCompanyApiLoading] = useState(false);
   const [getLocaleApiLoading, setGetLocaleApiLoading] = useState(false);
-
+  const [getPreferencesApiLoading, setGetPreferencesApiLoading] =
+    useState(false);
   const [countryId, setCountryId] = useState<string | undefined>();
   const [countryOptions, setcountryOptions] = useState<any[]>([]);
   const [phoneCodes, setPhoneCodes] = useState<any[]>([]);
   const [stateOptions, setstateOptions] = useState<any[]>([]);
+  const [getPreferences, setGetPreferences] = useState(EmailPreferencesOutput);
   const { storeSearchValue, setInvestorDbFilter } = useInvestorDatabase();
   const [bccEmail, setBccEmail] = useState("");
   const [emailSignature, setEmailSignature] = useState("");
@@ -178,16 +181,14 @@ const ToolbarWrapper = () => {
               firstName: data.firstName,
               profileImg: data.profileImage,
             });
-            const communicationData = data.communication;
+            const communicationData = JSON.parse(data.communication);
             userInitialValues.firstName = data.firstName;
             userInitialValues.lastName = data.lastName;
             userInitialValues.email = data.email;
             userInitialValues.contact = data.contact!;
             userInitialValues.country = data.countryId!;
             userInitialValues.designation = data.designation;
-            userInitialValues.photo = data.photo!;
-            userInitialValues.banner = data.banner!;
-            userInitialValues.website = data.website!;
+            userInitialValues.profileImageId = data.profileImageId!;
             userInitialValues.communication.email =
               communicationData?.email || false;
             userInitialValues.communication.phone =
@@ -214,7 +215,7 @@ const ToolbarWrapper = () => {
         if (personalityId) {
           const {
             data: { success, data, errors },
-          } = await getPersonalityInfo(personalityId);
+          } = await companyData(personalityId);
           if (success) {
             setGetCompanyApiLoading(false);
             setCompanyImgName(data.companylogo);
@@ -330,6 +331,35 @@ const ToolbarWrapper = () => {
     getCompanyMeta();
   }, [personalityId]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => {
+    const getApiEmailPreferences = async () => {
+      try {
+        if (personalityId) {
+          setGetPreferencesApiLoading(true);
+          const {
+            data: {
+              data: { preference },
+              success,
+              errors,
+            },
+          } = await getEmailPreferences(personalityId);
+          if (success) {
+            setGetPreferencesApiLoading(false);
+            setGetPreferences(JSON.parse(preference));
+          } else {
+            setGetPreferencesApiLoading(false);
+            errors.forEach((error: string) => {
+              toast.error(formatMessage({ id: error }));
+            });
+          }
+        }
+      } catch (err) {
+        setGetPreferencesApiLoading(false);
+        console.log(err);
+      }
+    };
+    getApiEmailPreferences();
+  }, [personalityId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   //for bcctracking
   useEffect(() => {
@@ -517,8 +547,8 @@ const ToolbarWrapper = () => {
                   <User
                     key={key}
                     getApiLoading={getApiLoading}
-                    // setImgName={setImgName}
-                    // imgName={imgName}
+                    setImgName={setImgName}
+                    imgName={imgName}
                     countryOptions={countryOptions}
                     phoneCodes={phoneCodes}
                   />
@@ -599,7 +629,12 @@ const ToolbarWrapper = () => {
                 className="mr-3 mt-2"
               >
                 <div className="mt-4">
-                  <NotificationPreferences/>
+                  <NotificationPreferences
+                    key={key}
+                    getPreferences={getPreferences}
+                    setGetPreferences={setGetPreferences}
+                    getPreferencesApiLoading={getPreferencesApiLoading}
+                  />
                 </div>
               </Tab>
             </Tabs>

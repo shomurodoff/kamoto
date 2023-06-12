@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import "../styles/index.scss";
 import { toAbsoluteUrl } from "../../../../_metronic/helpers/AssetHelpers";
 import TextInput from "../../widgets/components/Input/TextInput";
@@ -23,15 +23,15 @@ import SearchInput from "./SearchInput";
 
 export function User({
   key,
-  // setImgName,
-  // imgName,
+  setImgName,
+  imgName,
   getApiLoading,
   countryOptions,
   phoneCodes
 }: {
   key: number;
-  // setImgName: Dispatch<SetStateAction<string | undefined>>;
-  // imgName: string | undefined;
+  setImgName: Dispatch<SetStateAction<string | undefined>>;
+  imgName: string | undefined;
   getApiLoading: boolean;
   countryOptions: any;
   phoneCodes: any;
@@ -39,9 +39,6 @@ export function User({
   const { formatMessage } = useIntl();
 
   const [modelStatus, setModelStatus] = useState<boolean>(false);
-  const [modalStatusBanner, setModalStatusBanner] = useState<boolean>(false);
-  const [imgName, setImgName] = useState<string | undefined>();
-  const [bannerUrl, setBannerUrl] = useState<string | undefined>(toAbsoluteUrl("/media/avatars/banner-image.png"));
   const { personalityId, currentUser, setCurrentUser } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -94,16 +91,14 @@ export function User({
               profileImg: data.profileImage,
             });
             setImgName(data.profileImage);
-            const communicationData = data.communication;
+            const communicationData = JSON.parse(data.communication);
             userInitialValues.firstName = data.firstName;
             userInitialValues.lastName = data.lastName;
             userInitialValues.email = data.email;
             userInitialValues.contact = data.contact!;
             userInitialValues.country = data.countryId!;
             userInitialValues.designation = data.designation;
-            userInitialValues.photo = data.photo!;
-            userInitialValues.banner = data.banner!;
-            userInitialValues.website = data.website;
+            userInitialValues.profileImageId = data.profileImageId!;
             userInitialValues.communication.email =
               communicationData?.email || false;
             userInitialValues.communication.phone =
@@ -127,13 +122,6 @@ export function User({
       console.log(err);
     }
   };
-
-  useEffect(() => {
-    setImgName(userInitialValues.photo)
-    if(userInitialValues.banner){
-      setBannerUrl(userInitialValues.banner)
-    }
-  },[])
 
   const getForgotedPassword = async () => {
     if (currentUser?.email) {
@@ -162,10 +150,6 @@ export function User({
   const handleClose = () => {
     setModelStatus(false);
   };
-
-  const handleBannerClose = () => {
-    setModalStatusBanner(false)
-  }
 
   return (
     <>
@@ -331,7 +315,7 @@ export function User({
                   <div className={"col-span-12 md:col-span-6"}>
                     <TextInput
                       label={formatMessage({ id: "Website URL" })}
-                      fieldName={"website"}
+                      fieldName={"webpage"}
                       withoutLabel={true}
                       formik={formik}
                       placeholder="www.example.com"
@@ -360,7 +344,7 @@ export function User({
                   >
                     <div
                       className="rounded-full  bg-[#21233A] absolute -top-2 -right-3 p-2 shadow-[0px_2px_4px_0px_#0000001A]"
-                      onClick={(e) => setModalStatusBanner(true)}
+                      onClick={handleOpen}
                     >
                       <svg
                         width="16"
@@ -384,12 +368,11 @@ export function User({
                       </svg>
                     </div>
                     <img
-                      src={bannerUrl}
+                      src={toAbsoluteUrl("/media/avatars/banner-image.png")}
                       className={"w-full h-[110px]"}
                     />
                   </div>
                 </div>
-                {/* ToDoAnand change all fileupload with respect to new flow */}
                 <FileUpload
                   fileSize={2097152}
                   maxFileNumber={1}
@@ -399,22 +382,8 @@ export function User({
                   handleClose={handleClose}
                   handleSuccess={(id: number, name: string) => {
                     setImgName(name);
-                    formik.setFieldValue("photo", name);
+                    formik.setFieldValue("profileImageId", id);
                   }}
-                  resourceType="user-avatar"
-                />
-                <FileUpload
-                  fileSize={2097152}
-                  maxFileNumber={1}
-                  allowType={["image/*", ".jpg", ".jpeg", ".png"]}
-                  metaData={{ module: "profileimg", isProtected: true }}
-                  modalStatus={modalStatusBanner}
-                  handleClose={handleBannerClose}
-                  handleSuccess={(id: number, name: string) => {
-                    setBannerUrl(name);
-                    formik.setFieldValue("banner", name);
-                  }}
-                  resourceType="user-banner"
                 />
                 <div
                   className={

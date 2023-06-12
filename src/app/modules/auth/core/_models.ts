@@ -69,7 +69,6 @@ export interface UserModel {
   socialNetworks?: UserSocialNetworksModel
   personality: any
   personalityId?: string
-  verifiedAt?: string
 }
 
 export type FormikProps = {

@@ -35,7 +35,7 @@ const SidebarLogo = () => {
     setCompanyData(currentUser?.personality);
     if (personalityId) {
       const findCompany = currentUser?.personality.find(
-        (company: { personalityId: string }) => company.personalityId === personalityId
+        (company: { personalityId: number }) => company.personalityId === personalityId
       );
       if (findCompany) {
         setSelectedCompany(findCompany);

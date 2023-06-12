@@ -23,7 +23,7 @@ export function Billing({
   currencyBill: string;
   selected: string;
   currentState: string;
-  companyId: string | undefined;
+  companyId: number | undefined;
   getBillingDetails: () => Promise<void>;
 }) {
   const { formatMessage } = useIntl();

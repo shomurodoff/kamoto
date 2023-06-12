@@ -33,7 +33,7 @@ export const CreateAllActivity = ({
   };
   allUsers: any;
   type: string;
-  companyId: string;
+  companyId: number;
   investorId?: number;
   getActivity?: () => void;
 }) => {

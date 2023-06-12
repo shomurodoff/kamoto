@@ -16,12 +16,10 @@ import { ErrorsPage } from "../modules/errors/ErrorsPage";
 import DataRoomsRoutes from "../modules/data-rooms/DataRoomsRoutes";
 import { DashboardPage } from "../modules/dashboard/DashboardPage";
 import { AiPersonalityPage } from "../modules/ai-personality/AiPersonalityPage";
+import MarketPlaceOverviewPage from "../modules/marketplace/pages/overview";
 import SupportPage from "../modules/support";
 import Sitemap from "../modules/sitemap";
 import ChatCreditsPage from "../modules/chat-credits";
-import MarketplaceRouting from "../modules/marketplace/MarketplaceRouting";
-import MarketplacePublicLayout from "../../_metronic/layout/marketplace-public-layout";
-import MarketPlacePublicRoute from "../modules/marketplace-public/MarketPlacePublicRoute";
 
 const InvestorDBRoutes = lazy(
   () => import("../modules//investor-database/InvestorDBRoutes")
@@ -53,6 +51,10 @@ const PrivateRoutes = () => {
             <Route index element={<Navigate to="/dashboard" />} />
             <Route path="dashboard" element={<DashboardPage />} />
             <Route path="my-ai/*" element={<AiPersonalityPage />} />
+            <Route
+              path="marketplace/overview"
+              element={<MarketPlaceOverviewPage />}
+            />
             <Route path="investor-crm/*" element={<InvestorCrmRoutes />} />
             <Route
               path="settings"
@@ -62,14 +64,7 @@ const PrivateRoutes = () => {
                 </SuspensedView>
               }
             />
-            <Route
-              path="marketplace/*"
-              element={
-                <SuspensedView>
-                  <MarketplaceRouting />
-                </SuspensedView>
-              }
-            />
+
             <Route
               path="data-rooms/*"
               element={
@@ -105,10 +100,6 @@ const PrivateRoutes = () => {
             <Route path="/sitemap/*" element={<Sitemap />} />
             <Route path="*" element={<ErrorsPage />} />
           </Route>
-          <Route
-            path={"/marketplace-public/*"}
-            element={<MarketPlacePublicRoute />}
-          />
         </>
       ) : (
         <>
@@ -118,6 +109,7 @@ const PrivateRoutes = () => {
           <Route path="*" element={<ErrorsPage />} />
         </>
       )}
+
       {/* Pages */}
     </Routes>
   ) : null;

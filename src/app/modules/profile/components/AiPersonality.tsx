@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import "../styles/index.scss";
 import { toAbsoluteUrl } from "../../../../_metronic/helpers/AssetHelpers";
 import TextInput from "../../widgets/components/Input/TextInput";
@@ -7,24 +7,26 @@ import * as Yup from "yup";
 import { useIntl } from "react-intl";
 import { SelectInput } from "../../widgets/components/Input/SelectInput";
 import { CustomButton } from "../../widgets/components/UI/CustomButton";
-import { getPersonalityInfo, profileData, updatePersonalityInfo } from "../core/_requests";
+import { profileData, updateProfileInfo } from "../core/_requests";
 import { FileUpload } from "../../widgets/components/FileUpload";
-// import { designationOptions } from "../core/_constants";
+import { designationOptions, userInitialValues } from "../core/_constants";
 import { useAuth } from "../../auth";
 import { ChangePasswordModal } from "../../auth/components/ChangePasswordModal";
-// import { forgotPassword } from "../../auth/core/_requests";
+import { forgotPassword } from "../../auth/core/_requests";
 import { DisplayImage } from "../../widgets/components/General/DisplayImage";
 import { toast } from "react-toastify";
 import { Spinner } from "../../widgets/components/General/Spinner";
 import { ToolTipUI } from "../../widgets/components/UI/ToolTipUI";
+import { BasicButton } from "../../widgets/components/UI/BasicButton";
 import TextArea from "../../widgets/components/Input/TextArea";
 import { Country } from "../../widgets/components/General/Country";
 import { State } from "../../widgets/components/General/State";
 import SearchInput from "./SearchInput";
-import { industryOptions } from "../../../core/_constants";
 
 export function AiPersonality({
   key,
+  setImgName,
+  imgName,
   getApiLoading,
   countryOptions,
 }: {
@@ -37,59 +39,44 @@ export function AiPersonality({
   const { formatMessage } = useIntl();
 
   const [modelStatus, setModelStatus] = useState<boolean>(false);
-  const [modalStatusBanner, setModalStatusBanner] = useState<boolean>(false);
-  const [countryId, setCountryId] = useState<string | undefined>();
-  const [imgName, setImgName] = useState<string | undefined>();
-  const [bannerUrl, setBannerUrl] = useState<string | undefined>(toAbsoluteUrl("/media/avatars/banner-image.png"));
   const { personalityId, currentUser, setCurrentUser } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [changePasswordLoading, setChangePasswordLoading] = useState(false);
   const [, setHasErrors] = useState<boolean | undefined>();
-  const [personalityData,setPersonalityData] = useState(currentUser?.personality.find((el: any) => el.personalityId == personalityId) || null)
 
-  const personalitySchema = Yup.object().shape({
-    name: Yup.string()
+  const userSchema = Yup.object().shape({
+    firstName: Yup.string()
       .min(3, formatMessage({ id: "Minimum 3 characters" }))
       .max(50, formatMessage({ id: "Maximum 50 characters" }))
       .required(formatMessage({ id: "First name is required" })),
-    tagline: Yup.string()
+    lastName: Yup.string()
       .max(50, formatMessage({ id: "Maximum 50 characters" }))
-      .nullable(),
-    description: Yup.string()
+      .required(formatMessage({ id: "Last name is required" })),
+    email: Yup.string()
+      .email(formatMessage({ id: "Invalid email format" }))
       .max(50, formatMessage({ id: "Maximum 50 characters" }))
-      .required(formatMessage({ id: "Description is required" })),
-    gender: Yup.string()
-      .required(formatMessage({ id: "Gender is required" }))
+      .required(formatMessage({ id: "Email is required" })),
+    contact: Yup.string()
+      .required(formatMessage({ id: "Contact number is required" }))
+      .min(6, formatMessage({ id: "Minimum 6 digits" }))
+      .max(10, formatMessage({ id: "Maximum 10 digits" }))
       .nullable(),
-    personalityType: Yup.string()
-      .required(formatMessage({ id: "Personality type is required" })),
+    country: Yup.string()
+      .required(formatMessage({ id: "Country is required" }))
+      .nullable(),
+    communication: Yup.object().shape({
+      email: Yup.bool(),
+      phone: Yup.bool(),
+    }),
   });
-
-  useEffect(() =>{
-    setImgName(personalityData.image)
-    if(personalityData.banner){
-      setBannerUrl(personalityData.banner)
-    }
-  },[personalityData])
-
-  useEffect(() => {
-    // if personality id is not null update the latest personality details
-    (async () => {
-      let {data : {success,data}} =await getPersonalityInfo(personalityId?.toString() || '')
-      if(success){
-        setPersonalityData(data)
-      }
-    })()
-
-  },[])
 
   const onSubmit = async (values: any) => {
     try {
       setLoading(true);
       let {
         data: { success, errors },
-      } = await updatePersonalityInfo({
+      } = await updateProfileInfo({
         ...values,
         country: parseInt(values.country),
         personalityId,
@@ -101,7 +88,24 @@ export function AiPersonality({
             data: { success, data, errors },
           } = await profileData(personalityId);
           if (success) {
-            console.log(data,success)
+            setCurrentUser({
+              ...currentUser,
+              firstName: data.firstName,
+              profileImg: data.profileImage,
+            });
+            setImgName(data.profileImage);
+            const communicationData = JSON.parse(data.communication);
+            userInitialValues.firstName = data.firstName;
+            userInitialValues.lastName = data.lastName;
+            userInitialValues.email = data.email;
+            userInitialValues.contact = data.contact!;
+            userInitialValues.country = data.countryId!;
+            userInitialValues.designation = data.designation;
+            userInitialValues.profileImageId = data.profileImageId!;
+            userInitialValues.communication.email =
+              communicationData?.email || false;
+            userInitialValues.communication.phone =
+              communicationData?.phone || false;
           } else if (errors) {
             errors.forEach((error: string) => {
               toast.error(formatMessage({ id: error }));
@@ -109,7 +113,7 @@ export function AiPersonality({
           }
         }
         setLoading(false);
-        toast.success(formatMessage({ id: "AI Personality updated successfully" }));
+        toast.success(formatMessage({ id: "Profile updated successfully" }));
       } else if (errors) {
         setLoading(false);
         errors.forEach((error: string) => {
@@ -122,6 +126,26 @@ export function AiPersonality({
     }
   };
 
+  const getForgotedPassword = async () => {
+    if (currentUser?.email) {
+      try {
+        setChangePasswordLoading(true);
+        const {
+          data: { success },
+        } = await forgotPassword(currentUser?.email);
+        if (success) {
+          setShowModal(true);
+          setHasErrors(false);
+        } else {
+          setHasErrors(true);
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setChangePasswordLoading(false);
+      }
+    }
+  };
 
   const handleOpen = () => {
     setModelStatus(true);
@@ -129,10 +153,6 @@ export function AiPersonality({
   const handleClose = () => {
     setModelStatus(false);
   };
-
-  const handleBannerClose = () => {
-    setModalStatusBanner(false);
-  }
 
   return (
     <>
@@ -175,13 +195,12 @@ export function AiPersonality({
           </div>
         </div>
         <Formik
-          initialValues={personalityData}
-          validationSchema={personalitySchema}
+          initialValues={userInitialValues}
+          validationSchema={userSchema}
           onSubmit={onSubmit}
           className={"flex-grow"}
         >
           {(formik) => {
-            setCountryId(formik.values.country);
             return (
               <Form className={"w-full"}>
                 <h3
@@ -196,7 +215,7 @@ export function AiPersonality({
                     <TextInput
                       fieldType={"text"}
                       label={formatMessage({ id: "Personality Name" })}
-                      fieldName={"name"}
+                      fieldName={"personalName"}
                       formik={formik}
                       placeholder="Shahrukh Khan"
                       toolTipText={formatMessage({
@@ -250,7 +269,7 @@ export function AiPersonality({
                   <div className={"col-span-12 md:col-span-6"}>
                     <SelectInput
                       label={formatMessage({ id: "Personality Type" })}
-                      fieldName={"personalityType"}
+                      fieldName={"personality"}
                       placeholder={formatMessage({
                         id: "Select your Fictional character",
                       })}
@@ -259,13 +278,11 @@ export function AiPersonality({
                         id: "Select your Fictional character",
                       })}
                       options={[
-                        { name: "Actor", value: "actor" },
-                        { name: "Gamer", value: "gamer" },
-                        { name: "Comedian", value: "comedian" },
+                        { name: "Fictional character", value: "fictional" },
                       ]}
                     />
                   </div>
-                  {/* <div className={"col-span-12 md:col-span-6"}>
+                  <div className={"col-span-12 md:col-span-6"}>
                     <SelectInput
                       label={formatMessage({ id: "Visibility" })}
                       fieldName={"visibility"}
@@ -281,7 +298,7 @@ export function AiPersonality({
                         { name: "Private", value: "private" },
                       ]}
                     />
-                  </div> */}
+                  </div>
                   <div className={"col-span-12 md:col-span-6"}>
                     <SelectInput
                       label={formatMessage({ id: "Industry" })}
@@ -293,7 +310,10 @@ export function AiPersonality({
                       toolTipText={formatMessage({
                         id: "Select your Industry",
                       })}
-                      options={industryOptions}
+                      options={[
+                        { name: "Agro", value: "Industry" },
+                        { name: "Tech", value: "Tech" },
+                      ]}
                     />
                   </div>
                   <div className={"col-span-12 md:col-span-6"}>
@@ -311,26 +331,32 @@ export function AiPersonality({
                     />
                   </div>
                   <div className={"col-span-12 md:col-span-6"}>
-                  <Country
-                    initialValues={personalityData}
-                    formik={formik}
-                    label={formatMessage({ id: "Country" })}
-                    setCountryId={setCountryId}
-                    tooltipText={formatMessage({
-                      id: "GLOBAL.TOOLTIP.COMPANY_DETAILS.COUNTRY",
-                    })}
-                    width={12}
-                  />
+                    <SelectInput
+                      label={formatMessage({ id: "Country" })}
+                      fieldName={"country"}
+                      placeholder={formatMessage({ id: "Select Your Country" })}
+                      formik={formik}
+                      toolTipText={formatMessage({
+                        id: "GLOBAL.TOOLTIP.USER.COUNTRY",
+                      })}
+                      options={countryOptions}
+                      width={5}
+                      margin={"me-6"}
+                    />
                   </div>
                   <div className={"col-span-12 md:col-span-6"}>
-                    <State
-                    countryId={countryId}
-                    formik={formik}
-                    initialValues={personalityData}
-                    tooltipText={formatMessage({
-                      id: "GLOBAL.TOOLTIP.COMPANY_DETAILS.STATE",
-                    })}
-                  />
+                    <SelectInput
+                      label={formatMessage({ id: "State/Province*" })}
+                      fieldName={"state"}
+                      placeholder={formatMessage({
+                        id: "Select Your State or Province",
+                      })}
+                      formik={formik}
+                      toolTipText={formatMessage({
+                        id: "GLOBAL.TOOLTIP.USER.COUNTRY",
+                      })}
+                      options={countryOptions}
+                    />
                   </div>
                   <div
                     className={
@@ -339,7 +365,7 @@ export function AiPersonality({
                   >
                     <div
                       className="rounded-full  bg-[#21233A] absolute -top-2 -right-3 p-2 shadow-[0px_2px_4px_0px_#0000001A]"
-                      onClick={(e) => setModalStatusBanner(true)}
+                      onClick={handleOpen}
                     >
                       <svg
                         width="16"
@@ -363,8 +389,7 @@ export function AiPersonality({
                       </svg>
                     </div>
                     <img
-                      alt="banner"
-                      src={bannerUrl}
+                      src={toAbsoluteUrl("/media/avatars/banner-image.png")}
                       className={"w-full h-[110px]"}
                     />
                   </div>
@@ -552,7 +577,7 @@ export function AiPersonality({
                       </div>
                       <div className={"col-span-12 md:col-span-9"}>
                         <TextInput
-                          fieldName={"linkedin"}
+                          fieldName={"linkedIn"}
                           withoutLabel={true}
                           formik={formik}
                           placeholder="Enter website URL here"
@@ -615,7 +640,7 @@ export function AiPersonality({
                       </div>
                       <div className={"col-span-12 md:col-span-9"}>
                         <TextInput
-                          fieldName={"instagram"}
+                          fieldName={"webpage"}
                           withoutLabel={true}
                           formik={formik}
                           placeholder="Enter website URL here"
@@ -638,30 +663,25 @@ export function AiPersonality({
                   handleClose={handleClose}
                   handleSuccess={(id: number, name: string) => {
                     setImgName(name);
-                    formik.setFieldValue("image", name)
-                    // formik.setFieldValue("profileImageId", id);
+                    formik.setFieldValue("profileImageId", id);
                   }}
-                  resourceType="personality-avatar"
-                />
-                <FileUpload
-                  fileSize={2097152}
-                  maxFileNumber={1}
-                  allowType={["image/*", ".jpg", ".jpeg", ".png"]}
-                  metaData={{ module: "profileimg", isProtected: true }}
-                  modalStatus={modalStatusBanner}
-                  handleClose={handleBannerClose}
-                  handleSuccess={(id: number, name: string) => {
-                    setBannerUrl(name);
-                    formik.setFieldValue("banner", name)
-                    // formik.setFieldValue("profileImageId", id);
-                  }}
-                  resourceType="personality-banner"
                 />
                 <div
                   className={
                     "flex flex-col md:flex-row justify-end mt-5 gap-y-[14px] md:gap-x-[20px]"
                   }
                 >
+                  <BasicButton
+                    buttonText={formatMessage({ id: "Change password" })}
+                    onClick={getForgotedPassword}
+                    disabled={changePasswordLoading}
+                    loading={changePasswordLoading}
+                    height="44px"
+                    border="1px solid #C2D24B"
+                    customClass={"!bg-[#171825]"}
+                    textColor={"#C2D24B"}
+                    padding="12px 24px"
+                  />
                   <CustomButton
                     isSubmitting={formik.isSubmitting}
                     isValid={formik.isValid}

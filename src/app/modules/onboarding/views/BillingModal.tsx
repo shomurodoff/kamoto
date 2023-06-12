@@ -43,7 +43,7 @@ export const BillingModal = ({
     label?: string;
     features: { title: string; supported: boolean }[];
   }[];
-  companyId?: string | undefined;
+  companyId?: number | undefined;
 }) => {
   const [localBilling, setlocalBilling] = useState<string>("Monthly");
   const [localPlan, setlocalPlan] = useState<any | undefined>("Basic");

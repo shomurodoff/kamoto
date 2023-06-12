@@ -8,7 +8,6 @@ type Props = {
   to: string;
   title: string;
   icon?: string;
-  activeIcon: string;
   fontIcon?: string;
   hasBullet?: boolean;
 };
@@ -17,8 +16,7 @@ const SidebarMenuItemWithSub: React.FC<Props & WithChildren> = ({
   children,
   to,
   title,
-                                                                  icon,
-                                                                  activeIcon,
+  icon,
   fontIcon,
   hasBullet,
 }) => {
@@ -29,7 +27,11 @@ const SidebarMenuItemWithSub: React.FC<Props & WithChildren> = ({
 
   return (
     <div
-      className={clsx("menu-item", { "here show": isActive }, "menu-accordion",)}
+      className={clsx(
+        "menu-item group",
+        { "here show": isActive },
+        "menu-accordion"
+      )}
       data-kt-menu-trigger="click"
     >
       <span className="menu-link">
@@ -39,17 +41,14 @@ const SidebarMenuItemWithSub: React.FC<Props & WithChildren> = ({
           </span>
         )}
         {icon && app?.sidebar?.default?.menu?.iconType === "svg" && (
-            isActive ? <span className="menu-icon">
-            <KTSVG path={activeIcon} className="svg-icon-2" />
-          </span> :
-          <span className="menu-icon">
+          <span className="menu-icon group-hover:stroke-[#C2D24B]">
             <KTSVG path={icon} className="svg-icon-2" />
           </span>
         )}
         {fontIcon && app?.sidebar?.default?.menu?.iconType === "font" && (
           <i className={clsx("bi fs-3", fontIcon)}></i>
         )}
-        <span className={clsx("menu-title" , isActive && "!text-[#C2D24B]")}>{title}</span>
+        <span className="menu-title">{title}</span>
         <span className="menu-arrow"></span>
       </span>
       <div

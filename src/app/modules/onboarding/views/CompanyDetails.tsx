@@ -159,6 +159,7 @@ export const CompanyDetails = () => {
   const handleClose = () => {
     setModelStatus(false);
   };
+
   return (
     <>
       <Toaster />

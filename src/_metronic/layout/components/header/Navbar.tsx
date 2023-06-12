@@ -33,7 +33,7 @@ const Navbar = () => {
           />
         </div>
       </div>
-      <div className={clsx("app-navbar-item mr-2", itemClass)}>
+      <div className={clsx("app-navbar-item", itemClass)}>
         <div
           data-kt-menu-trigger="{default: 'click'}"
           data-kt-menu-attach="parent"
@@ -76,7 +76,8 @@ const Navbar = () => {
         </div>
         <HeaderUserMenu />
       </div>
-      <div className={clsx("!hidden md:!flex", "app-navbar-item", itemClass)}>
+
+      <div className={clsx("app-navbar-item", itemClass)}>
         <p className="m-1 fw-bold">
           <span className="text-muted font-size-13">Hi, </span>
 

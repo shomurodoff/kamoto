@@ -14,13 +14,11 @@ export const ACCEPT_INVITATION = `${API_URL}/auth/accept-invite`;
 export const CREATE_COMPANY = `${API_URL}/company`;
 export const CREATE_ROUND = `${API_URL}/round`;
 export const CURRENCIES = `${API_URL}/currency`;
-export const GET_USER_BY_ACCESSTOKEN_URL = `${API_URL}/user`;
+export const GET_USER_BY_ACCESSTOKEN_URL = `${API_URL}/auth/verify-token`;
 export const VERIFY_TOKEN = `${API_URL}/auth/verify-token`;
 export const VERIFY_INVITE = `${API_URL}/auth/verify-invite`;
 export const ACCEPT_INVITE = `${API_URL}/auth/accept-invite`;
-export const GET_UPLOAD_SIGNATURE = `${API_URL}/transloadit_signature`;
-export const VERIFY_EMAIL = `${API_URL}/auth/verify-email`;
-export const SEND_VERIFY_EMAIL = `${API_URL}/auth/send-verify-email`
+
 const VERIFY_RESET_LINK = `${API_URL}/auth/reset/verify`;
 // export const REQUEST_PASSWORD_URL = `${API_URL}/forgot_password`
 
@@ -116,7 +114,9 @@ export function socialLoginVerification(type: string, token: string) {
 // }
 
 export function getUserByToken(token: string) {
-  return axios.get<ResponseType<UserModel>>(GET_USER_BY_ACCESSTOKEN_URL);
+  return axios.post<ResponseType<UserModel>>(GET_USER_BY_ACCESSTOKEN_URL, {
+    token,
+  });
 }
 
 export function verifyToken(token: string) {
@@ -143,16 +143,3 @@ export function acceptInvite(inviteToken: string, password: string) {
 export const getTokenStatus = (token: string) => {
   return axios.post(VERIFY_RESET_LINK, { token });
 };
-
-export const getUploadSign = (resourceType: string | undefined) => {
-  return axios.post(GET_UPLOAD_SIGNATURE, { resourceType });
-};
-
-
-export const verifyEmail = (token: string) =>{
-  return axios.post(VERIFY_EMAIL, {token})
-}
-
-export const sendVerifyEmail = (userId: number) =>{
-  return axios.post(SEND_VERIFY_EMAIL, {userId})
-}

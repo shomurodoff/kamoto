@@ -12,7 +12,7 @@ export const InfoCard = ({
   slug: string;
 }) => {
   return (
-    <div className="bg-[#1A1B25] rounded px-[20px] pt-4 pb-2.5 md:pb-[26px] mb-[14px]">
+    <div className="bg-[#1A1B25] rounded px-5 pt-4 pb-2.5 mb-[14px]">
       <div className="flex">
         <div className="me-4">
           <svg

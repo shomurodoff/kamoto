@@ -7,8 +7,8 @@ const UPDATE_PROFILE_DATA = `${API_URL}/user`;
 const CREATE_EMAIL_PREFERENCES = `${API_URL}/email-preferences`;
 const CREATE_LOCALE = `${API_URL}/user-meta`;
 export const GET_FILE_URL = `${API_URL}/file`;
-const GET_PERSONALITY_DATA = `${API_URL}/personality`;
-const UPDATE_PERSONALITY_DATA = `${API_URL}/personality`;
+const GET_COMPANY_DATA = `${API_URL}/company`;
+const UPDATE_COMPANY_DATA = `${API_URL}/company`;
 const GET_REFERRAL_DATA = `${API_URL}/referral/code`;
 const UPDATE_PAYPAL_EMAIL = `${API_URL}/referral/paypal`;
 const TOTAL_REFERRAL_EARNING = `${API_URL}/referral/earnings`;
@@ -22,8 +22,8 @@ const BILLING_DATA = `${API_URL}/billing`;
 const BILLING_PORTAL = `${API_URL}/billing/access`;
 const PENDING_USERS = `${API_URL}/team/pending-invite`;
 
-export const profileData = (personalityId: any) => {
-  return axios.get(`${GET_PROFILE_DATA}?personalityId=${personalityId}`, {
+export const profileData = (companyId: any) => {
+  return axios.get(`${GET_PROFILE_DATA}?personalityId=${companyId}`, {
     validateStatus(status) {
       return true;
     },
@@ -31,13 +31,14 @@ export const profileData = (personalityId: any) => {
 };
 
 export const createEmailPreferences = (
-  notificationSettings: string,
+  preference: string,
+  companyId: number
 ) => {
   return axios.post(
-    CREATE_LOCALE,
+    CREATE_EMAIL_PREFERENCES,
     {
-      key:"notificationSettings",
-      value:notificationSettings
+      preference,
+      companyId,
     },
     {
       validateStatus(status) {
@@ -47,21 +48,21 @@ export const createEmailPreferences = (
   );
 };
 
-export const getEmailPreferences = () => {
-  return axios.get(`${API_URL}/user-meta/notificationSettings`, {
+export const getEmailPreferences = (companyId: number) => {
+  return axios.get(`${API_URL}/email-preferences/${companyId}`, {
     validateStatus(status) {
       return true;
     },
   });
 };
 
-export const createLocale = (key: string, value: string, personalityId: string) => {
+export const createLocale = (key: string, value: string, companyId: number) => {
   return axios.post(
     CREATE_LOCALE,
     {
       key,
       value,
-      personalityId,
+      companyId,
     },
     {
       validateStatus(status) {
@@ -79,8 +80,12 @@ export const getLocale = () => {
   });
 };
 
-export const getPersonalityInfo = (personalityId: string) => {
-  return axios.get(`${GET_PERSONALITY_DATA}/${personalityId}`);
+export const companyData = (companyId: number) => {
+  return axios.get(`${GET_COMPANY_DATA}/${companyId}`, {
+    validateStatus(status) {
+      return true;
+    },
+  });
 };
 
 export const updateProfileInfo = (profileData: ProfileType) => {
@@ -91,8 +96,8 @@ export const updateProfileInfo = (profileData: ProfileType) => {
   });
 };
 
-export const updatePersonalityInfo = (data: any) => {
-  return axios.put(UPDATE_PERSONALITY_DATA, data, {
+export const updateCompanyProfile = (data: any) => {
+  return axios.put(UPDATE_COMPANY_DATA, data, {
     validateStatus(status) {
       return true;
     },
@@ -137,8 +142,8 @@ export const createSenderProfileInfo = (data: any) => {
   });
 };
 
-export const getMailInfo = (personalityId: string | undefined) => {
-  return axios.get(`${SENDER_PROFILE_INFO}/${personalityId}`, {
+export const getMailInfo = (companyId: number | undefined) => {
+  return axios.get(`${SENDER_PROFILE_INFO}/${companyId}`, {
     validateStatus(status) {
       return true;
     },
@@ -146,12 +151,12 @@ export const getMailInfo = (personalityId: string | undefined) => {
 };
 
 export const createSendgridMail = (
-  personalityId: string | undefined,
+  companyId: number | undefined,
   data: any
 ) => {
   return axios.post(
     SENDER_PROFILE_INFO,
-    { personalityId, sendgrid: data },
+    { companyId, sendgrid: data },
     {
       validateStatus(status) {
         return true;
@@ -161,12 +166,12 @@ export const createSendgridMail = (
 };
 
 export const createCustomSmtpMail = (
-  personalityId: string | undefined,
+  companyId: number | undefined,
   data: any
 ) => {
   return axios.post(
     SENDER_PROFILE_INFO,
-    { personalityId, smtp: data },
+    { companyId, smtp: data },
     {
       validateStatus(status) {
         return true;
@@ -176,11 +181,11 @@ export const createCustomSmtpMail = (
 };
 
 export const createPostmarkMail = (
-  personalityId: string | undefined,
+  companyId: number | undefined,
   data: any
 ) => {
   const payload = {
-    personalityId,
+    companyId,
     postmark: data,
   };
   return axios.post(SENDER_PROFILE_INFO, payload, {
@@ -190,28 +195,28 @@ export const createPostmarkMail = (
   });
 };
 
-export const updateIsActive = (personalityId: string | undefined, data: any) => {
-  return axios.put(`${SENDER_PROFILE_INFO}/${personalityId}`, data, {
+export const updateIsActive = (companyId: number | undefined, data: any) => {
+  return axios.put(`${SENDER_PROFILE_INFO}/${companyId}`, data, {
     validateStatus(status) {
       return true;
     },
   });
 };
 
-export const getProfileCompletionAPI = (personalityId: string) => {
-  return axios.get(`${PROFILE_COMPLETION}/${personalityId}`);
+export const getProfileCompletionAPI = (companyId: number) => {
+  return axios.get(`${PROFILE_COMPLETION}/${companyId}`);
 };
 
-export const getBccTrackingData = (personalityId: string | undefined) => {
-  return axios.get(`${BCC_TRACKING_DATA}/${personalityId}`, {
+export const getBccTrackingData = (companyId: number | undefined) => {
+  return axios.get(`${BCC_TRACKING_DATA}/${companyId}`, {
     validateStatus(status) {
       return true;
     },
   });
 };
 
-export const getUserList = (personalityId: string | undefined) => {
-  return axios.get(`${USERS_DATA}/${personalityId}/users`, {
+export const getUserList = (companyId: number | undefined) => {
+  return axios.get(`${USERS_DATA}/${companyId}/users`, {
     validateStatus(status) {
       return true;
     },
@@ -219,12 +224,12 @@ export const getUserList = (personalityId: string | undefined) => {
 };
 
 export const updateTransferOwnership = (
-  personalityId: string | undefined,
+  companyId: number | undefined,
   userId: number | undefined
 ) => {
   return axios.post(
     TRANSFER_OWNERSHIP,
-    { personalityId, userId },
+    { companyId, userId },
     {
       validateStatus(status) {
         return true;
@@ -241,16 +246,16 @@ export const addUser = (data: any) => {
   });
 };
 
-export const deleteUser = (personalityId: string | undefined, userId: number) => {
-  return axios.delete(`${USERS_DATA}/${personalityId}/users/${userId}`, {
+export const deleteUser = (companyId: number | undefined, userId: number) => {
+  return axios.delete(`${USERS_DATA}/${companyId}/users/${userId}`, {
     validateStatus(status) {
       return true;
     },
   });
 };
 
-export const getUser = (personalityId: string | undefined, userId: number) => {
-  return axios.get(`${USERS_DATA}/${personalityId}/users/${userId}`, {
+export const getUser = (companyId: number | undefined, userId: number) => {
+  return axios.get(`${USERS_DATA}/${companyId}/users/${userId}`, {
     validateStatus(status) {
       return true;
     },
@@ -266,11 +271,11 @@ export const editUser = (userId: number | undefined, data: any) => {
 };
 
 export const sendTestMail = (
-  personalityId: string | undefined,
+  companyId: number | undefined,
   mailType: string
 ) => {
   return axios.post(
-    `${SENDER_PROFILE_INFO}/test/${personalityId}`,
+    `${SENDER_PROFILE_INFO}/test/${companyId}`,
     { mailType },
     {
       validateStatus(status) {
@@ -280,15 +285,15 @@ export const sendTestMail = (
   );
 };
 
-export const getBillingData = (personalityId: string | undefined) => {
-  return axios.get(`${BILLING_DATA}/${personalityId}`, {
+export const getBillingData = (companyId: number | undefined) => {
+  return axios.get(`${BILLING_DATA}/${companyId}`, {
     validateStatus(status) {
       return true;
     },
   });
 };
-export const getBillingAccess = (personalityId: string | undefined) => {
-  return axios.get(`${BILLING_PORTAL}/${personalityId}`, {
+export const getBillingAccess = (companyId: number | undefined) => {
+  return axios.get(`${BILLING_PORTAL}/${companyId}`, {
     validateStatus(status) {
       return true;
     },
@@ -296,11 +301,11 @@ export const getBillingAccess = (personalityId: string | undefined) => {
 };
 
 export const updateBillingAccess = (
-  personalityId: string | undefined,
+  companyId: number | undefined,
   chargebeePlanId: string
 ) => {
   return axios.put(
-    `${BILLING_DATA}/${personalityId}`,
+    `${BILLING_DATA}/${companyId}`,
     { chargebeePlanId },
     {
       validateStatus(status) {
@@ -309,8 +314,8 @@ export const updateBillingAccess = (
     }
   );
 };
-export const getPendingUsers = (personalityId: string) => {
-  return axios.get(`${PENDING_USERS}/${personalityId}`, {
+export const getPendingUsers = (companyId: number) => {
+  return axios.get(`${PENDING_USERS}/${companyId}`, {
     validateStatus(status) {
       return true;
     },

@@ -60,7 +60,7 @@ export const AddRoundModal = ({
         values.amountTargeted,
         values.amountAchieved,
         values.currency,
-        personalityId
+        personalityId as number
       )
 
       if (success) {
@@ -167,7 +167,7 @@ export const AddRoundModal = ({
         values.amountTargeted,
         values.amountAchieved,
         values.currency,
-        personalityId,
+        personalityId as number,
         activeRound.roundId as number
       );
 

@@ -71,15 +71,6 @@ const Index = () => {
               </Link>
             </td>
           </tr>
-          <tr>
-            <td className={"border px-2 py-2"}>Marketplace Public</td>
-            <td className={"border px-2 py-2"}>
-              <Link to={"/marketplace-public"} className={"text-blue-500"}>
-                {" "}
-                Marketplace Public
-              </Link>
-            </td>
-          </tr>
         </tbody>
       </table>
     </div>

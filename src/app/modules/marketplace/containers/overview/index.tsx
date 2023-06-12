@@ -3,12 +3,6 @@ import Breadcrumb from "../../components/overview/breadcrumb";
 import { LineChart } from "../../../../components/line-chart";
 import Chart from "../../components/chart";
 import { ChartOne } from "../../../dashboard/components/chart/ChartOne";
-import { get, map, range } from "lodash";
-import { toAbsoluteUrl } from "../../../../../_metronic/helpers";
-import StarRatings from "react-star-ratings";
-import { ToolTipUI } from "../../../widgets/components/UI/ToolTipUI";
-import ReactCohortGraph from "react-cohort-graph";
-import { CorothonChart } from "../../../../components/cohort-chart";
 
 const Index = () => {
   return (
@@ -39,10 +33,10 @@ const Index = () => {
         >
           <Chart
             title={"Net Revenue"}
-            // profit={"25,560"}
+            profit={"25,560"}
             percentage={"5,6"}
-            // prevMonthProfit={"19,562"}
-            withData={false}
+            prevMonthProfit={"19,562"}
+            withData={true}
           />
         </div>
         <div
@@ -72,148 +66,83 @@ const Index = () => {
           />
         </div>
       </div>
-      <div className={"bg-[#2E2F45] h-[1px]  mb-6"} />
       <div
         className={
-          "grid grid-cols-12 bg-[#171825] shadow-[0px_1px_4px_0px_#0000001A] rounded mb-6"
+          "col-span-12 md:col-span-3 bg-[#171825] shadow-[0px_1px_4px_0px_#0000001A] rounded"
         }
       >
-        <div className={"col-span-12 md:col-span-7 p-6"}>
-          <h3
+        <div className={"px-5 pt-5"}>
+          <h3 className="flex items-center gap-1 text-[14px] leading-5 text-[#FFFFFFA6] font-normal mb-2">
+            API Requests
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7.99967 14.6654C4.31767 14.6654 1.33301 11.6807 1.33301 7.9987C1.33301 4.3167 4.31767 1.33203 7.99967 1.33203C11.6817 1.33203 14.6663 4.3167 14.6663 7.9987C14.6663 11.6807 11.6817 14.6654 7.99967 14.6654ZM7.99967 13.332C9.41416 13.332 10.7707 12.7701 11.7709 11.7699C12.7711 10.7697 13.333 9.41319 13.333 7.9987C13.333 6.58421 12.7711 5.22766 11.7709 4.22746C10.7707 3.22727 9.41416 2.66536 7.99967 2.66536C6.58519 2.66536 5.22863 3.22727 4.22844 4.22746C3.22824 5.22766 2.66634 6.58421 2.66634 7.9987C2.66634 9.41319 3.22824 10.7697 4.22844 11.7699C5.22863 12.7701 6.58519 13.332 7.99967 13.332ZM7.33301 4.66536H8.66634V5.9987H7.33301V4.66536ZM7.33301 7.33203H8.66634V11.332H7.33301V7.33203Z"
+                fill="white"
+                fillOpacity="0.65"
+              />
+            </svg>
+          </h3>
+          <div
             className={
-              "text-[20px] leading-7 font-semibold mb-5 text-[#FFFFFFCC]"
+              "text-[12px] leading-5 font-normal text-[#FFFFFFA6] flex gap-9 mb-2"
             }
           >
-            Today
-          </h3>
-          <div className={"flex gap-20"}>
-            <div>
-              <h3 className="flex items-center gap-1 text-[14px] leading-5 text-[#FFFFFFA6] font-normal mb-4">
-                Gross Volume
-                <ToolTipUI tooltipText={"Gross Volume"} />
-              </h3>
-              <div className="flex items-center gap-4 mb-1">
-                <h1 className="mb-0 text-[28px] leading-[36px] text-[#FFFFFFCC] font-semibold flex items-center gap-1">
-                  <span className={"text-[14px] leading-5 text-[#FFFFFFA6]"}>
-                    $
-                  </span>
-                  29,420
-                </h1>
-                <p className="mb-0 flex items-center text-[14px] leading-5 text-[#3DD883] font-normal">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      opacity="0.5"
-                      d="M10.7617 14.2644V6.1677C10.7617 5.76119 10.4205 5.43164 9.9996 5.43164C9.57869 5.43164 9.23748 5.76119 9.23748 6.1677V14.2644C9.23748 14.6709 9.57869 15.0005 9.9996 15.0005C10.4205 15.0005 10.7617 14.6709 10.7617 14.2644Z"
-                      fill="#3DD883"
-                    />
-                    <path
-                      d="M10.4311 7.31969L13.6201 10.3996C13.9357 10.7045 14.4476 10.7045 14.7632 10.3996C15.0789 10.0947 15.0789 9.60039 14.7632 9.29551L10.5389 5.21559C10.2413 4.92814 9.75872 4.92814 9.46111 5.21559L5.23676 9.29551C4.92108 9.60039 4.92108 10.0947 5.23676 10.3996C5.55244 10.7045 6.06426 10.7045 6.37994 10.3996L9.56887 7.31969C9.80696 7.08973 10.193 7.08973 10.4311 7.31969Z"
-                      fill="#3DD883"
-                    />
-                  </svg>
-                  2.2%
-                </p>
-              </div>
-            </div>
-            <div>
-              <h3 className="flex items-center gap-1 text-[14px] leading-5 text-[#FFFFFFA6] font-normal mb-4">
-                Yesterday
-              </h3>
-              <h3 className={"text-[20px] leading-7 text-[#FFFFFFA6]"}>$156</h3>
-            </div>
+            <p className={"flex gap-2"}>
+              Successful <span>11K</span>
+            </p>
+            <p>
+              Successful <span>11K</span>
+            </p>
           </div>
+          <p
+            className={
+              "text-[12px] leading-5 font-normal text-[#FFFFFFA6] flex gap-3 mb-2"
+            }
+          >
+            Yesterday
+          </p>
+          <p
+            className={
+              "text-[12px] leading-5 font-normal text-[#FFFFFFA6] flex gap-3"
+            }
+          >
+            <span>successful: 11k,</span>Failed: 50
+          </p>
+        </div>
+        <div className={"-mx-3 overflow-hidden"}>
           <ChartOne className={""} />
         </div>
-        <div className={"col-span-12 md:col-span-5 p-6 "}>
-          <div className={"border-b border-[#2E2F45] py-6"}>
-            <div className={"flex items-center justify-between mb-2 "}>
-              <div>
-                <h3 className="flex items-center gap-1 text-[14px] leading-5 text-[#FFFFFFA6] font-normal mb-3">
-                  USD Balance
-                  <ToolTipUI tooltipText={"USD Balance"} />
-                </h3>
-                <h1 className="mb-0 text-[28px] leading-[36px] text-[#FFFFFFCC] font-semibold flex items-center gap-1">
-                  <span className={"text-[14px] leading-5 text-[#FFFFFFA6]"}>
-                    $
-                  </span>
-                  892.48
-                </h1>
-              </div>
-            </div>
-            <p className={"text-[13px] leading-[18px] text-[#FFFFFFA6]"}>
-              Estimated future payouts ($748.68 available instantly)
-            </p>
-          </div>
-          <div className={"py-6"}>
-            <div className={"flex items-center justify-between mb-2 "}>
-              <div>
-                <h3 className="flex items-center gap-1 text-[14px] leading-5 text-[#FFFFFFA6] font-normal mb-3">
-                  Payouts
-                  <ToolTipUI tooltipText={"Payouts"} />
-                </h3>
-                <h1 className="mb-0 text-[28px] leading-[36px] text-[#FFFFFFCC] font-semibold flex items-center gap-1">
-                  <span className={"text-[14px] leading-5 text-[#FFFFFFA6]"}>
-                    $
-                  </span>
-                  892.48
-                </h1>
-              </div>
-            </div>
-            <p className={"text-[13px] leading-[18px] text-[#FFFFFFA6]"}>
-              Expected tomorrow
-            </p>
-          </div>
-        </div>
-      </div>
-      <div
-        className={"grid grid-cols-12 md:gap-x-[22px] gap-y-[14px] md:gap-y-0 "}
-      >
-        <div
-          className={
-            "col-span-12 md:col-span-6 bg-[#171825] shadow-default p-[8px] md:p-5 rounded"
-          }
-        >
-          <div className={"flex justify-between items-center"}>
-            <h3
-              className={
-                "text-[16px] leading-6 text-[#FFFFFFCC] font-semibold flex items-center"
-              }
+        <div className="flex justify-end px-2 pb-2">
+          <a
+            className={
+              "text-[12px] leading-[18px] text-[#C2D24B]  flex items-center gap-1"
+            }
+          >
+            Check API page
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              Revenue retention by cohort
-              <ToolTipUI tooltipText={"Revenue retention by cohort"} />
-            </h3>
-            <span className={"text-[14px] leading-5 text-[#FFFFFFA6]"}>
-              Last 12 months
-            </span>
-          </div>
-          <CorothonChart className={""} />
-        </div>
-        <div
-          className={
-            "col-span-12 md:col-span-6 bg-[#171825] shadow-default p-[8px] md:p-5 rounded "
-            // cohort
-          }
-        >
-          <div className={"flex justify-between items-center"}>
-            <h3
-              className={
-                "text-[16px] leading-6 text-[#FFFFFFCC] font-semibold flex items-center"
-              }
-            >
-              Subscriber retention by cohort
-              <ToolTipUI tooltipText={"Subscriber retention by cohort"} />
-            </h3>
-            <span className={"text-[14px] leading-5 text-[#FFFFFFA6]"}>
-              Last 12 months
-            </span>
-          </div>
-          <CorothonChart className={""} />
+              <path
+                opacity="0.3"
+                d="M4.00065 7.33268C3.63246 7.33268 3.33398 7.63116 3.33398 7.99935C3.33398 8.36754 3.63246 8.66602 4.00065 8.66602H12.0007C12.3688 8.66602 12.6673 8.36754 12.6673 7.99935C12.6673 7.63116 12.3688 7.33268 12.0007 7.33268H4.00065Z"
+                fill="#C2D24B"
+              />
+              <path
+                d="M7.52794 11.5279C7.26759 11.7883 7.26759 12.2104 7.52794 12.4708C7.78829 12.7311 8.2104 12.7311 8.47075 12.4708L12.4708 8.47075C12.7231 8.21837 12.732 7.81198 12.4908 7.54887L8.82412 3.54887C8.57532 3.27746 8.15361 3.25912 7.8822 3.50791C7.61079 3.75671 7.59245 4.17842 7.84125 4.44983L11.0766 7.9793L7.52794 11.5279Z"
+                fill="#C2D24B"
+              />
+            </svg>
+          </a>
         </div>
       </div>
     </div>

@@ -80,7 +80,7 @@ export function createRound(
   amountTargeted: number,
   amountAchieved: number,
   currency: string,
-  companyId: string
+  companyId: number
 ) {
   const currencyId = parseInt(currency);
 
@@ -110,11 +110,11 @@ export function currencies() {
 export function state(countryId: string) {
   return axios.get(`${API_URL}/state/${countryId}`);
 }
-// export function getUserByToken(token: string) {
-//   return axios.post<UserModel>(GET_USER_BY_ACCESSTOKEN_URL, {
-//     token: token,
-//   });
-// }
+export function getUserByToken(token: string) {
+  return axios.post<UserModel>(GET_USER_BY_ACCESSTOKEN_URL, {
+    token: token,
+  });
+}
 //getLocation
 export const getLocation = () => {
   return axios.get(IPSTACK_URL);
@@ -135,7 +135,7 @@ export const updateRound = (
   amountTargeted: number,
   amountAchieved: number,
   currency: string,
-  companyId: string,
+  companyId: number,
   roundId: number
 ) => {
   const currencyId = parseInt(currency);

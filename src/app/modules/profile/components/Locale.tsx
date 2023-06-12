@@ -8,7 +8,6 @@ import {
   localeInitialValues,
   localeOptions,
   timeFormatOptions,
-  timeStampOptions,
   timeZoneOptions,
 } from "../core/_constants";
 import { CustomButton } from "../../widgets/components/UI/CustomButton";
@@ -62,11 +61,6 @@ export const Locale = ({ key, getLocaleApiLoading }: any) => {
         createLocale(
           "timezone",
           values.timezone,
-          currentUser?.personality[0].personalityId
-        ),
-        createLocale(
-          "timestampFormat",
-          values.timestampFormat,
           currentUser?.personality[0].personalityId
         ),
       ];
@@ -290,7 +284,7 @@ export const Locale = ({ key, getLocaleApiLoading }: any) => {
                     <div className={"col-span-12 md:col-span-6"}>
                       <SelectInput
                         label={formatMessage({ id: "Timestamp Format" })}
-                        fieldName={"timestampFormat"}
+                        fieldName={"timeStampFormat"}
                         placeholder={formatMessage({
                           id: "Select the Timestamp Format",
                         })}
@@ -298,7 +292,7 @@ export const Locale = ({ key, getLocaleApiLoading }: any) => {
                         toolTipText={formatMessage({
                           id: "GLOBAL.TOOLTIP.LOCALE.TIME_FORMAT",
                         })}
-                        options={timeStampOptions}
+                        options={timeFormatOptions}
                       />
                     </div>
                   </div>
